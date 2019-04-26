@@ -44,6 +44,7 @@ echo_info()    { cecho "$*" $blue         ;}
 
 
 function install_ovs {
+  echo_info "################################################"
   echo "Installing the OpenvSwitch-2.10.90"
   git clone https://github.com/openvswitch/ovs.git
   OVS_PATH=$PWD
@@ -51,6 +52,7 @@ function install_ovs {
   git checkout origin/branch-2.10
   ./boot.sh
   ./configure
+  echo_info "################################################"
   echo_info "Start the making process. Please have patience!"
   echo_info ""
   echo_info "The output information of the process it can be found on the make.log file!"
