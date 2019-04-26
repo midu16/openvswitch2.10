@@ -56,12 +56,12 @@ function install_ovs {
   echo_info "Start the making process. Please have patience!"
   echo_info ""
   echo_info "The output information of the process it can be found on the make.log file!"
-  sudo make > make.log 2>&1
+  sudo make > ../var/log/make.log 2>&1
   echo_info "################################################"
   echo_info "Checking all the previous work is done corect. Please have patience!"
   echo_info ""
   echo_info "The output information of the process it can be found on the make_check.log file!"
-  sudo make check > make_check.log 2>&1
+  sudo make check > ../var/log/make_check.log 2>&1
   echo_info "################################################"
   echo_info "Start the installation!"
   sudo make install
@@ -82,6 +82,7 @@ echo_info "Start installing the ovs-2.10.90 on the host"
 install_ovs
 echo_info "################################################"
 echo_success "The installation is done! The ovs-2.10.90 will start"
+
 if [ "$(whoami)" != "root" ]; then
     exec sudo -- "$0" "$@"
 fi
@@ -97,5 +98,4 @@ ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock \
              --pidfile --detach
 ovs-vsctl --no-wait init
 ovs-vswitchd --pidfile --detach --log-file=/tmp/log
-
-
+EOF

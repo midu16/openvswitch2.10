@@ -1,3 +1,32 @@
+ cd . && /bin/bash /home/cigarier/Desktop/openvswitch2.10/ovs/build-aux/missing automake-1.15 --foreign Makefile
+ cd . && /bin/bash ./config.status Makefile depfiles
+config.status: creating Makefile
+config.status: executing depfiles commands
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ofproto/ipfix-gen-entities ofproto/ipfix.xml > ofproto/ipfix-entities.def.tmp && \
+mv ofproto/ipfix-entities.def.tmp ofproto/ipfix-entities.def
+sed -f ./build-aux/extract-odp-netlink-h < datapath/linux/compat/include/linux/openvswitch.h > include/odp-netlink.h
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in annotate ./vswitchd/vswitch.ovsschema ./lib/vswitch-idl.ann > lib/vswitch-idl.ovsidl.tmp && mv lib/vswitch-idl.ovsidl.tmp lib/vswitch-idl.ovsidl
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-source lib/vswitch-idl.ovsidl > lib/vswitch-idl.c.tmp && mv lib/vswitch-idl.c.tmp lib/vswitch-idl.c
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-header lib/vswitch-idl.ovsidl > lib/vswitch-idl.h.tmp && mv lib/vswitch-idl.h.tmp lib/vswitch-idl.h
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in annotate ./ovsdb/_server.ovsschema ./lib/ovsdb-server-idl.ann > lib/ovsdb-server-idl.ovsidl.tmp && mv lib/ovsdb-server-idl.ovsidl.tmp lib/ovsdb-server-idl.ovsidl
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-source lib/ovsdb-server-idl.ovsidl > lib/ovsdb-server-idl.c.tmp && mv lib/ovsdb-server-idl.c.tmp lib/ovsdb-server-idl.c
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-header lib/ovsdb-server-idl.ovsidl > lib/ovsdb-server-idl.h.tmp && mv lib/ovsdb-server-idl.h.tmp lib/ovsdb-server-idl.h
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in -C . annotate tests/idltest.ovsschema tests/idltest.ann > tests/idltest.ovsidl.tmp && \
+mv tests/idltest.ovsidl.tmp tests/idltest.ovsidl
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-header tests/idltest.ovsidl > tests/idltest.h.tmp && mv tests/idltest.h.tmp tests/idltest.h
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-source tests/idltest.ovsidl > tests/idltest.c.tmp && mv tests/idltest.c.tmp tests/idltest.c
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in annotate ./vtep/vtep.ovsschema ./vtep/vtep-idl.ann > vtep/vtep-idl.ovsidl.tmp && \
+mv vtep/vtep-idl.ovsidl.tmp vtep/vtep-idl.ovsidl
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-source vtep/vtep-idl.ovsidl > vtep/vtep-idl.c.tmp && mv vtep/vtep-idl.c.tmp vtep/vtep-idl.c
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-header vtep/vtep-idl.ovsidl > vtep/vtep-idl.h.tmp && mv vtep/vtep-idl.h.tmp vtep/vtep-idl.h
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in annotate ./ovn/ovn-sb.ovsschema ./ovn/lib/ovn-sb-idl.ann > ovn/lib/ovn-sb-idl.ovsidl.tmp && \
+mv ovn/lib/ovn-sb-idl.ovsidl.tmp ovn/lib/ovn-sb-idl.ovsidl
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-source ovn/lib/ovn-sb-idl.ovsidl > ovn/lib/ovn-sb-idl.c.tmp && mv ovn/lib/ovn-sb-idl.c.tmp ovn/lib/ovn-sb-idl.c
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-header ovn/lib/ovn-sb-idl.ovsidl > ovn/lib/ovn-sb-idl.h.tmp && mv ovn/lib/ovn-sb-idl.h.tmp ovn/lib/ovn-sb-idl.h
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in annotate ./ovn/ovn-nb.ovsschema ./ovn/lib/ovn-nb-idl.ann > ovn/lib/ovn-nb-idl.ovsidl.tmp && \
+mv ovn/lib/ovn-nb-idl.ovsidl.tmp ovn/lib/ovn-nb-idl.ovsidl
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-source ovn/lib/ovn-nb-idl.ovsidl > ovn/lib/ovn-nb-idl.c.tmp && mv ovn/lib/ovn-nb-idl.c.tmp ovn/lib/ovn-nb-idl.c
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-idlc.in c-idl-header ovn/lib/ovn-nb-idl.ovsidl > ovn/lib/ovn-nb-idl.h.tmp && mv ovn/lib/ovn-nb-idl.h.tmp ovn/lib/ovn-nb-idl.h
 make  all-recursive
 make[1]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
 Making all in datapath
@@ -74,6 +103,10 @@ depbase=`echo lib/coverage.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/coverage.lo -MD -MP -MF $depbase.Tpo -c -o lib/coverage.lo lib/coverage.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/coverage.lo -MD -MP -MF lib/.deps/coverage.Tpo -c lib/coverage.c -o lib/coverage.o
+depbase=`echo lib/crc32c.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/crc32c.lo -MD -MP -MF $depbase.Tpo -c -o lib/crc32c.lo lib/crc32c.c &&\
+mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/crc32c.lo -MD -MP -MF lib/.deps/crc32c.Tpo -c lib/crc32c.c -o lib/crc32c.o
 depbase=`echo lib/csum.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/csum.lo -MD -MP -MF $depbase.Tpo -c -o lib/csum.lo lib/csum.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -206,6 +239,8 @@ depbase=`echo lib/memory.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/memory.lo -MD -MP -MF $depbase.Tpo -c -o lib/memory.lo lib/memory.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/memory.lo -MD -MP -MF lib/.deps/memory.Tpo -c lib/memory.c -o lib/memory.o
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 build-aux/extract-ofp-fields meta-flow ./include/openvswitch/meta-flow.h > lib/meta-flow.inc.tmp
+mv lib/meta-flow.inc.tmp lib/meta-flow.inc
 depbase=`echo lib/meta-flow.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/meta-flow.lo -MD -MP -MF $depbase.Tpo -c -o lib/meta-flow.lo lib/meta-flow.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -234,6 +269,8 @@ depbase=`echo lib/netlink.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/netlink.lo -MD -MP -MF $depbase.Tpo -c -o lib/netlink.lo lib/netlink.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/netlink.lo -MD -MP -MF lib/.deps/netlink.Tpo -c lib/netlink.c -o lib/netlink.o
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 build-aux/extract-ofp-fields nx-match ./include/openvswitch/meta-flow.h > lib/nx-match.inc.tmp
+mv lib/nx-match.inc.tmp lib/nx-match.inc
 depbase=`echo lib/nx-match.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/nx-match.lo -MD -MP -MF $depbase.Tpo -c -o lib/nx-match.lo lib/nx-match.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -250,6 +287,8 @@ depbase=`echo lib/odp-util.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/odp-util.lo -MD -MP -MF $depbase.Tpo -c -o lib/odp-util.lo lib/odp-util.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/odp-util.lo -MD -MP -MF lib/.deps/odp-util.Tpo -c lib/odp-util.c -o lib/odp-util.o
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 build-aux/extract-ofp-actions lib/ofp-actions.c --prototypes > lib/ofp-actions.inc1.tmp && mv lib/ofp-actions.inc1.tmp lib/ofp-actions.inc1
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 build-aux/extract-ofp-actions lib/ofp-actions.c --definitions > lib/ofp-actions.inc2.tmp && mv lib/ofp-actions.inc2.tmp lib/ofp-actions.inc2
 depbase=`echo lib/ofp-actions.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/ofp-actions.lo -MD -MP -MF $depbase.Tpo -c -o lib/ofp-actions.lo lib/ofp-actions.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -266,6 +305,10 @@ depbase=`echo lib/ofp-ed-props.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/ofp-ed-props.lo -MD -MP -MF $depbase.Tpo -c -o lib/ofp-ed-props.lo lib/ofp-ed-props.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/ofp-ed-props.lo -MD -MP -MF lib/.deps/ofp-ed-props.Tpo -c lib/ofp-ed-props.c -o lib/ofp-ed-props.o
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/extract-ofp-errors \
+	./include/openvswitch/ofp-errors.h \
+	./include/openflow/openflow-common.h > lib/ofp-errors.inc.tmp && \
+mv lib/ofp-errors.inc.tmp lib/ofp-errors.inc
 depbase=`echo lib/ofp-errors.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/ofp-errors.lo -MD -MP -MF $depbase.Tpo -c -o lib/ofp-errors.lo lib/ofp-errors.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -294,6 +337,8 @@ depbase=`echo lib/ofp-monitor.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/ofp-monitor.lo -MD -MP -MF $depbase.Tpo -c -o lib/ofp-monitor.lo lib/ofp-monitor.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/ofp-monitor.lo -MD -MP -MF lib/.deps/ofp-monitor.Tpo -c lib/ofp-monitor.c -o lib/ofp-monitor.o
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/extract-ofp-msgs \
+	./include/openvswitch/ofp-msgs.h lib/ofp-msgs.inc > lib/ofp-msgs.inc.tmp && mv lib/ofp-msgs.inc.tmp lib/ofp-msgs.inc
 depbase=`echo lib/ofp-msgs.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/ofp-msgs.lo -MD -MP -MF $depbase.Tpo -c -o lib/ofp-msgs.lo lib/ofp-msgs.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -486,6 +531,10 @@ depbase=`echo lib/socket-util.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/socket-util.lo -MD -MP -MF $depbase.Tpo -c -o lib/socket-util.lo lib/socket-util.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/socket-util.lo -MD -MP -MF lib/.deps/socket-util.Tpo -c lib/socket-util.c -o lib/socket-util.o
+depbase=`echo lib/sort.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/sort.lo -MD -MP -MF $depbase.Tpo -c -o lib/sort.lo lib/sort.c &&\
+mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/sort.lo -MD -MP -MF lib/.deps/sort.Tpo -c lib/sort.c -o lib/sort.o
 depbase=`echo lib/sset.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/sset.lo -MD -MP -MF $depbase.Tpo -c -o lib/sset.lo lib/sset.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -682,6 +731,10 @@ depbase=`echo lib/dhparams.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/dhparams.lo -MD -MP -MF $depbase.Tpo -c -o lib/dhparams.lo lib/dhparams.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/dhparams.lo -MD -MP -MF lib/.deps/dhparams.Tpo -c lib/dhparams.c -o lib/dhparams.o
+depbase=`echo lib/dns-resolve-stub.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT lib/dns-resolve-stub.lo -MD -MP -MF $depbase.Tpo -c -o lib/dns-resolve-stub.lo lib/dns-resolve-stub.c &&\
+mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/dns-resolve-stub.lo -MD -MP -MF lib/.deps/dns-resolve-stub.Tpo -c lib/dns-resolve-stub.c -o lib/dns-resolve-stub.o
 (echo '/* -*- mode: c; buffer-read-only: t -*- */' && sed < ./lib/dirs.c.in \
 	-e 's,[@]srcdir[@],.,g' \
 	-e 's,[@]LOGDIR[@],"/usr/local/var/log/openvswitch",g' \
@@ -705,7 +758,6 @@ depbase=`echo lib/vswitch-idl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT lib/vswitch-idl.lo -MD -MP -MF lib/.deps/vswitch-idl.Tpo -c lib/vswitch-idl.c -o lib/vswitch-idl.o
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -release 2.10 -version-info 0:3 -Wl,--version-script=./lib/libopenvswitch.sym     -o lib/libopenvswitch.la -rpath /usr/local/lib lib/aes128.lo lib/backtrace.lo lib/bfd.lo lib/bundle.lo lib/byteq.lo lib/cfm.lo lib/classifier.lo lib/ccmap.lo lib/cmap.lo lib/colors.lo lib/command-line.lo lib/connectivity.lo lib/conntrack-icmp.lo lib/conntrack-tcp.lo lib/conntrack-other.lo lib/conntrack.lo lib/coverage.lo lib/crc32c.lo lib/csum.lo lib/ct-dpif.lo lib/daemon.lo lib/db-ctl-base.lo lib/dummy.lo lib/dpctl.lo lib/dp-packet.lo lib/dpif-netdev.lo lib/dpif-netdev-perf.lo lib/dpif.lo lib/heap.lo lib/dynamic-string.lo lib/entropy.lo lib/fat-rwlock.lo lib/fatal-signal.lo lib/flow.lo lib/guarded-list.lo lib/hash.lo lib/hindex.lo lib/hmap.lo lib/hmapx.lo lib/id-pool.lo lib/jhash.lo lib/json.lo lib/jsonrpc.lo lib/lacp.lo lib/learn.lo lib/learning-switch.lo lib/lockfile.lo lib/mac-learning.lo lib/match.lo lib/mcast-snooping.lo lib/memory.lo lib/meta-flow.lo lib/multipath.lo lib/namemap.lo lib/netdev-dummy.lo lib/netdev-vport.lo lib/netdev.lo lib/netlink.lo lib/nx-match.lo lib/object-collection.lo lib/odp-execute.lo lib/odp-util.lo lib/ofp-actions.lo lib/ofp-bundle.lo lib/ofp-connection.lo lib/ofp-ed-props.lo lib/ofp-errors.lo lib/ofp-flow.lo lib/ofp-group.lo lib/ofp-ipfix.lo lib/ofp-match.lo lib/ofp-meter.lo lib/ofp-monitor.lo lib/ofp-msgs.lo lib/ofp-packet.lo lib/ofp-parse.lo lib/ofp-port.lo lib/ofp-print.lo lib/ofp-prop.lo lib/ofp-protocol.lo lib/ofp-queue.lo lib/ofp-switch.lo lib/ofp-table.lo lib/ofp-util.lo lib/ofp-version-opt.lo lib/ofpbuf.lo lib/ovs-atomic-locked.lo lib/ovs-lldp.lo lib/ovs-numa.lo lib/ovs-rcu.lo lib/ovs-router.lo lib/ovs-thread.lo lib/ovsdb-data.lo lib/ovsdb-error.lo lib/ovsdb-idl.lo lib/ovsdb-map-op.lo lib/ovsdb-set-op.lo lib/ovsdb-condition.lo lib/ovsdb-parser.lo lib/ovsdb-session.lo lib/ovsdb-types.lo lib/ox-stat.lo lib/packets.lo lib/pcap-file.lo lib/perf-counter.lo lib/stopwatch.lo lib/poll-loop.lo lib/process.lo lib/pvector.lo lib/random.lo lib/rconn.lo lib/reconnect.lo lib/rstp.lo lib/rstp-state-machines.lo lib/seq.lo lib/sha1.lo lib/shash.lo lib/simap.lo lib/skiplist.lo lib/smap.lo lib/socket-util.lo lib/sort.lo lib/sset.lo lib/stp.lo lib/stream-fd.lo lib/stream-tcp.lo lib/stream.lo lib/stdio.lo lib/string.lo lib/svec.lo lib/syslog-direct.lo lib/syslog-libc.lo lib/table.lo lib/timer.lo lib/timeval.lo lib/tnl-neigh-cache.lo lib/tnl-ports.lo lib/netdev-native-tnl.lo lib/token-bucket.lo lib/tun-metadata.lo lib/unicode.lo lib/unixctl.lo lib/util.lo lib/uuid.lo lib/vconn-stream.lo lib/vconn.lo lib/vlan-bitmap.lo lib/vlog.lo lib/lldp/lldp.lo lib/lldp/lldpd.lo lib/lldp/lldpd-structs.lo  lib/daemon-unix.lo lib/latch-unix.lo lib/signals.lo lib/socket-util-unix.lo lib/stream-unix.lo lib/dpif-netlink.lo lib/dpif-netlink-rtnl.lo lib/if-notifier.lo lib/netdev-linux.lo lib/netdev-tc-offloads.lo lib/netlink-conntrack.lo lib/netlink-notifier.lo lib/netlink-socket.lo lib/rtnetlink.lo lib/route-table.lo lib/tc.lo  lib/dpdk-stub.lo  lib/async-append-aio.lo    lib/stream-ssl.lo lib/dhparams.lo   lib/dns-resolve-stub.lo lib/dirs.lo lib/ovsdb-server-idl.lo lib/vswitch-idl.lo -lssl -lcrypto   -latomic -lpthread -lrt -lm 
-libtool: link: rm -fr  lib/.libs/libopenvswitch.a lib/.libs/libopenvswitch.la lib/.libs/libopenvswitch.lai
 libtool: link: ar cru lib/.libs/libopenvswitch.a  lib/aes128.o lib/backtrace.o lib/bfd.o lib/bundle.o lib/byteq.o lib/cfm.o lib/classifier.o lib/ccmap.o lib/cmap.o lib/colors.o lib/command-line.o lib/connectivity.o lib/conntrack-icmp.o lib/conntrack-tcp.o lib/conntrack-other.o lib/conntrack.o lib/coverage.o lib/crc32c.o lib/csum.o lib/ct-dpif.o lib/daemon.o lib/db-ctl-base.o lib/dummy.o lib/dpctl.o lib/dp-packet.o lib/dpif-netdev.o lib/dpif-netdev-perf.o lib/dpif.o lib/heap.o lib/dynamic-string.o lib/entropy.o lib/fat-rwlock.o lib/fatal-signal.o lib/flow.o lib/guarded-list.o lib/hash.o lib/hindex.o lib/hmap.o lib/hmapx.o lib/id-pool.o lib/jhash.o lib/json.o lib/jsonrpc.o lib/lacp.o lib/learn.o lib/learning-switch.o lib/lockfile.o lib/mac-learning.o lib/match.o lib/mcast-snooping.o lib/memory.o lib/meta-flow.o lib/multipath.o lib/namemap.o lib/netdev-dummy.o lib/netdev-vport.o lib/netdev.o lib/netlink.o lib/nx-match.o lib/object-collection.o lib/odp-execute.o lib/odp-util.o lib/ofp-actions.o lib/ofp-bundle.o lib/ofp-connection.o lib/ofp-ed-props.o lib/ofp-errors.o lib/ofp-flow.o lib/ofp-group.o lib/ofp-ipfix.o lib/ofp-match.o lib/ofp-meter.o lib/ofp-monitor.o lib/ofp-msgs.o lib/ofp-packet.o lib/ofp-parse.o lib/ofp-port.o lib/ofp-print.o lib/ofp-prop.o lib/ofp-protocol.o lib/ofp-queue.o lib/ofp-switch.o lib/ofp-table.o lib/ofp-util.o lib/ofp-version-opt.o lib/ofpbuf.o lib/ovs-atomic-locked.o lib/ovs-lldp.o lib/ovs-numa.o lib/ovs-rcu.o lib/ovs-router.o lib/ovs-thread.o lib/ovsdb-data.o lib/ovsdb-error.o lib/ovsdb-idl.o lib/ovsdb-map-op.o lib/ovsdb-set-op.o lib/ovsdb-condition.o lib/ovsdb-parser.o lib/ovsdb-session.o lib/ovsdb-types.o lib/ox-stat.o lib/packets.o lib/pcap-file.o lib/perf-counter.o lib/stopwatch.o lib/poll-loop.o lib/process.o lib/pvector.o lib/random.o lib/rconn.o lib/reconnect.o lib/rstp.o lib/rstp-state-machines.o lib/seq.o lib/sha1.o lib/shash.o lib/simap.o lib/skiplist.o lib/smap.o lib/socket-util.o lib/sort.o lib/sset.o lib/stp.o lib/stream-fd.o lib/stream-tcp.o lib/stream.o lib/stdio.o lib/string.o lib/svec.o lib/syslog-direct.o lib/syslog-libc.o lib/table.o lib/timer.o lib/timeval.o lib/tnl-neigh-cache.o lib/tnl-ports.o lib/netdev-native-tnl.o lib/token-bucket.o lib/tun-metadata.o lib/unicode.o lib/unixctl.o lib/util.o lib/uuid.o lib/vconn-stream.o lib/vconn.o lib/vlan-bitmap.o lib/vlog.o lib/lldp/lldp.o lib/lldp/lldpd.o lib/lldp/lldpd-structs.o lib/daemon-unix.o lib/latch-unix.o lib/signals.o lib/socket-util-unix.o lib/stream-unix.o lib/dpif-netlink.o lib/dpif-netlink-rtnl.o lib/if-notifier.o lib/netdev-linux.o lib/netdev-tc-offloads.o lib/netlink-conntrack.o lib/netlink-notifier.o lib/netlink-socket.o lib/rtnetlink.o lib/route-table.o lib/tc.o lib/dpdk-stub.o lib/async-append-aio.o lib/stream-ssl.o lib/dhparams.o lib/dns-resolve-stub.o lib/dirs.o lib/ovsdb-server-idl.o lib/vswitch-idl.o
 ar: `u' modifier ignored since `D' is the default (see `U')
 libtool: link: ranlib lib/.libs/libopenvswitch.a
@@ -723,7 +775,6 @@ mv -f lib/.deps/lib_libsflow_la-sflow_poller.Tpo lib/.deps/lib_libsflow_la-sflow
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -Wno-unused -Wno-unused-parameter -g -O2 -MT lib/lib_libsflow_la-sflow_receiver.lo -MD -MP -MF lib/.deps/lib_libsflow_la-sflow_receiver.Tpo -c lib/sflow_receiver.c -o lib/lib_libsflow_la-sflow_receiver.o
 mv -f lib/.deps/lib_libsflow_la-sflow_receiver.Tpo lib/.deps/lib_libsflow_la-sflow_receiver.Plo
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -Wno-unused -Wno-unused-parameter -g -O2 -release 2.10 -version-info 0:3 -Wl,--version-script=./lib/libsflow.sym     -o lib/libsflow.la -rpath /usr/local/lib lib/lib_libsflow_la-sflow_agent.lo lib/lib_libsflow_la-sflow_sampler.lo lib/lib_libsflow_la-sflow_poller.lo lib/lib_libsflow_la-sflow_receiver.lo  -latomic -lpthread -lrt -lm 
-libtool: link: rm -fr  lib/.libs/libsflow.a lib/.libs/libsflow.la lib/.libs/libsflow.lai
 libtool: link: ar cru lib/.libs/libsflow.a  lib/lib_libsflow_la-sflow_agent.o lib/lib_libsflow_la-sflow_sampler.o lib/lib_libsflow_la-sflow_poller.o lib/lib_libsflow_la-sflow_receiver.o
 ar: `u' modifier ignored since `D' is the default (see `U')
 libtool: link: ranlib lib/.libs/libsflow.a
@@ -792,7 +843,6 @@ mv -f ofproto/.deps/ofproto_libofproto_la-tunnel.Tpo ofproto/.deps/ofproto_libof
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT ofproto/ofproto_libofproto_la-bundles.lo -MD -MP -MF ofproto/.deps/ofproto_libofproto_la-bundles.Tpo -c ofproto/bundles.c -o ofproto/ofproto_libofproto_la-bundles.o
 mv -f ofproto/.deps/ofproto_libofproto_la-bundles.Tpo ofproto/.deps/ofproto_libofproto_la-bundles.Plo
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -release 2.10 -version-info 0:3 -Wl,--version-script=./ofproto/libofproto.sym     -o ofproto/libofproto.la -rpath /usr/local/lib ofproto/ofproto_libofproto_la-bond.lo ofproto/ofproto_libofproto_la-collectors.lo ofproto/ofproto_libofproto_la-connmgr.lo ofproto/ofproto_libofproto_la-fail-open.lo ofproto/ofproto_libofproto_la-in-band.lo ofproto/ofproto_libofproto_la-names.lo ofproto/ofproto_libofproto_la-netflow.lo ofproto/ofproto_libofproto_la-ofproto.lo ofproto/ofproto_libofproto_la-ofproto-dpif.lo ofproto/ofproto_libofproto_la-ofproto-dpif-ipfix.lo ofproto/ofproto_libofproto_la-ofproto-dpif-mirror.lo ofproto/ofproto_libofproto_la-ofproto-dpif-monitor.lo ofproto/ofproto_libofproto_la-ofproto-dpif-rid.lo ofproto/ofproto_libofproto_la-ofproto-dpif-sflow.lo ofproto/ofproto_libofproto_la-ofproto-dpif-trace.lo ofproto/ofproto_libofproto_la-ofproto-dpif-upcall.lo ofproto/ofproto_libofproto_la-ofproto-dpif-xlate.lo ofproto/ofproto_libofproto_la-ofproto-dpif-xlate-cache.lo ofproto/ofproto_libofproto_la-pinsched.lo ofproto/ofproto_libofproto_la-tunnel.lo ofproto/ofproto_libofproto_la-bundles.lo lib/libsflow.la  -latomic -lpthread -lrt -lm 
-libtool: link: rm -fr  ofproto/.libs/libofproto.a ofproto/.libs/libofproto.la ofproto/.libs/libofproto.lai
 libtool: link: ar cru ofproto/.libs/libofproto.a  ofproto/ofproto_libofproto_la-bond.o ofproto/ofproto_libofproto_la-collectors.o ofproto/ofproto_libofproto_la-connmgr.o ofproto/ofproto_libofproto_la-fail-open.o ofproto/ofproto_libofproto_la-in-band.o ofproto/ofproto_libofproto_la-names.o ofproto/ofproto_libofproto_la-netflow.o ofproto/ofproto_libofproto_la-ofproto.o ofproto/ofproto_libofproto_la-ofproto-dpif.o ofproto/ofproto_libofproto_la-ofproto-dpif-ipfix.o ofproto/ofproto_libofproto_la-ofproto-dpif-mirror.o ofproto/ofproto_libofproto_la-ofproto-dpif-monitor.o ofproto/ofproto_libofproto_la-ofproto-dpif-rid.o ofproto/ofproto_libofproto_la-ofproto-dpif-sflow.o ofproto/ofproto_libofproto_la-ofproto-dpif-trace.o ofproto/ofproto_libofproto_la-ofproto-dpif-upcall.o ofproto/ofproto_libofproto_la-ofproto-dpif-xlate.o ofproto/ofproto_libofproto_la-ofproto-dpif-xlate-cache.o ofproto/ofproto_libofproto_la-pinsched.o ofproto/ofproto_libofproto_la-tunnel.o ofproto/ofproto_libofproto_la-bundles.o
 ar: `u' modifier ignored since `D' is the default (see `U')
 libtool: link: ranlib ofproto/.libs/libofproto.a
@@ -864,7 +914,6 @@ mv -f ovsdb/.deps/ovsdb_libovsdb_la-transaction.Tpo ovsdb/.deps/ovsdb_libovsdb_l
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT ovsdb/ovsdb_libovsdb_la-ovsdb-util.lo -MD -MP -MF ovsdb/.deps/ovsdb_libovsdb_la-ovsdb-util.Tpo -c ovsdb/ovsdb-util.c -o ovsdb/ovsdb_libovsdb_la-ovsdb-util.o
 mv -f ovsdb/.deps/ovsdb_libovsdb_la-ovsdb-util.Tpo ovsdb/.deps/ovsdb_libovsdb_la-ovsdb-util.Plo
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -release 2.10 -version-info 0:3 -Wl,--version-script=./ovsdb/libovsdb.sym     -o ovsdb/libovsdb.la -rpath /usr/local/lib ovsdb/ovsdb_libovsdb_la-column.lo ovsdb/ovsdb_libovsdb_la-condition.lo ovsdb/ovsdb_libovsdb_la-execution.lo ovsdb/ovsdb_libovsdb_la-file.lo ovsdb/ovsdb_libovsdb_la-jsonrpc-server.lo ovsdb/ovsdb_libovsdb_la-log.lo ovsdb/ovsdb_libovsdb_la-mutation.lo ovsdb/ovsdb_libovsdb_la-ovsdb.lo ovsdb/ovsdb_libovsdb_la-monitor.lo ovsdb/ovsdb_libovsdb_la-query.lo ovsdb/ovsdb_libovsdb_la-raft.lo ovsdb/ovsdb_libovsdb_la-raft-private.lo ovsdb/ovsdb_libovsdb_la-raft-rpc.lo ovsdb/ovsdb_libovsdb_la-rbac.lo ovsdb/ovsdb_libovsdb_la-replication.lo ovsdb/ovsdb_libovsdb_la-row.lo ovsdb/ovsdb_libovsdb_la-server.lo ovsdb/ovsdb_libovsdb_la-storage.lo ovsdb/ovsdb_libovsdb_la-table.lo ovsdb/ovsdb_libovsdb_la-trigger.lo ovsdb/ovsdb_libovsdb_la-transaction.lo ovsdb/ovsdb_libovsdb_la-ovsdb-util.lo  -latomic -lpthread -lrt -lm 
-libtool: link: rm -fr  ovsdb/.libs/libovsdb.a ovsdb/.libs/libovsdb.la ovsdb/.libs/libovsdb.lai
 libtool: link: ar cru ovsdb/.libs/libovsdb.a  ovsdb/ovsdb_libovsdb_la-column.o ovsdb/ovsdb_libovsdb_la-condition.o ovsdb/ovsdb_libovsdb_la-execution.o ovsdb/ovsdb_libovsdb_la-file.o ovsdb/ovsdb_libovsdb_la-jsonrpc-server.o ovsdb/ovsdb_libovsdb_la-log.o ovsdb/ovsdb_libovsdb_la-mutation.o ovsdb/ovsdb_libovsdb_la-ovsdb.o ovsdb/ovsdb_libovsdb_la-monitor.o ovsdb/ovsdb_libovsdb_la-query.o ovsdb/ovsdb_libovsdb_la-raft.o ovsdb/ovsdb_libovsdb_la-raft-private.o ovsdb/ovsdb_libovsdb_la-raft-rpc.o ovsdb/ovsdb_libovsdb_la-rbac.o ovsdb/ovsdb_libovsdb_la-replication.o ovsdb/ovsdb_libovsdb_la-row.o ovsdb/ovsdb_libovsdb_la-server.o ovsdb/ovsdb_libovsdb_la-storage.o ovsdb/ovsdb_libovsdb_la-table.o ovsdb/ovsdb_libovsdb_la-trigger.o ovsdb/ovsdb_libovsdb_la-transaction.o ovsdb/ovsdb_libovsdb_la-ovsdb-util.o
 ar: `u' modifier ignored since `D' is the default (see `U')
 libtool: link: ranlib ovsdb/.libs/libovsdb.a
@@ -874,7 +923,6 @@ depbase=`echo vtep/vtep-idl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT vtep/vtep-idl.lo -MD -MP -MF vtep/.deps/vtep-idl.Tpo -c vtep/vtep-idl.c -o vtep/vtep-idl.o
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -release 2.10 -version-info 0:3 -Wl,--version-script=./vtep/libvtep.sym     -o vtep/libvtep.la -rpath /usr/local/lib vtep/vtep-idl.lo  -latomic -lpthread -lrt -lm 
-libtool: link: rm -fr  vtep/.libs/libvtep.a vtep/.libs/libvtep.la vtep/.libs/libvtep.lai
 libtool: link: ar cru vtep/.libs/libvtep.a  vtep/vtep-idl.o
 ar: `u' modifier ignored since `D' is the default (see `U')
 libtool: link: ranlib vtep/.libs/libvtep.a
@@ -920,7 +968,6 @@ depbase=`echo ovn/lib/ovn-sb-idl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I ./include -I ./include -I ./lib -I ./lib -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -MT ovn/lib/ovn-sb-idl.lo -MD -MP -MF ovn/lib/.deps/ovn-sb-idl.Tpo -c ovn/lib/ovn-sb-idl.c -o ovn/lib/ovn-sb-idl.o
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -release 2.10 -version-info 0:3 -Wl,--version-script=./ovn/lib/libovn.sym     -o ovn/lib/libovn.la -rpath /usr/local/lib ovn/lib/acl-log.lo ovn/lib/actions.lo ovn/lib/chassis-index.lo ovn/lib/expr.lo ovn/lib/extend-table.lo ovn/lib/lex.lo ovn/lib/ovn-util.lo ovn/lib/logical-fields.lo ovn/lib/ovn-nb-idl.lo ovn/lib/ovn-sb-idl.lo  -latomic -lpthread -lrt -lm 
-libtool: link: rm -fr  ovn/lib/.libs/libovn.a ovn/lib/.libs/libovn.la ovn/lib/.libs/libovn.lai
 libtool: link: ar cru ovn/lib/.libs/libovn.a  ovn/lib/acl-log.o ovn/lib/actions.o ovn/lib/chassis-index.o ovn/lib/expr.o ovn/lib/extend-table.o ovn/lib/lex.o ovn/lib/ovn-util.o ovn/lib/logical-fields.o ovn/lib/ovn-nb-idl.o ovn/lib/ovn-sb-idl.o
 ar: `u' modifier ignored since `D' is the default (see `U')
 libtool: link: ranlib ovn/lib/.libs/libovn.a
@@ -1066,6 +1113,9 @@ gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstri
 mv -f $depbase.Tpo $depbase.Po
 depbase=`echo tests/test-bundle.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
 gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT tests/test-bundle.o -MD -MP -MF $depbase.Tpo -c -o tests/test-bundle.o tests/test-bundle.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo tests/test-byte-order.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT tests/test-byte-order.o -MD -MP -MF $depbase.Tpo -c -o tests/test-byte-order.o tests/test-byte-order.c &&\
 mv -f $depbase.Tpo $depbase.Po
 depbase=`echo tests/test-classifier.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
 gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT tests/test-classifier.o -MD -MP -MF $depbase.Tpo -c -o tests/test-classifier.o tests/test-classifier.c &&\
@@ -1214,11 +1264,872 @@ gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstri
 mv -f $depbase.Tpo $depbase.Po
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2      -o vswitchd/ovs-vswitchd vswitchd/bridge.o vswitchd/ovs-vswitchd.o vswitchd/system-stats.o vswitchd/xenserver.o ofproto/libofproto.la lib/libsflow.la lib/libopenvswitch.la -latomic -lpthread -lrt -lm 
 libtool: link: gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -o vswitchd/ovs-vswitchd vswitchd/bridge.o vswitchd/ovs-vswitchd.o vswitchd/system-stats.o vswitchd/xenserver.o  ofproto/.libs/libofproto.a /home/cigarier/Desktop/openvswitch2.10/ovs/lib/.libs/libsflow.a lib/.libs/libsflow.a lib/.libs/libopenvswitch.a -lssl -lcrypto -latomic -lpthread -lrt -lm
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/text2c < ovsdb/_server.ovsschema > ovsdb/_server.ovsschema.inc.tmp
+mv ovsdb/_server.ovsschema.inc.tmp ovsdb/_server.ovsschema.inc
 depbase=`echo ovsdb/ovsdb-server.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
 gcc -DHAVE_CONFIG_H -I.    -I ./include -I ./include -I ./lib -I ./lib    -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2 -MT ovsdb/ovsdb-server.o -MD -MP -MF $depbase.Tpo -c -o ovsdb/ovsdb-server.o ovsdb/ovsdb-server.c &&\
 mv -f $depbase.Tpo $depbase.Po
 /bin/bash ./libtool  --tag=CC   --mode=link gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic    -g -O2     -o ovsdb/ovsdb-server ovsdb/ovsdb-server.o ovsdb/libovsdb.la lib/libopenvswitch.la -latomic -lpthread -lrt -lm 
 libtool: link: gcc -Wstrict-prototypes -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow -Wno-null-pointer-arithmetic -g -O2 -o ovsdb/ovsdb-server ovsdb/ovsdb-server.o  ovsdb/.libs/libovsdb.a lib/.libs/libopenvswitch.a -lssl -lcrypto -latomic -lpthread -lrt -lm
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-pki.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-pki.tmp
+mv utilities/ovs-pki.tmp utilities/ovs-pki
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-pcap.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-pcap.tmp
+mv utilities/ovs-pcap.tmp utilities/ovs-pcap
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-tcpdump.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-tcpdump.tmp
+mv utilities/ovs-tcpdump.tmp utilities/ovs-tcpdump
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-tcpundump.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-tcpundump.tmp
+mv utilities/ovs-tcpundump.tmp utilities/ovs-tcpundump
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-dpctl-top.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-dpctl-top.tmp
+mv utilities/ovs-dpctl-top.tmp utilities/ovs-dpctl-top
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-l3ping.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-l3ping.tmp
+mv utilities/ovs-l3ping.tmp utilities/ovs-l3ping
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-parse-backtrace.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-parse-backtrace.tmp
+mv utilities/ovs-parse-backtrace.tmp utilities/ovs-parse-backtrace
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-test.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-test.tmp
+mv utilities/ovs-test.tmp utilities/ovs-test
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-vlan-test.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-vlan-test.tmp
+mv utilities/ovs-vlan-test.tmp utilities/ovs-vlan-test
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovn/utilities/ovn-docker-overlay-driver.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovn/utilities/ovn-docker-overlay-driver.tmp
+mv ovn/utilities/ovn-docker-overlay-driver.tmp ovn/utilities/ovn-docker-overlay-driver
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovn/utilities/ovn-docker-underlay-driver.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovn/utilities/ovn-docker-underlay-driver.tmp
+mv ovn/utilities/ovn-docker-underlay-driver.tmp ovn/utilities/ovn-docker-underlay-driver
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovn/utilities/ovn-detrace.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovn/utilities/ovn-detrace.tmp
+mv ovn/utilities/ovn-detrace.tmp ovn/utilities/ovn-detrace
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-sim.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-sim.tmp
+mv utilities/ovs-sim.tmp utilities/ovs-sim
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovsdb/ovsdb-idlc.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovsdb/ovsdb-idlc.tmp
+mv ovsdb/ovsdb-idlc.tmp ovsdb/ovsdb-idlc
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovsdb/ovsdb-dot.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovsdb/ovsdb-dot.tmp
+mv ovsdb/ovsdb-dot.tmp ovsdb/ovsdb-dot
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/bugtool/ovs-bugtool.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/bugtool/ovs-bugtool.tmp
+mv utilities/bugtool/ovs-bugtool.tmp utilities/bugtool/ovs-bugtool
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-check-dead-ifs.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-check-dead-ifs.tmp
+mv utilities/ovs-check-dead-ifs.tmp utilities/ovs-check-dead-ifs
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-ctl.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-ctl.tmp
+mv utilities/ovs-ctl.tmp utilities/ovs-ctl
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-kmod-ctl.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-kmod-ctl.tmp
+mv utilities/ovs-kmod-ctl.tmp utilities/ovs-kmod-ctl
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < vtep/ovs-vtep.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > vtep/ovs-vtep.tmp
+mv vtep/ovs-vtep.tmp vtep/ovs-vtep
+PYTHONIOENCODING=utf8 PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 build-aux/extract-ofp-fields \
+            --ovs-version=2.10.3 ovs-fields \
+    ./include/openvswitch/meta-flow.h \
+            ./lib/meta-flow.xml > lib/ovs-fields.7.tmp
+mv lib/ovs-fields.7.tmp lib/ovs-fields.7
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-appctl.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-appctl.8.tmp
+mv utilities/ovs-appctl.8.tmp utilities/ovs-appctl.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-testcontroller.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-testcontroller.8.tmp
+mv utilities/ovs-testcontroller.8.tmp utilities/ovs-testcontroller.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-dpctl.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-dpctl.8.tmp
+mv utilities/ovs-dpctl.8.tmp utilities/ovs-dpctl.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-dpctl-top.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-dpctl-top.8.tmp
+mv utilities/ovs-dpctl-top.8.tmp utilities/ovs-dpctl-top.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-l3ping.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-l3ping.8.tmp
+mv utilities/ovs-l3ping.8.tmp utilities/ovs-l3ping.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-ofctl.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-ofctl.8.tmp
+mv utilities/ovs-ofctl.8.tmp utilities/ovs-ofctl.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-pcap.1.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-pcap.1.tmp
+mv utilities/ovs-pcap.1.tmp utilities/ovs-pcap.1
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-pki.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-pki.8.tmp
+mv utilities/ovs-pki.8.tmp utilities/ovs-pki.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-tcpdump.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-tcpdump.8.tmp
+mv utilities/ovs-tcpdump.8.tmp utilities/ovs-tcpdump.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-tcpundump.1.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-tcpundump.1.tmp
+mv utilities/ovs-tcpundump.1.tmp utilities/ovs-tcpundump.1
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-vlan-bug-workaround.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-vlan-bug-workaround.8.tmp
+mv utilities/ovs-vlan-bug-workaround.8.tmp utilities/ovs-vlan-bug-workaround.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/ovs-vsctl.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/ovs-vsctl.8.tmp
+mv utilities/ovs-vsctl.8.tmp utilities/ovs-vsctl.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < utilities/bugtool/ovs-bugtool.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > utilities/bugtool/ovs-bugtool.8.tmp
+mv utilities/bugtool/ovs-bugtool.8.tmp utilities/bugtool/ovs-bugtool.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < vswitchd/ovs-vswitchd.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > vswitchd/ovs-vswitchd.8.tmp
+mv vswitchd/ovs-vswitchd.8.tmp vswitchd/ovs-vswitchd.8
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-doc \
+	 \
+	--version=2.10.3 \
+	./vswitchd/vswitch.ovsschema \
+	./vswitchd/vswitch.xml > vswitchd/ovs-vswitchd.conf.db.5.tmp && \
+mv vswitchd/ovs-vswitchd.conf.db.5.tmp vswitchd/ovs-vswitchd.conf.db.5
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovsdb/ovsdb-tool.1.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovsdb/ovsdb-tool.1.tmp
+mv ovsdb/ovsdb-tool.1.tmp ovsdb/ovsdb-tool.1
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovsdb/ovsdb-client.1.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovsdb/ovsdb-client.1.tmp
+mv ovsdb/ovsdb-client.1.tmp ovsdb/ovsdb-client.1
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovsdb/ovsdb-server.1.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovsdb/ovsdb-server.1.tmp
+mv ovsdb/ovsdb-server.1.tmp ovsdb/ovsdb-server.1
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-doc \
+	--version=2.10.3 \
+	./ovsdb/_server.ovsschema \
+	./ovsdb/_server.xml > ovsdb/ovsdb-server.5.tmp && \
+mv ovsdb/ovsdb-server.5.tmp ovsdb/ovsdb-server.5
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < vtep/vtep-ctl.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > vtep/vtep-ctl.8.tmp
+mv vtep/vtep-ctl.8.tmp vtep/vtep-ctl.8
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-doc \
+	 \
+	--version=2.10.3 \
+	./vtep/vtep.ovsschema \
+	./vtep/vtep.xml > vtep/vtep.5.tmp && \
+mv vtep/vtep.5.tmp vtep/vtep.5
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-doc \
+	 \
+	--version=2.10.3 \
+	./ovn/ovn-sb.ovsschema \
+	./ovn/ovn-sb.xml > ovn/ovn-sb.5.tmp && \
+mv ovn/ovn-sb.5.tmp ovn/ovn-sb.5
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./ovsdb/ovsdb-doc \
+	 \
+	--version=2.10.3 \
+	./ovn/ovn-nb.ovsschema \
+	./ovn/ovn-nb.xml > ovn/ovn-nb.5.tmp && \
+mv ovn/ovn-nb.5.tmp ovn/ovn-nb.5
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/xml2nroff ovn/ovn-architecture.7.xml > ovn/ovn-architecture.7.tmp \
+  -I . \
+  --version=2.10.3 \
+  PKIDIR='/usr/local/var/lib/openvswitch/pki' \
+  LOGDIR='/usr/local/var/log/openvswitch' \
+  DBDIR='/usr/local/etc/openvswitch' \
+  PYTHON='/usr/bin/python2' \
+  RUNDIR='/usr/local/var/run/openvswitch' \
+  VERSION='2.10.3' \
+  localstatedir='/usr/local/var' \
+  pkgdatadir='/usr/local/share/openvswitch' \
+  sysconfdir='/usr/local/etc' \
+  bindir='/usr/local/bin' \
+  sbindir='/usr/local/sbin'
+mv ovn/ovn-architecture.7.tmp ovn/ovn-architecture.7
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/xml2nroff ovn/controller/ovn-controller.8.xml > ovn/controller/ovn-controller.8.tmp \
+  -I . \
+  --version=2.10.3 \
+  PKIDIR='/usr/local/var/lib/openvswitch/pki' \
+  LOGDIR='/usr/local/var/log/openvswitch' \
+  DBDIR='/usr/local/etc/openvswitch' \
+  PYTHON='/usr/bin/python2' \
+  RUNDIR='/usr/local/var/run/openvswitch' \
+  VERSION='2.10.3' \
+  localstatedir='/usr/local/var' \
+  pkgdatadir='/usr/local/share/openvswitch' \
+  sysconfdir='/usr/local/etc' \
+  bindir='/usr/local/bin' \
+  sbindir='/usr/local/sbin'
+mv ovn/controller/ovn-controller.8.tmp ovn/controller/ovn-controller.8
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/xml2nroff ovn/controller-vtep/ovn-controller-vtep.8.xml > ovn/controller-vtep/ovn-controller-vtep.8.tmp \
+  -I . \
+  --version=2.10.3 \
+  PKIDIR='/usr/local/var/lib/openvswitch/pki' \
+  LOGDIR='/usr/local/var/log/openvswitch' \
+  DBDIR='/usr/local/etc/openvswitch' \
+  PYTHON='/usr/bin/python2' \
+  RUNDIR='/usr/local/var/run/openvswitch' \
+  VERSION='2.10.3' \
+  localstatedir='/usr/local/var' \
+  pkgdatadir='/usr/local/share/openvswitch' \
+  sysconfdir='/usr/local/etc' \
+  bindir='/usr/local/bin' \
+  sbindir='/usr/local/sbin'
+mv ovn/controller-vtep/ovn-controller-vtep.8.tmp ovn/controller-vtep/ovn-controller-vtep.8
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/xml2nroff ovn/northd/ovn-northd.8.xml > ovn/northd/ovn-northd.8.tmp \
+  -I . \
+  --version=2.10.3 \
+  PKIDIR='/usr/local/var/lib/openvswitch/pki' \
+  LOGDIR='/usr/local/var/log/openvswitch' \
+  DBDIR='/usr/local/etc/openvswitch' \
+  PYTHON='/usr/bin/python2' \
+  RUNDIR='/usr/local/var/run/openvswitch' \
+  VERSION='2.10.3' \
+  localstatedir='/usr/local/var' \
+  pkgdatadir='/usr/local/share/openvswitch' \
+  sysconfdir='/usr/local/etc' \
+  bindir='/usr/local/bin' \
+  sbindir='/usr/local/sbin'
+mv ovn/northd/ovn-northd.8.tmp ovn/northd/ovn-northd.8
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/xml2nroff ovn/utilities/ovn-ctl.8.xml > ovn/utilities/ovn-ctl.8.tmp \
+  -I . \
+  --version=2.10.3 \
+  PKIDIR='/usr/local/var/lib/openvswitch/pki' \
+  LOGDIR='/usr/local/var/log/openvswitch' \
+  DBDIR='/usr/local/etc/openvswitch' \
+  PYTHON='/usr/bin/python2' \
+  RUNDIR='/usr/local/var/run/openvswitch' \
+  VERSION='2.10.3' \
+  localstatedir='/usr/local/var' \
+  pkgdatadir='/usr/local/share/openvswitch' \
+  sysconfdir='/usr/local/etc' \
+  bindir='/usr/local/bin' \
+  sbindir='/usr/local/sbin'
+mv ovn/utilities/ovn-ctl.8.tmp ovn/utilities/ovn-ctl.8
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/xml2nroff ovn/utilities/ovn-nbctl.8.xml > ovn/utilities/ovn-nbctl.8.tmp \
+  -I . \
+  --version=2.10.3 \
+  PKIDIR='/usr/local/var/lib/openvswitch/pki' \
+  LOGDIR='/usr/local/var/log/openvswitch' \
+  DBDIR='/usr/local/etc/openvswitch' \
+  PYTHON='/usr/bin/python2' \
+  RUNDIR='/usr/local/var/run/openvswitch' \
+  VERSION='2.10.3' \
+  localstatedir='/usr/local/var' \
+  pkgdatadir='/usr/local/share/openvswitch' \
+  sysconfdir='/usr/local/etc' \
+  bindir='/usr/local/bin' \
+  sbindir='/usr/local/sbin'
+mv ovn/utilities/ovn-nbctl.8.tmp ovn/utilities/ovn-nbctl.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovn/utilities/ovn-sbctl.8.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovn/utilities/ovn-sbctl.8.tmp
+mv ovn/utilities/ovn-sbctl.8.tmp ovn/utilities/ovn-sbctl.8
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/xml2nroff ovn/utilities/ovn-trace.8.xml > ovn/utilities/ovn-trace.8.tmp \
+  -I . \
+  --version=2.10.3 \
+  PKIDIR='/usr/local/var/lib/openvswitch/pki' \
+  LOGDIR='/usr/local/var/log/openvswitch' \
+  DBDIR='/usr/local/etc/openvswitch' \
+  PYTHON='/usr/bin/python2' \
+  RUNDIR='/usr/local/var/run/openvswitch' \
+  VERSION='2.10.3' \
+  localstatedir='/usr/local/var' \
+  pkgdatadir='/usr/local/share/openvswitch' \
+  sysconfdir='/usr/local/etc' \
+  bindir='/usr/local/bin' \
+  sbindir='/usr/local/sbin'
+mv ovn/utilities/ovn-trace.8.tmp ovn/utilities/ovn-trace.8
+PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. < ovn/utilities/ovn-detrace.1.in | \
+  /usr/bin/python2 ./build-aux/dpdkstrip.py --nodpdk | \
+  sed \
+    -e 's,[@]PKIDIR[@],/usr/local/var/lib/openvswitch/pki,g' \
+    -e 's,[@]LOGDIR[@],/usr/local/var/log/openvswitch,g' \
+    -e 's,[@]DBDIR[@],/usr/local/etc/openvswitch,g' \
+    -e 's,[@]PYTHON[@],/usr/bin/python2,g' \
+    -e 's,[@]RUNDIR[@],/usr/local/var/run/openvswitch,g' \
+    -e 's,[@]VERSION[@],2.10.3,g' \
+    -e 's,[@]localstatedir[@],/usr/local/var,g' \
+    -e 's,[@]pkgdatadir[@],/usr/local/share/openvswitch,g' \
+    -e 's,[@]sysconfdir[@],/usr/local/etc,g' \
+    -e 's,[@]bindir[@],/usr/local/bin,g' \
+    -e 's,[@]sbindir[@],/usr/local/sbin,g' \
+    -e 's,[@]abs_builddir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+    -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
+  > ovn/utilities/ovn-detrace.1.tmp
+mv ovn/utilities/ovn-detrace.1.tmp ovn/utilities/ovn-detrace.1
 printf '\043 Generated automatically -- do not modify!    -*- buffer-read-only: t -*-\n' > version.py.tmp && \
 echo 'VERSION = "2.10.3"' >> version.py.tmp && \
 if cmp -s version.py.tmp python/ovs/version.py; then touch python/ovs/version.py; rm version.py.tmp; else mv version.py.tmp python/ovs/version.py; fi
@@ -1240,6 +2151,30 @@ PYTHONPATH=$PYTHONPATH":"./python /usr/bin/python2 ./build-aux/soexpand.py -I. <
     -e 's,[@]abs_top_srcdir[@],/home/cigarier/Desktop/openvswitch2.10/ovs,g' \
   > utilities/ovs-lib.tmp
 mv utilities/ovs-lib.tmp utilities/ovs-lib
+:;{ \
+  echo '# Signature of the current package.' && \
+  echo 'm4_define([AT_PACKAGE_NAME],      [openvswitch])' && \
+  echo 'm4_define([AT_PACKAGE_TARNAME],   [openvswitch])' && \
+  echo 'm4_define([AT_PACKAGE_VERSION],   [2.10.3])' && \
+  echo 'm4_define([AT_PACKAGE_STRING],    [openvswitch 2.10.3])' && \
+  echo 'm4_define([AT_PACKAGE_BUGREPORT], [bugs@openvswitch.org])'; \
+} >'./package.m4'
+/bin/bash /home/cigarier/Desktop/openvswitch2.10/ovs/build-aux/missing autom4te --language=autotest -I '.' -o tests/testsuite.tmp tests/testsuite.at
+mv tests/testsuite.tmp tests/testsuite
+/bin/bash /home/cigarier/Desktop/openvswitch2.10/ovs/build-aux/missing autom4te --language=autotest -I '.' -o tests/system-kmod-testsuite.tmp tests/system-kmod-testsuite.at
+mv tests/system-kmod-testsuite.tmp tests/system-kmod-testsuite
+/bin/bash /home/cigarier/Desktop/openvswitch2.10/ovs/build-aux/missing autom4te --language=autotest -I '.' -o tests/system-userspace-testsuite.tmp tests/system-userspace-testsuite.at
+mv tests/system-userspace-testsuite.tmp tests/system-userspace-testsuite
+/bin/bash /home/cigarier/Desktop/openvswitch2.10/ovs/build-aux/missing autom4te --language=autotest -I '.' -o tests/system-offloads-testsuite.tmp tests/system-offloads-testsuite.at
+mv tests/system-offloads-testsuite.tmp tests/system-offloads-testsuite
+/bin/bash /home/cigarier/Desktop/openvswitch2.10/ovs/build-aux/missing autom4te --language=autotest -I '.' -o tests/system-dpdk-testsuite.tmp tests/system-dpdk-testsuite.at
+mv tests/system-dpdk-testsuite.tmp tests/system-dpdk-testsuite
+\
+{ sed -n -e '/%AUTHORS%/q' -e p < ./debian/copyright.in;   \
+  sed '34,/^$/d' ./AUTHORS.rst |			   \
+	sed -n -e '/^$/q' -e 's/^/  /p';			   \
+  sed -e '34,/%AUTHORS%/d' ./debian/copyright.in;	   \
+} > debian/copyright
 (printf '\043 Generated automatically -- do not modify!    -*- buffer-read-only: t -*-\n' && sed -e 's,[@]VERSION[@],2.10.3,g') < ./rhel/openvswitch-dkms.spec.in > openvswitch-dkms.spec.tmp || exit 1; if cmp -s openvswitch-dkms.spec.tmp rhel/openvswitch-dkms.spec; then touch rhel/openvswitch-dkms.spec; rm openvswitch-dkms.spec.tmp; else mv openvswitch-dkms.spec.tmp rhel/openvswitch-dkms.spec; fi
 (printf '\043 Generated automatically -- do not modify!    -*- buffer-read-only: t -*-\n' && sed -e 's,[@]VERSION[@],2.10.3,g') < ./rhel/kmod-openvswitch-rhel6.spec.in > kmod-openvswitch-rhel6.spec.tmp || exit 1; if cmp -s kmod-openvswitch-rhel6.spec.tmp rhel/kmod-openvswitch-rhel6.spec; then touch rhel/kmod-openvswitch-rhel6.spec; rm kmod-openvswitch-rhel6.spec.tmp; else mv kmod-openvswitch-rhel6.spec.tmp rhel/kmod-openvswitch-rhel6.spec; fi
 (printf '\043 Generated automatically -- do not modify!    -*- buffer-read-only: t -*-\n' && sed -e 's,[@]VERSION[@],2.10.3,g') < ./rhel/openvswitch-kmod-fedora.spec.in > openvswitch-kmod-fedora.spec.tmp || exit 1; if cmp -s openvswitch-kmod-fedora.spec.tmp rhel/openvswitch-kmod-fedora.spec; then touch rhel/openvswitch-kmod-fedora.spec; rm openvswitch-kmod-fedora.spec.tmp; else mv openvswitch-kmod-fedora.spec.tmp rhel/openvswitch-kmod-fedora.spec; fi
@@ -1250,6 +2185,36 @@ mv utilities/ovs-lib.tmp utilities/ovs-lib
 if cmp -s openvswitch-xen.spec.tmp xenserver/openvswitch-xen.spec; then touch xenserver/openvswitch-xen.spec; rm openvswitch-xen.spec.tmp; else mv openvswitch-xen.spec.tmp xenserver/openvswitch-xen.spec; fi
 make[3]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
 make[3]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
+touch -c manpage-check
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/intel-ext.h && \
+touch include/openflow/intel-ext.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/netronome-ext.h && \
+touch include/openflow/netronome-ext.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/nicira-ext.h && \
+touch include/openflow/nicira-ext.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-1.0.h && \
+touch include/openflow/openflow-1.0.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-1.1.h && \
+touch include/openflow/openflow-1.1.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-1.2.h && \
+touch include/openflow/openflow-1.2.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-1.3.h && \
+touch include/openflow/openflow-1.3.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-1.4.h && \
+touch include/openflow/openflow-1.4.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-1.5.h && \
+touch include/openflow/openflow-1.5.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-1.6.h && \
+touch include/openflow/openflow-1.6.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow-common.h && \
+touch include/openflow/openflow-common.hstamp
+PYTHONPATH=./python":"$PYTHONPATH PYTHONDONTWRITEBYTECODE=yes /usr/bin/python2 ./build-aux/check-structs -I./include include/openflow/openflow.h && \
+touch include/openflow/openflow.hstamp
 touch cxx-check
+./build-aux/cksum-schema-check vswitchd/vswitch.ovsschema vswitchd/vswitch.ovsschema.stamp
+./build-aux/cksum-schema-check ovsdb/_server.ovsschema ovsdb/_server.ovsschema.stamp
+./build-aux/cksum-schema-check vtep/vtep.ovsschema vtep/vtep.ovsschema.stamp
+./build-aux/cksum-schema-check ovn/ovn-nb.ovsschema ovn/ovn-nb.ovsschema.stamp
+./build-aux/cksum-schema-check ovn/ovn-sb.ovsschema ovn/ovn-sb.ovsschema.stamp
 make[2]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
 make[1]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs'

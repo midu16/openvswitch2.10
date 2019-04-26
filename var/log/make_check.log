@@ -14,13 +14,25 @@ make[3]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
 make[3]: Nothing to be done for 'utilities/ovs-appctl-bashcomp.bash'.
 make[3]: Nothing to be done for 'utilities/ovs-vsctl-bashcomp.bash'.
 make[3]: 'tests/atlocal' is up to date.
-make[3]: 'tests/testpki-cacert.pem' is up to date.
-make[3]: 'tests/testpki-cert.pem' is up to date.
-make[3]: 'tests/testpki-privkey.pem' is up to date.
-make[3]: 'tests/testpki-req.pem' is up to date.
-make[3]: 'tests/testpki-cert2.pem' is up to date.
-make[3]: 'tests/testpki-privkey2.pem' is up to date.
-make[3]: 'tests/testpki-req2.pem' is up to date.
+rm -f tests/pki/stamp
+rm -rf tests/pki
+/bin/bash ./utilities/ovs-pki.in --dir=tests/pki --log=tests/ovs-pki.log init && \
+/bin/bash ./utilities/ovs-pki.in --dir=tests/pki --log=tests/ovs-pki.log req+sign tests/pki/test && \
+/bin/bash ./utilities/ovs-pki.in --dir=tests/pki --log=tests/ovs-pki.log req+sign tests/pki/test2 && \
+: > tests/pki/stamp
+Creating controllerca...
+Creating switchca...
+tests/pki/test-req.pem	vendredi 26 avril 2019, 15:18:24 (UTC+0200)
+	fingerprint 2dc16eb48e0d8c60631f3b1bc497c40a25723c0d
+tests/pki/test2-req.pem	vendredi 26 avril 2019, 15:18:24 (UTC+0200)
+	fingerprint 315f94c4f358e2ae3acb59fb186d73fa99e4fc11
+cp tests/pki/switchca/cacert.pem tests/testpki-cacert.pem
+cp tests/pki/test-cert.pem tests/testpki-cert.pem
+cp tests/pki/test-privkey.pem tests/testpki-privkey.pem
+cp tests/pki/test-req.pem tests/testpki-req.pem
+cp tests/pki/test2-cert.pem tests/testpki-cert2.pem
+cp tests/pki/test2-privkey.pem tests/testpki-privkey2.pem
+cp tests/pki/test2-req.pem tests/testpki-req2.pem
 make[3]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
 make  check-local
 make[3]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
@@ -469,4 +481,2727 @@ ofp-print
 384: OFPT_BUNDLE_ADD_MESSAGE - verify xid            ok
 385: OFPT_BUNDLE_ADD_MESSAGE - reject OFPT_HELLO     ok
 386: OFPT_BUNDLE_ADD_MESSAGE - FLOW_MOD              ok
-387: OFPT_BUNDLE_ADD_MESSAGE - PORT_MOD             
+387: OFPT_BUNDLE_ADD_MESSAGE - PORT_MOD              ok
+388: OFPT_BUNDLE_ADD_MESSAGE - GROUP_MOD             ok
+389: OFPT_BUNDLE_ADD_MESSAGE - PACKET_OUT            ok
+390: NXST_IPFIX_BRIDGE - request                     ok
+391: NXST_IPFIX_BRIDGE - reply                       ok
+392: NXST_IPFIX_FLOW - request                       ok
+393: NXST_IPFIX_FLOW - reply                         ok
+394: NXT_CT_FLUSH_ZONE                               ok
+
+OpenFlow utilities
+
+395: encoding hellos                                 ok
+396: parsing key-value pairs                         ok
+
+ofp-errors tests
+
+397: OFPT_ERROR with type OFPET_HELLO_FAILED - OF1.0 ok
+398: OFPT_ERROR with type OFPET_HELLO_FAILED - OF1.1 ok
+399: OFPT_ERROR with type OFPET_BAD_REQUEST - OF1.0  ok
+400: OFPT_ERROR prints type of truncated inner messages ok
+401: OFPT_ERROR with code OFPBMC_BAD_PREREQ - OF1.0  ok
+402: OFPT_ERROR with code OFPBMC_BAD_PREREQ - OF1.1  ok
+403: OFPT_ERROR with type OFPFMFC_OVERLAP - OF1.0    ok
+404: OFPT_ERROR with type OFPBIC_UNSUP_INST - OF1.1  ok
+405: OFPT_ERROR with type OFPBIC_DUP_INST - OF1.4    ok
+406: encoding OFPBIC_* experimenter errors           ok
+407: encoding errors extension that became official  ok
+408: decoding OFPBIC_* experimenter errors           ok
+409: decoding experimenter errors                    ok
+410: encoding experimenter errors                    ok
+
+ovs-ofctl
+
+411: ovs-ofctl parse-flows choice of protocol        ok
+412: ovs-ofctl parse-flows (OpenFlow 1.0)            ok
+413: ovs-ofctl parse-flows (OpenFlow 1.1)            ok
+414: ovs-ofctl parse-flows (OpenFlow 1.2)            ok
+415: ovs-ofctl parse-flow with invalid mask          ok
+416: ovs-ofctl action inconsistency (OpenFlow 1.1)   ok
+417: ovs-ofctl parse-flows (skb_priority)            ok
+418: ovs-ofctl parse-flows (NXM)                     ok
+419: ovs-ofctl -F nxm parse-flows                    ok
+420: ovs-ofctl -F nxm -mmm parse-flows               ok
+421: ovs-ofctl parse-nx-match                        ok
+422: ovs-ofctl parse-ofp10-match                     ok
+423: ovs-ofctl parse-ofp11-match                     ok
+424: ovs-ofctl parse-nx-match loose                  ok
+425: ovs-ofctl parse-oxm (OpenFlow 1.2)              ok
+426: ovs-ofctl parse-oxm (OpenFlow 1.3)              ok
+427: ovs-ofctl parse-oxm (OpenFlow 1.5)              ok
+428: ovs-ofctl parse-oxm loose                       ok
+429: experimenter OXM encoding                       ok
+430: check TCP flags expression in OXM and NXM       ok
+431: ovs-ofctl check-vlan                            ok
+432: ovs-ofctl -F option and NXM features            ok
+433: ovs-ofctl -F option with flow_mods              ok
+434: ovs-ofctl dump-flows honors -F option           ok
+435: ovs-ofctl dump-flows rejects bad -F option      ok
+436: ovs-ofctl add-flow reports non-normalized flows ok
+437: ovs-ofctl dump-flows with sorting               ok
+438: ovs-ofctl dump-flows --names                    ok
+439: ovs-ofctl diff-flows                            ok
+440: ovs-ofctl diff-flows - tunnel metadata          ok
+441: ovs-ofctl diff-flows - suppress false differences ok
+442: ovs-ofctl -F and -O interaction                 ok
+443: ovs-ofctl ofp-parse                             ok
+444: tcp flags - filtering                           ok
+445: ovs-ofctl rule with importance                  ok
+446: ovs-ofctl replace-flows with importance         ok
+447: ovs-ofctl replace-flows with --bundle           ok
+448: ovs-ofctl ct-flush-zone                         ok
+
+datapath parsing and formatting
+
+449: OVS datapath key parsing and formatting - valid forms ok
+450: OVS datapath wildcarded key parsing and formatting - valid forms ok
+451: OVS datapath wildcarded key filtering.          ok
+452: OVS datapath actions parsing and formatting - valid forms ok
+453: OVS datapath actions parsing and formatting - invalid forms ok
+
+mpls-xlate
+
+454: MPLS xlate action                               ok
+455: MPLS xlate action - patch-port                  ok
+456: MPLS xlate action - group bucket                ok
+
+multipath link selection
+
+457: modulo_n multipath link selection               ok
+458: hash_threshold multipath link selection         ok
+459: hrw multipath link selection                    ok
+460: iter_hash multipath link selection              ok
+461: multipath action missing argument               ok
+462: multipath action bad fields                     ok
+463: multipath action bad algorithm                  ok
+464: multipath action bad n_links                    ok
+465: multipath action destination too narrow         ok
+
+learning action
+
+466: learning action - parsing and formatting        ok
+467: learning action - parsing and formatting - illegal in_port_oxm ok
+468: learning action - parsing and formatting - OXM  ok
+469: learning action - examples                      ok
+470: learning action - satisfied prerequisites       ok
+471: learning action - invalid prerequisites         ok
+472: learning action - too-long immediate value      ok
+473: learning action - standard VLAN+MAC learning    ok
+474: learning action - learn refreshes hard_age      ok
+475: learning action - TCPv4 port learning           ok
+476: learning action - TCPv6 port learning           ok
+477: learning action - self-modifying flow           ok
+478: learning action - self-modifying flow with idle_timeout ok
+479: learning action - self-modifying flow with hard_timeout ok
+480: learning action - fin_timeout feature           ok
+481: learning action - delete_learned feature        ok
+482: learning action - delete_learned/limit with packet ok
+483: learning action - limit                         ok
+484: learning action - limit result_dst              ok
+485: learning action - different limits              ok
+
+vconn library -- unix class
+
+486: unix vconn - refuse connection                  ok
+487: unix vconn - accept then close                  ok
+488: unix vconn - read hello                         ok
+489: unix vconn - send plain hello                   ok
+490: unix vconn - send long hello                    ok
+491: unix vconn - send echo hello                    ok
+492: unix vconn - send short hello                   ok
+493: unix vconn - send invalid version hello         ok
+
+vconn library -- tcp class
+
+494: tcp vconn - refuse connection                   ok
+495: tcp vconn - accept then close                   ok
+496: tcp vconn - read hello                          ok
+497: tcp vconn - send plain hello                    ok
+498: tcp vconn - send long hello                     ok
+499: tcp vconn - send echo hello                     ok
+500: tcp vconn - send short hello                    ok
+501: tcp vconn - send invalid version hello          ok
+
+vconn library -- ssl class
+
+502: ssl vconn - refuse connection                   ok
+503: ssl vconn - accept then close                   ok
+504: ssl vconn - read hello                          ok
+505: ssl vconn - send plain hello                    ok
+506: ssl vconn - send long hello                     ok
+507: ssl vconn - send echo hello                     ok
+508: ssl vconn - send short hello                    ok
+509: ssl vconn - send invalid version hello          ok
+
+test dir_name and base_name functions
+
+510: components of "/usr/lib" are "/usr", "lib"      ok
+511: components of "/usr/" are "/", "usr"            ok
+512: components of "usr" are ".", "usr"              ok
+513: components of "/" are "/", "/"                  ok
+514: components of "." are ".", "."                  ok
+515: components of ".." are ".", ".."                ok
+516: components of "//" are "//", "//"               ok
+517: components of "//foo" are "//", "foo"           ok
+518: components of "" are ".", "."                   ok
+519: components of "dir/file" are "dir", "file"      ok
+520: components of "dir/file/" are "dir", "file"     ok
+521: components of "dir/file//" are "dir", "file"    ok
+522: components of "///foo" are "/", "foo"           ok
+
+test follow_symlinks function
+
+523: follow_symlinks - relative symlinks             ok
+524: follow_symlinks - absolute symlinks             ok
+525: follow_symlinks - symlinks to directories       ok
+526: follow_symlinks - nonexistent targets           ok
+527: follow_symlinks - regular files                 ok
+528: follow_symlinks - device targets                ok
+529: follow_symlinks - nonexistent files             ok
+530: follow_symlinks - symlink loop                  ok
+
+AES-128 unit tests
+
+531: wikipedia test vector 1                         ok
+532: wikipedia test vector 2                         ok
+533: NIST KAT ECBKeySbox128e vector 0                ok
+534: NIST KAT ECBKeySbox128e vector 1                ok
+535: NIST KAT ECBKeySbox128e vector 2                ok
+536: NIST KAT ECBKeySbox128e vector 3                ok
+537: NIST KAT ECBKeySbox128e vector 4                ok
+538: NIST KAT ECBKeySbox128e vector 5                ok
+539: NIST KAT ECBKeySbox128e vector 6                ok
+540: NIST KAT ECBKeySbox128e vector 7                ok
+541: NIST KAT ECBKeySbox128e vector 8                ok
+542: NIST KAT ECBKeySbox128e vector 9                ok
+543: NIST KAT ECBKeySbox128e vector 10               ok
+544: NIST KAT ECBKeySbox128e vector 11               ok
+545: NIST KAT ECBKeySbox128e vector 12               ok
+546: NIST KAT ECBKeySbox128e vector 13               ok
+547: NIST KAT ECBKeySbox128e vector 14               ok
+548: NIST KAT ECBKeySbox128e vector 15               ok
+549: NIST KAT ECBKeySbox128e vector 16               ok
+550: NIST KAT ECBKeySbox128e vector 17               ok
+551: NIST KAT ECBKeySbox128e vector 18               ok
+552: NIST KAT ECBKeySbox128e vector 19               ok
+553: NIST KAT ECBKeySbox128e vector 20               ok
+
+unixctl
+
+554: unixctl ovs-vswitchd exit - Python2             ok
+555: unixctl ovs-vswitchd exit - Python3             ok
+556: unixctl ovs-vswitchd list-commands - Python2    ok
+557: unixctl ovs-vswitchd list-commands - Python3    ok
+558: unixctl ovs-vswitchd arguments - Python2        ok
+559: unixctl ovs-vswitchd arguments - Python3        ok
+560: unixctl bad target - Python2                    ok
+561: unixctl bad target - Python3                    ok
+562: unixctl server - Python2                        ok
+563: unixctl server - Python3                        ok
+564: unixctl server errors - Python2                 ok
+565: unixctl server errors - Python3                 ok
+
+UUID unit tests
+
+566: UUID generation, parsing, serialization         ok
+
+JSON -- arrays
+
+567: empty array - C                                 ok
+568: empty array - Python2                           ok
+569: empty array - Python3                           ok
+570: single-element array - C                        ok
+571: single-element array - Python2                  ok
+572: single-element array - Python3                  ok
+573: 2-element array - C                             ok
+574: 2-element array - Python2                       ok
+575: 2-element array - Python3                       ok
+576: many-element array - C                          ok
+577: many-element array - Python2                    ok
+578: many-element array - Python3                    ok
+579: missing comma - C                               ok
+580: missing comma - Python2                         ok
+581: missing comma - Python3                         ok
+582: trailing comma not allowed - C                  ok
+583: trailing comma not allowed - Python2            ok
+584: trailing comma not allowed - Python3            ok
+585: doubled comma not allowed - C                   ok
+586: doubled comma not allowed - Python2             ok
+587: doubled comma not allowed - Python3             ok
+
+JSON -- strings
+
+588: empty string - C                                ok
+589: empty string - Python2                          ok
+590: empty string - Python3                          ok
+591: 1-character strings - C                         ok
+592: 1-character strings - Python2                   ok
+593: 1-character strings - Python3                   ok
+594: escape sequences - C                            ok
+595: escape sequences - Python2                      ok
+596: escape sequences - Python3                      ok
+597: Unicode escape sequences - C                    ok
+598: Unicode escape sequences - Python2              ok
+599: Unicode escape sequences - Python3              ok
+600: surrogate pairs - C                             ok
+601: surrogate pairs - Python                        ok
+602: a string by itself is not valid JSON - C        ok
+603: a string by itself is not valid JSON - Python2  ok
+604: a string by itself is not valid JSON - Python3  ok
+605: end of line in quoted string - C                ok
+606: end of line in quoted string - Python2          ok
+607: end of line in quoted string - Python3          ok
+608: formfeed in quoted string - C                   ok
+609: formfeed in quoted string - Python2             ok
+610: formfeed in quoted string - Python3             ok
+611: bad escape in quoted string - C                 ok
+612: bad escape in quoted string - Python2           ok
+613: bad escape in quoted string - Python3           ok
+614: \u must be followed by 4 hex digits (1) - C     ok
+615: \u must be followed by 4 hex digits (1) - Python2 ok
+616: \u must be followed by 4 hex digits (1) - Python3 ok
+617: \u must be followed by 4 hex digits (2) - C     ok
+618: \u must be followed by 4 hex digits (2) - Python2 ok
+619: \u must be followed by 4 hex digits (2) - Python3 ok
+620: isolated leading surrogate not allowed - C      ok
+621: isolated leading surrogate not allowed - Python2 ok
+622: isolated leading surrogate not allowed - Python3 ok
+623: surrogatess must paired properly - C            ok
+624: surrogatess must paired properly - Python2      ok
+625: surrogatess must paired properly - Python3      ok
+626: null bytes not allowed - C                      ok
+627: null bytes not allowed - Python2                ok
+628: null bytes not allowed - Python3                ok
+629: properly quoted backslash at end of string - C  ok
+630: properly quoted backslash at end of string - Python2 ok
+631: properly quoted backslash at end of string - Python3 ok
+632: stray backslash at end of string - C            ok
+633: stray backslash at end of string - Python2      ok
+634: stray backslash at end of string - Python3      ok
+635: end of input in quoted string - C               ok
+636: end of input in quoted string - Python          ok
+
+JSON -- objects
+
+637: empty object - C                                ok
+638: empty object - Python2                          ok
+639: empty object - Python3                          ok
+640: simple object - C                               ok
+641: simple object - Python2                         ok
+642: simple object - Python3                         ok
+643: bad value - C                                   ok
+644: bad value - Python2                             ok
+645: bad value - Python3                             ok
+646: missing colon - C                               ok
+647: missing colon - Python2                         ok
+648: missing colon - Python3                         ok
+649: missing comma - C                               ok
+650: missing comma - Python2                         ok
+651: missing comma - Python3                         ok
+652: trailing comma not allowed - C                  ok
+653: trailing comma not allowed - Python2            ok
+654: trailing comma not allowed - Python3            ok
+655: doubled comma not allowed - C                   ok
+656: doubled comma not allowed - Python2             ok
+657: doubled comma not allowed - Python3             ok
+658: names must be strings - C                       ok
+659: names must be strings - Python2                 ok
+660: names must be strings - Python3                 ok
+
+JSON -- literal names
+
+661: null - C                                        ok
+662: null - Python2                                  ok
+663: null - Python3                                  ok
+664: false - C                                       ok
+665: false - Python2                                 ok
+666: false - Python3                                 ok
+667: true - C                                        ok
+668: true - Python2                                  ok
+669: true - Python3                                  ok
+670: a literal by itself is not valid JSON - C       ok
+671: a literal by itself is not valid JSON - Python2 ok
+672: a literal by itself is not valid JSON - Python3 ok
+673: nullify is invalid - C                          ok
+674: nullify is invalid - Python2                    ok
+675: nullify is invalid - Python3                    ok
+676: nubs is invalid - C                             ok
+677: nubs is invalid - Python2                       ok
+678: nubs is invalid - Python3                       ok
+679: xxx is invalid - C                              ok
+680: xxx is invalid - Python2                        ok
+681: xxx is invalid - Python3                        ok
+
+JSON -- numbers
+
+682: integers expressed as reals - C                 ok
+683: integers expressed as reals - Python2           ok
+684: integers expressed as reals - Python3           ok
+685: large integers - C                              ok
+686: large integers - Python2                        ok
+687: large integers - Python3                        ok
+688: large integers expressed as reals - C           ok
+689: large integers expressed as reals - Python2     ok
+690: large integers expressed as reals - Python3     ok
+691: C - large integers that overflow to reals       ok
+692: large integers that overflow to reals - Python2 ok
+693: large integers that overflow to reals - Python3 ok
+694: negative zero - C                               ok
+695: negative zero - Python2                         ok
+696: negative zero - Python3                         ok
+697: reals - C                                       ok
+698: reals - Python2                                 ok
+699: reals - Python3                                 ok
+700: scientific notation - C                         ok
+701: scientific notation - Python2                   ok
+702: scientific notation - Python3                   ok
+703: C - +/- DBL_MAX                                 ok
+704: +/- DBL_MAX - Python2                           ok
+705: +/- DBL_MAX - Python3                           ok
+706: negative reals - C                              ok
+707: negative reals - Python2                        ok
+708: negative reals - Python3                        ok
+709: negative scientific notation - C                ok
+710: negative scientific notation - Python2          ok
+711: negative scientific notation - Python3          ok
+712: 1e-9999 underflows to 0 - C                     ok
+713: 1e-9999 underflows to 0 - Python2               ok
+714: 1e-9999 underflows to 0 - Python3               ok
+715: a number by itself is not valid JSON - C        ok
+716: a number by itself is not valid JSON - Python2  ok
+717: a number by itself is not valid JSON - Python3  ok
+718: leading zeros not allowed - C                   ok
+719: leading zeros not allowed - Python2             ok
+720: leading zeros not allowed - Python3             ok
+721: 1e9999 is too big - C                           ok
+722: 1e9999 is too big - Python2                     ok
+723: 1e9999 is too big - Python3                     ok
+724: exponent bigger than INT_MAX                    ok
+725: exponent smaller than INT_MIN                   ok
+726: accumulated exponent bigger than INT_MAX        ok
+727: accumulated exponent smaller than INT_MIN       ok
+728: decimal point must be followed by digit - C     ok
+729: decimal point must be followed by digit - Python2 ok
+730: decimal point must be followed by digit - Python3 ok
+731: exponent must contain at least one digit (1) - C ok
+732: exponent must contain at least one digit (1) - Python2 ok
+733: exponent must contain at least one digit (1) - Python3 ok
+734: exponent must contain at least one digit (2) - C ok
+735: exponent must contain at least one digit (2) - Python2 ok
+736: exponent must contain at least one digit (2) - Python3 ok
+737: exponent must contain at least one digit (3) - C ok
+738: exponent must contain at least one digit (3) - Python2 ok
+739: exponent must contain at least one digit (3) - Python3 ok
+
+JSON -- RFC 4627 examples
+
+740: RFC 4267 object example - C                     ok
+741: RFC 4267 object example - Python2               ok
+742: RFC 4267 object example - Python3               ok
+743: RFC 4267 array example - C                      ok
+744: RFC 4267 array example - Python2                ok
+745: RFC 4267 array example - Python3                ok
+
+JSON -- pathological cases
+
+746: trailing garbage - C                            ok
+747: trailing garbage - Python2                      ok
+748: trailing garbage - Python3                      ok
+749: formfeeds are not valid white space - C         ok
+750: formfeeds are not valid white space - Python2   ok
+751: formfeeds are not valid white space - Python3   ok
+752: ';' is not a valid token - C                    ok
+753: ';' is not a valid token - Python2              ok
+754: ';' is not a valid token - Python3              ok
+755: arrays nesting too deep - C                     ok
+756: arrays nesting too deep - Python2               ok
+757: arrays nesting too deep - Python3               ok
+758: objects nesting too deep - C                    ok
+759: objects nesting too deep - Python2              ok
+760: objects nesting too deep - Python3              ok
+761: input may not be empty                          ok
+
+JSON -- multiple inputs
+
+762: multiple adjacent objects - C                   ok
+763: multiple adjacent objects - Python2             ok
+764: multiple adjacent objects - Python3             ok
+765: multiple space-separated objects - C            ok
+766: multiple space-separated objects - Python2      ok
+767: multiple space-separated objects - Python3      ok
+768: multiple objects on separate lines - C          ok
+769: multiple objects on separate lines - Python2    ok
+770: multiple objects on separate lines - Python3    ok
+771: multiple objects and arrays - C                 ok
+772: multiple objects and arrays - Python2           ok
+773: multiple objects and arrays - Python3           ok
+774: garbage between multiple objects - C            ok
+775: garbage between multiple objects - Python2      ok
+776: garbage between multiple objects - Python3      ok
+777: garbage after multiple objects - C              ok
+778: garbage after multiple objects - Python2        ok
+779: garbage after multiple objects - Python3        ok
+
+JSON-RPC - C
+
+780: JSON-RPC request and successful reply           ok
+781: JSON-RPC request and error reply                ok
+782: JSON-RPC notification                           ok
+
+JSON-RPC - Python
+
+783: JSON-RPC request and successful reply - Python2 ok
+784: JSON-RPC request and successful reply - Python3 ok
+785: JSON-RPC request and error reply - Python2      ok
+786: JSON-RPC request and error reply - Python3      ok
+787: JSON-RPC notification - Python2                 ok
+788: JSON-RPC notification - Python3                 ok
+
+tunnel
+
+789: tunnel - input                                  ok
+790: tunnel - ECN decapsulation                      ok
+791: tunnel - output                                 ok
+792: tunnel - unencrypted tunnel and not setting skb_mark ok
+793: tunnel - unencrypted tunnel and setting skb_mark to 1 ok
+794: tunnel - unencrypted tunnel and setting skb_mark to 2 ok
+795: tunnel - ToS and TTL inheritance                ok
+796: tunnel - set_tunnel                             ok
+797: tunnel - key                                    ok
+798: tunnel - key match                              ok
+799: tunnel - Geneve                                 ok
+800: tunnel - VXLAN                                  ok
+801: tunnel - LISP                                   ok
+802: tunnel - ERSPAN                                 ok
+803: tunnel - different VXLAN UDP port               ok
+804: ofproto-dpif - set_field - tun_src/tun_dst/tun_id ok
+805: tunnel - ERSPAN v1/v2 metadata                  ok
+806: tunnel - Geneve metadata                        ok
+807: tunnel - Geneve option present                  ok
+808: tunnel - concomitant IPv6 and IPv4 tunnels      ok
+809: tunnel - Mix Geneve/GRE options                 ok
+
+tunnel_push_pop
+
+810: tunnel_push_pop - erspan                        ok
+811: tunnel_push_pop - action                        ok
+812: tunnel_push_pop - packet_out                    ok
+813: tunnel_push_pop - underlay bridge match         ok
+
+tunnel_push_pop_ipv6
+
+814: tunnel_push_pop_ipv6 - ip6erspan                ok
+815: tunnel_push_pop_ipv6 - action                   ok
+
+ovs-router
+
+816: appctl - route/add with gateway                 ok
+817: appctl - route/lookup                           ok
+818: appctl - route/lookup6                          ok
+
+lockfile unit tests
+
+819: lock and unlock                                 ok
+820: lock and unlock twice                           ok
+821: lock blocks same process                        ok
+822: lock blocks same process twice                  ok
+823: lock blocks other process                       ok
+824: lock twice blocks other process                 ok
+825: lock and unlock allows other process            ok
+826: lock multiple                                   ok
+827: lock symlink                                    ok
+828: lock symlink to dir                             ok
+
+reconnect library
+
+829: nothing happens if not enabled - C              ok
+830: nothing happens if not enabled - Python2        ok
+831: nothing happens if not enabled - Python3        ok
+832: quick connect, idle disconnect - C              ok
+833: quick connect, idle disconnect - Python2        ok
+834: quick connect, idle disconnect - Python3        ok
+835: slow connect, idle disconnect - C               ok
+836: slow connect, idle disconnect - Python2         ok
+837: slow connect, idle disconnect - Python3         ok
+838: connect backs off - C                           ok
+839: connect backs off - Python2                     ok
+840: connect backs off - Python3                     ok
+841: connections with no data preserve backoff - C   ok
+842: connections with no data preserve backoff - Python2 ok
+843: connections with no data preserve backoff - Python3 ok
+844: brief connection preserves backoff - C          ok
+845: brief connection preserves backoff - Python2    ok
+846: brief connection preserves backoff - Python3    ok
+847: brief connection with data preserves backoff - C ok
+848: brief connection with data preserves backoff - Python2 ok
+849: brief connection with data preserves backoff - Python3 ok
+850: long connection resets backoff - C              ok
+851: long connection resets backoff - Python2        ok
+852: long connection resets backoff - Python3        ok
+853: connection attempt fails quickly - C            ok
+854: connection attempt fails quickly - Python2      ok
+855: connection attempt fails quickly - Python3      ok
+856: backoff-free tries work - C                     ok
+857: backoff-free tries work - Python2               ok
+858: backoff-free tries work - Python3               ok
+859: max-tries of 1 honored - C                      ok
+860: max-tries of 1 honored - Python2                ok
+861: max-tries of 1 honored - Python3                ok
+862: max-tries of 0 honored - C                      ok
+863: max-tries of 0 honored - Python2                ok
+864: max-tries of 0 honored - Python3                ok
+865: passive mode - C                                ok
+866: passive mode - Python2                          ok
+867: passive mode - Python3                          ok
+
+ovs-vswitchd
+
+868: ovs-vswitchd detaches correctly with empty db   ok
+869: ovs-vswitchd -- stats-update-interval           ok
+870: ovs-vswitchd -- start additional ovs-vswitchd process ok
+871: ovs-vswitchd -- switch over to another ovs-vswitchd process ok
+872: ovs-vswitchd -- invalid database path           ok
+873: ovs-vswitchd -- set service controller          ok
+874: ovs-vswitchd -- Compatible with OVSDB server - w/o monitor_cond ok
+875: ovs-vswitchd - do not create sockets with unsafe names ok
+876: ovs-vswitchd - set datapath IDs                 ok
+
+ofproto
+
+877: ofproto - echo request                          ok
+878: ofproto - handling messages with bad version    ok
+879: ofproto - feature request, config request       ok
+880: ofproto - set OpenFlow port number              ok
+881: ofproto - port stats - (OpenFlow 1.0)           ok
+882: ofproto - port stats - (OpenFlow 1.2)           ok
+883: ofproto - port stats - (OpenFlow 1.4)           ok
+884: ofproto - port-desc stats (OpenFlow 1.0)        ok
+885: ofproto - port-desc stats (OpenFlow 1.2)        ok
+886: ofproto - port-desc stats (OpenFlow 1.5)        ok
+887: ofproto - port-desc stats (OpenFlow 1.6)        ok
+888: ofproto - queue stats - (OpenFlow 1.0)          ok
+889: ofproto - queue stats - (OpenFlow 1.1)          ok
+890: ofproto - queue stats - (OpenFlow 1.2)          ok
+891: ofproto - queue stats - (OpenFlow 1.3)          ok
+892: ofproto - queue stats - (OpenFlow 1.4)          ok
+893: ofproto - queue configuration - (OpenFlow 1.0)  ok
+894: ofproto - queue configuration - (OpenFlow 1.1)  ok
+895: ofproto - queue configuration - (OpenFlow 1.2)  ok
+896: ofproto - queue configuration - (OpenFlow 1.4)  ok
+897: ofproto - del group (OpenFlow 1.0 extension)    ok
+898: ofproto - del group (OpenFlow 1.1)              ok
+899: ofproto - add indirect group                    ok
+900: ofproto - group mod with mod and add_or_mod command ok
+901: ofproto - del group (OpenFlow 1.5)              ok
+902: ofproto - del group deletes flows               ok
+903: ofproto - insert group buckets                  ok
+904: ofproto - remove group buckets                  ok
+905: ofproto - bundle del group (OpenFlow 1.3)       ok
+906: ofproto - bundle add indirect group             ok
+907: ofproto - bundle group mod with mod and add_or_mod command ok
+908: ofproto - bundle del group (OpenFlow 1.5)       ok
+909: ofproto - bundle del group deletes flows        ok
+910: ofproto - bundle insert group buckets           ok
+911: ofproto - bundle remove group buckets           ok
+912: ofproto - flow mod checks group availability    ok
+913: ofproto - bundle flow mod checks group availability ok
+914: ofproto - group description                     ok
+915: ofproto - group features (OpenFlow 1.0 extension) ok
+916: ofproto - group features (OpenFlow 1.2)         ok
+917: ofproto - group stats (OpenFlow 1.0 extension)  ok
+918: ofproto - group stats (OpenFlow 1.1)            ok
+919: ofproto - group stats (OpenFlow 1.3)            ok
+920: ofproto - group stats (OpenFlow 1.5)            ok
+921: ofproto - group stats after insert a new bucket (OpenFlow 1.5) ok
+922: ofproto - group add then bridge delete (OpenFlow 1.3) ok
+923: ofproto - mod-port (OpenFlow 1.0)               ok
+924: ofproto - mod-port (OpenFlow 1.2)               ok
+925: ofproto - mod-port (OpenFlow 1.4)               ok
+926: ofproto - mod-port (OpenFlow 1.6)               ok
+927: ofproto - basic flow_mod commands (NXM)         ok
+928: ofproto - basic flow_mod commands (OpenFlow 1.0) ok
+929: ofproto - add-flow and flags                    ok
+930: ofproto - basic flow_mod commands (OpenFlow 1.1) ok
+931: ofproto - flow_mod negative test (OpenFlow 1.1) ok
+932: ofproto - set-field flow_mod commands (NXM)     ok
+933: ofproto - basic flow_mod commands (OpenFlow 1.2) ok
+934: ofproto - set-field flow_mod commands (OF1.2)   ok
+935: ofproto - dump flows with cookie                ok
+936: ofproto - mod flow with cookie change (OpenFlow 1.0) ok
+937: ofproto - mod flow with cookie change (NXM)     ok
+938: ofproto - no mod flow with cookie change (OpenFlow 1.1) ok
+939: ofproto - no mod flow with cookie change (OpenFlow 1.2) ok
+940: ofproto - mod flows based on cookie mask (OpenFlow 1.0) ok
+941: ofproto - mod flows based on cookie mask (OpenFlow 1.1) ok
+942: ofproto - mod flows based on cookie mask (OpenFlow 1.2) ok
+943: ofproto - mod flows based on cookie mask with cookie change ok
+944: ofproto - mod flow with cookie miss (mask==0) - NXM ok
+945: ofproto - mod flow with cookie miss (mask==0) - OF1.1 ok
+946: ofproto - mod flow with cookie miss (mask==0) - OF1.2 ok
+947: ofproto - mod flow with cookie miss (mask!=0) - NXM ok
+948: ofproto - mod flow with cookie miss (mask!=0) - OF1.1 ok
+949: ofproto - mod flow with cookie miss (mask!=0) - OF1.2 ok
+950: ofproto - del flows with cookies                ok
+951: ofproto - del flows based on cookie             ok
+952: ofproto - del flows based on cookie mask        ok
+953: ofproto - del flows based on table id (NXM)     ok
+954: ofproto - del flows based on table id (OpenFlow 1.1) ok
+955: ofproto - del flows based on table id (OpenFlow 1.2) ok
+956: ofproto - flow_mod with out_port matching (OpenFlow 1.0) ok
+957: ofproto - flow_mod with out_port matching (OpenFlow 1.1) ok
+958: ofproto - flow_mod with out_group matching (OpenFlow 1.1) ok
+959: ofproto - bundle flow_mod with out group matching (OpenFlow 1.4) ok
+960: ofproto - bundle packet-out (OpenFlow 1.4)      ok
+961: ofproto - bundle packet-out, failing bundle commit (OpenFlow 1.4) ok
+962: ofproto - bundle packet-out makes bundle commit to fail(OpenFlow 1.4) ok
+963: ofproto - flow table configuration (OpenFlow 1.0) ok
+964: ofproto - hidden rules not in table stats       ok
+965: ofproto - flow table configuration (OpenFlow 1.2) ok
+966: ofproto - table features (OpenFlow 1.3)         ok
+967: ofproto - flow table names                      ok
+968: ofproto - table description (OpenFlow 1.4)      ok
+969: ofproto - hard limits on flow table size (OpenFlow 1.0) ok
+970: ofproto - hard limits on flow table size (OpenFlow 1.2) ok
+971: ofproto - eviction upon table overflow (OpenFlow 1.0) ok
+972: ofproto - eviction upon table overflow (OpenFlow 1.2) ok
+973: ofproto - eviction using importance upon table overflow (OpenFlow 1.4) ok
+974: ofproto - eviction upon table overflow, with fairness (OpenFlow 1.0) ok
+975: ofproto - eviction upon table overflow, with fairness (OpenFlow 1.2) ok
+976: ofproto - eviction upon table overflow, with modified hard timeout ok
+977: ofproto - eviction upon table overflow, with modified idle timeout ok
+978: ofproto - asynchronous message control (OpenFlow 1.0) ok
+979: ofproto - asynchronous message control (OpenFlow 1.2) ok
+980: ofproto - asynchronous message control (OpenFlow 1.3) ok
+981: ofproto - asynchronous message control (OpenFlow 1.4) ok
+982: ofproto - asynchronous message control (OpenFlow 1.5) ok
+983: ofproto - controller role (OpenFlow 1.2)        ok
+984: ofproto - controller role (OpenFlow 1.4)        ok
+985: ofproto - controller role (OpenFlow 1.3)        ok
+986: ofproto - requestforward (OpenFlow 1.4)         ok
+987: ofproto - packet-out from controller (OpenFlow 1.0) ok
+988: ofproto - packet-out from controller (OpenFlow 1.2) ok
+989: ofproto - packet-out from controller (OpenFlow 1.1) ok
+990: ofproto - packet-out from controller (OpenFlow 1.5) ok
+991: ofproto - packet-out with metadata and userdata (NXT_PACKET_IN2) ok
+992: ofproto - packet-out with set_field metadata (OpenFlow 1.5) ok
+993: ofproto - packet-out with set_field metadata with packet_type PT_ETH (OpenFlow 1.5) ok
+994: ofproto - packet-out with set_field metadata with packet_type PT_IPV4 on PTAP bridge (OpenFlow 1.5) ok
+995: ofproto - packet-out with metadata (NXM)        ok
+996: ofproto - packet-out with metadata (OpenFlow 1.2) ok
+997: ofproto - packet-out with metadata and dual set_field (OpenFlow 1.3) ok
+998: ofproto - packet-out with tunnel metadata (OpenFlow 1.2) ok
+999: ofproto - flow monitoring                       ok
+1000: ofproto - flow monitoring with !own             ok
+1001: ofproto - flow monitoring with out_port         ok
+1002: ofproto - flow monitoring pause and resume      ok
+1003: ofproto - event filtering (OpenFlow 1.3)        ok
+1004: ofproto - ofport_request                        ok
+1005: ofproto - bundle open (OpenFlow 1.4)            ok
+1006: ofproto - bundle double open (OpenFlow 1.4)     ok
+1007: ofproto - bundle close without open (OpenFlow 1.4) ok
+1008: ofproto - bundle double close (OpenFlow 1.4)    ok
+1009: ofproto - bundle close, different flags (OpenFlow 1.4) ok
+1010: ofproto - bundle commit without open (OpenFlow 1.4) ok
+1011: ofproto - bundle commit, different flags (OpenFlow 1.4) ok
+1012: ofproto - bundle discard without open (OpenFlow 1.4) ok
+1013: ofproto - bundle with multiple flow mods (OpenFlow 1.4) ok
+1014: ofproto - failing bundle commit (OpenFlow 1.4)  ok
+1015: ofproto - bundle timeout (OpenFlow 1.4)         ok
+1016: ofproto - bundle custom timeout (OpenFlow 1.4)  ok
+1017: ofproto - bundle reset timeout to default (OpenFlow 1.4) ok
+1018: ofproto - bundle open (OpenFlow 1.3)            ok
+1019: ofproto - bundle double open (OpenFlow 1.3)     ok
+1020: ofproto - bundle close without open (OpenFlow 1.3) ok
+1021: ofproto - bundle double close (OpenFlow 1.3)    ok
+1022: ofproto - bundle close, different flags (OpenFlow 1.3) ok
+1023: ofproto - bundle commit without open (OpenFlow 1.3) ok
+1024: ofproto - bundle commit, different flags (OpenFlow 1.3) ok
+1025: ofproto - bundle discard without open (OpenFlow 1.3) ok
+1026: ofproto - bundle with multiple flow mods (OpenFlow 1.3) ok
+1027: ofproto - failing bundle add message (OpenFlow 1.3) ok
+1028: ofproto - failing bundle commit (OpenFlow 1.3)  ok
+1029: ofproto - monitor flows with tun_md             ok
+1030: ofproto - flow mod with tunnel metadata         ok
+1031: ofproto - flush flows, groups, and meters for controller change ok
+
+dpif-netdev
+
+1032: dpif-netdev - netdev-dummy/receive              ok
+1033: dpif-netdev - dummy interface                   ok
+1034: dpif-netdev - dummy-pmd interface               ok
+1035: dpif-netdev - miss upcall key matches flow_install - dummy ok
+1036: dpif-netdev - miss upcall key matches flow_install - dummy-pmd ok
+1037: dpif-netdev - miss upcall key matches flow_dump - dummy ok
+1038: dpif-netdev - miss upcall key matches flow_dump - dummy-pmd ok
+1039: dpif-netdev - meters                            ok
+
+PMD
+
+1040: PMD - creating a thread/add-port                ok
+1041: PMD - multiqueue support                        ok
+1042: PMD - pmd-cpu-mask/distribution of rx queues    ok
+1043: PMD - stats                                     ok
+1044: PMD - reconfigure n_rxq                         ok
+1045: PMD - same flow multiple threads                ok
+1046: PMD - change numa node                          ok
+1047: PMD - non pmd device                            ok
+1048: PMD - add remove ports                          ok
+1049: PMD - rxq affinity                              ok
+1050: PMD - rxq affinity - NUMA                       ok
+1051: PMD - monitor threads                           ok
+1052: PMD - dpctl                                     ok
+
+dpctl
+
+1053: dpctl - add-dp del-dp                           ok
+1054: dpctl - add-if set-if del-if                    ok
+
+ofproto-dpif
+
+1055: ofproto-dpif - revalidator/wait                 ok
+1056: ofproto-dpif - active-backup bonding            ok
+1057: ofproto-dpif - balance-slb bonding              ok
+1058: ofproto-dpif - balance-tcp bonding              ok
+1059: ofproto-dpif - balance-tcp bonding, different recirc flow  ok
+1060: ofproto-dpif - resubmit                         ok
+1061: ofproto-dpif - goto table                       ok
+1062: ofproto-dpif - write actions                    ok
+1063: ofproto-dpif - modify IPv6 Neighbor Solitication (ND) ok
+1064: ofproto-dpif - clear actions                    ok
+1065: ofproto-dpif - group chaining                   ok
+1066: ofproto-dpif - all group in action list         ok
+1067: ofproto-dpif - indirect group in action list    ok
+1068: ofproto-dpif - group actions have no effect afterwards ok
+1069: ofproto-dpif - all group in action set          ok
+1070: ofproto-dpif - indirect group in action set     ok
+1071: ofproto-dpif - patch port with action set       ok
+1072: ofproto-dpif - select group                     ok
+1073: ofproto-dpif - select group with watch port     ok
+1074: ofproto-dpif - select group with weights        ok
+1075: ofproto-dpif - select group with explicit dp_hash selection method ok
+1076: ofproto-dpif - select group with legacy hash selection method ok
+1077: ofproto-dpif - select group with custom hash selection method ok
+1078: ofproto-dpif - fast failover group              ok
+1079: ofproto-dpif - group stats single bucket        ok
+1080: ofproto-dpif - group stats all buckets          ok
+1081: ofproto-dpif - registers                        ok
+1082: ofproto-dpif - extended registers               ok
+1083: ofproto-dpif - extended-extended registers      ok
+1084: ofproto-dpif - load and move order              ok
+1085: ofproto-dpif - copy-field into extended registers ok
+1086: ofproto-dpif - masked set-field into metadata   ok
+1087: ofproto-dpif - actset_output                    ok
+1088: ofproto-dpif - push-pop                         ok
+1089: ofproto-dpif - output                           ok
+1090: ofproto-dpif - dec_ttl                          ok
+1091: ofproto-dpif - dec_ttl without arguments at offset 32 in ofpacts ok
+1092: ofproto-dpif - dec_ttl with arguments at offset 32 in ofpacts ok
+1093: ofproto-dpif - note at offset 24 in ofpacts     ok
+1094: ofproto-dpif - note action deep inside ofpacts  ok
+1095: ofproto-dpif - output, OFPP_NONE ingress port   ok
+1096: ofproto-dpif - DSCP                             ok
+1097: ofproto-dpif - output/flood flags               ok
+1098: ofproto-dpif - Default Table Miss - OF1.0 (OFPTC_TABLE_MISS_CONTROLLER) ok
+1099: ofproto-dpif - Default Table Miss - OF1.3 (OFPTC_TABLE_MISS_DROP) ok
+1100: ofproto-dpif - Table Miss - goto table and OFPTC_TABLE_MISS_CONTROLLER ok
+1101: ofproto-dpif - Table Miss - resubmit and OFPTC_TABLE_MISS_CONTROLLER ok
+1102: ofproto-dpif - Table Miss - OFPTC_TABLE_MISS_CONTINUE ok
+1103: ofproto-dpif - Table Miss - goto table and OFPTC_TABLE_MISS_CONTINUE ok
+1104: ofproto-dpif - Table Miss - resubmit and OFPTC_TABLE_MISS_CONTINUE ok
+1105: ofproto-dpif - Table Miss - OFPTC_TABLE_MISS_DROP ok
+1106: ofproto-dpif - Table Miss - goto table and OFPTC_TABLE_MISS_DROP ok
+1107: ofproto-dpif - Table Miss - resubmit and OFPTC_TABLE_MISS_DROP ok
+1108: ofproto-dpif - controller                       ok
+1109: ofproto-dpif - controller with slow-path action ok
+1110: ofproto-dpif - controller action without megaflows ok
+1111: ofproto-dpif - MPLS handling                    ok
+1112: ofproto-dpif - MPLS handling with goto_table    ok
+1113: ofproto-dpif - MPLS handling with write_actions ok
+1114: ofproto-dpif - table-miss flow (OpenFlow 1.0)   ok
+1115: ofproto-dpif - table-miss flow (OpenFlow 1.3)   ok
+1116: ofproto-dpif - table-miss flow with async config (OpenFlow 1.3) ok
+1117: ofproto-dpif - table-miss flow (OpenFlow 1.4)   ok
+1118: ofproto-dpif - packet-in reasons (Openflow 1.3) ok
+1119: ofproto-dpif - packet-in reasons (Openflow 1.4) ok
+1120: ofproto-dpif - packet-in reasons (Openflow 1.3) ok
+1121: ofproto-dpif - ARP modification slow-path       ok
+1122: ofproto-dpif - VLAN handling                    ok
+1123: ofproto-dpif - VLAN depth limit                 ok
+1124: ofproto-dpif - Multi-VLAN actions               ok
+1125: ofproto-dpif - MPLS handling                    ok
+1126: ofproto-dpif - VLAN+MPLS handling               ok
+1127: ofproto-dpif - fragment handling - trace        ok
+1128: ofproto-dpif - fragment handling - upcall       ok
+1129: ofproto-dpif - fragment handling - actions      ok
+1130: ofproto-dpif - exit                             ok
+1131: ofproto-dpif - mirroring, select_all            ok
+1132: ofproto-dpif - mirroring, select_src            ok
+1133: ofproto-dpif - mirroring, OFPP_NONE ingress port ok
+1134: ofproto-dpif - mirroring, select_dst            ok
+1135: ofproto-dpif - mirroring, select_vlan           ok
+1136: ofproto-dpif - mirroring, output_port           ok
+1137: ofproto-dpif - mirroring, output_vlan           ok
+1138: ofproto-dpif - multiple VLAN output mirrors     ok
+1139: ofproto-dpif - mirroring with recirculation     ok
+1140: ofproto-dpif - mirroring, select_all with snaplen ok
+1141: ofproto-dpif - mirroring, select_all with snaplen and reset snaplen ok
+1142: ofproto-dpif - mirroring, select_src with snaplen ok
+1143: ofproto-dpif - mirroring, OFPP_NONE ingress port with snaplen ok
+1144: ofproto-dpif - mirroring, select_dst with snaplen ok
+1145: ofproto-dpif - mirroring, select_vlan with snaplen ok
+1146: ofproto-dpif - mirroring, output_port with snaplen ok
+1147: ofproto-dpif - mirroring, output_vlan with snaplen ok
+1148: ofproto-dpif - multiple VLAN output mirrors with snaplen ok
+1149: ofproto-dpif - resubmit with recirculation      ok
+1150: ofproto-dpif - resubmit with tun_id             ok
+1151: ofproto-dpif - recirculation after resubmit     ok
+1152: ofproto-dpif - debug_slow action                ok
+1153: ofproto-dpif - continuation - pause at end of pipeline ok
+1154: ofproto-dpif - continuation - actions           ok
+1155: ofproto-dpif - continuation - resubmit          ok
+1156: ofproto-dpif - continuation - action set        ok
+1157: ofproto-dpif - continuation - data stack        ok
+1158: ofproto-dpif - continuation - mirroring         ok
+1159: ofproto-dpif - continuation - patch ports       ok
+1160: ofproto-dpif - continuation flow stats          ok
+1161: ofproto-dpif - continuation with conntrack      ok
+1162: ofproto-dpif - continuation after clone         ok
+1163: ofproto-dpif - ofproto/trace command 1          ok
+1164: ofproto-dpif - ofproto/trace command 2          ok
+1165: ofproto-dpif - ofproto/trace from dpctl output  ok
+1166: ofproto-dpif - ofproto/trace-packet-out         ok
+1167: ofproto-dpif - MAC learning                     ok
+1168: ofproto-dpif - MAC table overflow               ok
+1169: ofproto-dpif - MAC table overflow fairness      ok
+1170: ofproto-dpif - basic truncate action            ok
+1171: ofproto-dpif - truncate and output to patch port ok
+1172: ofproto-dpif - truncate and output to gre tunnel ok
+1173: ofproto-dpif - sFlow packet sampling - IPv4 collector ok
+1174: ofproto-dpif - sFlow packet sampling - IPv6 collector skipped (ofproto-dpif.at:6590)
+1175: ofproto-dpif - sFlow packet sampling - LACP structures ok
+1176: ofproto-dpif - sFlow packet sampling - tunnel set ok
+1177: ofproto-dpif - sFlow packet sampling - tunnel push ok
+1178: ofproto-dpif - sFlow packet sampling - MPLS     ok
+1179: ofproto-dpif - NetFlow flow expiration - IPv4 collector ok
+1180: ofproto-dpif - NetFlow flow expiration - IPv6 collector skipped (ofproto-dpif.at:6964)
+1181: ofproto-dpif - NetFlow active expiration - IPv4 collector ok
+1182: ofproto-dpif - NetFlow active expiration - IPv6 collector skipped (ofproto-dpif.at:7048)
+1183: ofproto-dpif - Bridge IPFIX sanity check        ok
+1184: ofproto-dpif - Bridge IPFIX statistics check    ok
+1185: ofproto-dpif - Flow IPFIX sanity check          ok
+1186: ofproto-dpif - Flow IPFIX sanity check - tunnel set ok
+1187: ofproto-dpif - clone action                     ok
+1188: ofproto-dpif - Flow IPFIX statistics check      ok
+1189: ofproto-dpif - flow stats                       ok
+1190: ofproto-dpif - flow stats reset_counts          ok
+1191: ofproto-dpif - flow stats reset_counts OpenFlow1.5 ok
+1192: ofproto-dpif - flow stats, set-n-threads        ok
+1193: ofproto-dpif - idle_age and hard_age increase over time ok
+1194: ofproto-dpif - fin_timeout                      ok
+1195: ofproto-dpif - ovs-appctl dpif/dump-dps         ok
+1196: ofproto-dpif - ovs-appctl dpif/show             ok
+1197: ofproto-dpif - ovs-appctl dpif/dump-flows       ok
+1198: ofproto-dpif - ovs-appctl dpif/get-flow         ok
+1199: ofproto-dpif - ovs-appctl dpif/get-flow - pmd   ok
+1200: ofproto-dpif - MPLS actions that result in a userspace action ok
+1201: ofproto-dpif - MPLS actions that result in a drop ok
+1202: ofproto-dpif - patch ports                      ok
+1203: ofproto-dpif - patch ports - stack              ok
+1204: ofproto-dpif - port duration                    ok
+
+ofproto-dpif -- megaflows
+
+1205: ofproto-dpif megaflow - port classification     ok
+1206: ofproto-dpif megaflow - L2 classification       ok
+1207: ofproto-dpif megaflow - L3 classification       ok
+1208: ofproto-dpif megaflow - IPv6 classification     ok
+1209: ofproto-dpif megaflow - L4 classification       ok
+1210: ofproto-dpif megaflow - normal                  ok
+1211: ofproto-dpif megaflow - normal - pmd            ok
+1212: ofproto-dpif megaflow - mpls                    ok
+1213: ofproto-dpif megaflow - netflow - IPv4 collector ok
+1214: ofproto-dpif megaflow - netflow - IPv6 collector skipped (ofproto-dpif.at:8290)
+1215: ofproto-dpif megaflow - normal, active-backup bonding - dummy ok
+1216: ofproto-dpif megaflow - normal, active-backup bonding - dummy-pmd ok
+1217: ofproto-dpif megaflow - normal, balance-slb bonding ok
+1218: ofproto-dpif megaflow - normal, balance-tcp bonding ok
+1219: ofproto-dpif megaflow - resubmit port action    ok
+1220: ofproto-dpif megaflow - resubmit table action   ok
+1221: ofproto-dpif megaflow - goto_table action       ok
+1222: ofproto-dpif megaflow - mirroring, select_all   ok
+1223: ofproto-dpif megaflow - mirroring, select_vlan  ok
+1224: ofproto-dpif megaflow - move action             ok
+1225: ofproto-dpif megaflow - push action             ok
+1226: ofproto-dpif megaflow - learning                ok
+1227: ofproto-dpif megaflow - tunnels                 ok
+1228: ofproto-dpif megaflow - dec_ttl                 ok
+1229: ofproto-dpif megaflow - set dl_dst              ok
+1230: ofproto-dpif megaflow - disabled                ok
+1231: ofproto-dpif megaflow - disabled - pmd          ok
+1232: ofproto-dpif - datapath port number change      ok
+1233: ofproto - bundle with variable bfd/cfm config   ok
+1234: ofproto-dpif - ofproto-dpif-monitor 1           ok
+1235: ofproto-dpif - ofproto-dpif-monitor 2           ok
+
+ofproto-dpif - flow translation resource limits
+
+1236: ofproto-dpif - forward resubmit                 ok
+1237: ofproto-dpif - backward resubmit                ok
+1238: ofproto-dpif - infinite resubmit                ok
+1239: ofproto-dpif - backward resubmit without trace  ok
+1240: ofproto-dpif - exponential resubmit chain       ok
+1241: ofproto-dpif - too many output actions          ok
+1242: ofproto-dpif - stack too deep                   ok
+1243: ofproto-dpif packet-out controller              ok
+1244: ofproto-dpif packet-out controller (patch port) ok
+1245: ofproto-dpif packet-out pipeline match field (OpenFlow 1.5) ok
+1246: ofproto-dpif packet-out goto_table              ok
+1247: ofproto-dpif packet-out table-miss (continue)   ok
+1248: ofproto-dpif - ICMPv6                           ok
+1249: ofproto-dpif - ICMPv6 type match                ok
+1250: ofproto-dpif - Neighbor Discovery set-field with checksum update ok
+1251: ofproto-dpif - vlan matching                    ok
+1252: ofproto-dpif - in place modification            ok
+1253: ofproto-dpif - in place modification (vlan)     ok
+1254: ofproto-dpif - trace (unchanged)                ok
+1255: ofproto-dpif - conntrack - controller           ok
+1256: ofproto-dpif - conntrack - force commit         ok
+1257: ofproto-dpif - conntrack - ipv6                 ok
+1258: ofproto-dpif - conntrack - output action        ok
+1259: ofproto-dpif - conntrack - expiration           ok
+1260: ofproto-dpif - conntrack - untrackable traffic  ok
+1261: ofproto-dpif - conntrack - zones                ok
+1262: ofproto-dpif - conntrack - recirc,commit        ok
+1263: ofproto-dpif - conntrack - ICMP related         ok
+1264: ofproto-dpif - conntrack - ct_mark              ok
+1265: ofproto-dpif - conntrack - ct_label             ok
+1266: ofproto-dpif - conntrack - ct_label datapath flow ok
+1267: ofproto-dpif - conntrack - no output            ok
+1268: ofproto-dpif - conntrack - tcp port reuse       ok
+1269: ofproto-dpif - conntrack - tcp pick up          ok
+1270: ofproto-dpif - conntrack - ct_clear             ok
+1271: ofproto-dpif - conntrack - ofproto/trace        ok
+1272: ofproto - set mtu                               ok
+1273: ofproto - fragment prerequisites                ok
+
+bridge
+
+1274: bridge - ports that disappear get added back    ok
+1275: bridge - multiple bridges share a controller    ok
+1276: bridge - add port after stopping controller     ok
+
+netdev-type
+
+1277: bridge - set MAC address of internal port       ok
+
+OVSDB -- logging
+
+1278: create empty, reread                            ok
+1279: write one, reread                               ok
+1280: check that create fails if file exists          ok
+1281: write one, reread                               ok
+1282: write one, replace, commit                      ok
+1283: write one, replace, abort                       ok
+1284: write one, reread - alternative magic           ok
+1285: write one, reread, append                       ok
+1286: write, reread one, overwrite                    ok
+1287: write, add corrupted data, read                 ok
+1288: write, add corrupted data, read, overwrite      ok
+1289: write, corrupt some data, read, overwrite       ok
+1290: write, truncate file, read, overwrite           ok
+1291: write bad JSON, read, overwrite                 ok
+
+OVSDB -- atomic types
+
+1292: integer - C                                     ok
+1293: integer - Python2                               ok
+1294: integer - Python3                               ok
+1295: real - C                                        ok
+1296: real - Python2                                  ok
+1297: real - Python3                                  ok
+1298: boolean - C                                     ok
+1299: boolean - Python2                               ok
+1300: boolean - Python3                               ok
+1301: string - C                                      ok
+1302: string - Python2                                ok
+1303: string - Python3                                ok
+1304: uuid - C                                        ok
+1305: uuid - Python2                                  ok
+1306: uuid - Python3                                  ok
+1307: void is not a valid atomic-type - C             ok
+1308: void is not a valid atomic-type - Python2       ok
+
+OVSDB -- base types
+
+1309: integer enum - C                                ok
+1310: integer enum - Python2                          ok
+1311: integer enum - Python3                          ok
+1312: integer >= 5 - C                                ok
+1313: integer >= 5 - Python2                          ok
+1314: integer >= 5 - Python3                          ok
+1315: integer <= 7 - C                                ok
+1316: integer <= 7 - Python2                          ok
+1317: integer <= 7 - Python3                          ok
+1318: integer between -5 and 10 - C                   ok
+1319: integer between -5 and 10 - Python2             ok
+1320: integer between -5 and 10 - Python3             ok
+1321: integer max may not be less than min - C        ok
+1322: integer max may not be less than min - Python2  ok
+1323: real enum - C                                   ok
+1324: real enum - Python2                             ok
+1325: real enum - Python3                             ok
+1326: real >= -1.5 - C                                ok
+1327: real >= -1.5 - Python2                          ok
+1328: real >= -1.5 - Python3                          ok
+1329: real <= 1e5 - C                                 ok
+1330: real <= 1e5 - Python2                           ok
+1331: real <= 1e5 - Python3                           ok
+1332: real between -2.5 and 3.75 - C                  ok
+1333: real between -2.5 and 3.75 - Python2            ok
+1334: real between -2.5 and 3.75 - Python3            ok
+1335: real max may not be less than min - C           ok
+1336: real max may not be less than min - Python2     ok
+1337: boolean - C                                     ok
+1338: boolean - Python2                               ok
+1339: boolean - Python3                               ok
+1340: boolean enum - C                                ok
+1341: boolean enum - Python2                          ok
+1342: boolean enum - Python3                          ok
+1343: string enum - C                                 ok
+1344: string enum - Python2                           ok
+1345: string enum - Python3                           ok
+1346: string minLength - C                            ok
+1347: string minLength - Python2                      ok
+1348: string minLength - Python3                      ok
+1349: string maxLength - C                            ok
+1350: string maxLength - Python2                      ok
+1351: string maxLength - Python3                      ok
+1352: string minLength and maxLength - C              ok
+1353: string minLength and maxLength - Python2        ok
+1354: string minLength and maxLength - Python3        ok
+1355: maxLength must not be less than minLength - C   ok
+1356: maxLength must not be less than minLength - Python2 ok
+1357: maxLength must not be negative - C              ok
+1358: maxLength must not be negative - Python2        ok
+1359: uuid enum - C                                   ok
+1360: uuid enum - Python2                             ok
+1361: uuid enum - Python3                             ok
+1362: uuid refTable - C                               ok
+1363: uuid refTable - Python2                         ok
+1364: uuid refTable - Python3                         ok
+1365: uuid refTable must be valid id - C              ok
+1366: uuid refTable must be valid id - Python2        ok
+1367: void is not a valid base-type - C               ok
+1368: void is not a valid base-type - Python2         ok
+1369: "type" member must be present - C               ok
+1370: "type" member must be present - Python2         ok
+
+OVSDB -- simple types
+
+1371: simple integer - C                              ok
+1372: simple integer - Python2                        ok
+1373: simple integer - Python3                        ok
+1374: simple real - C                                 ok
+1375: simple real - Python2                           ok
+1376: simple real - Python3                           ok
+1377: simple boolean - C                              ok
+1378: simple boolean - Python2                        ok
+1379: simple boolean - Python3                        ok
+1380: simple string - C                               ok
+1381: simple string - Python2                         ok
+1382: simple string - Python3                         ok
+1383: simple uuid - C                                 ok
+1384: simple uuid - Python2                           ok
+1385: simple uuid - Python3                           ok
+1386: integer in object - C                           ok
+1387: integer in object - Python2                     ok
+1388: integer in object - Python3                     ok
+1389: real in object with explicit min and max - C    ok
+1390: real in object with explicit min and max - Python2 ok
+1391: real in object with explicit min and max - Python3 ok
+1392: key type is required - C                        ok
+1393: key type is required - Python2                  ok
+1394: void is not a valid type - C                    ok
+1395: void is not a valid type - Python2              ok
+
+OVSDB -- set types
+
+1396: optional boolean - C                            ok
+1397: optional boolean - Python2                      ok
+1398: optional boolean - Python3                      ok
+1399: set of 1 to 3 uuids - C                         ok
+1400: set of 1 to 3 uuids - Python2                   ok
+1401: set of 1 to 3 uuids - Python3                   ok
+1402: set of 0 to 3 strings - C                       ok
+1403: set of 0 to 3 strings - Python2                 ok
+1404: set of 0 to 3 strings - Python3                 ok
+1405: set of 0 or more integers - C                   ok
+1406: set of 0 or more integers - Python2             ok
+1407: set of 0 or more integers - Python3             ok
+1408: set of 1 or more reals - C                      ok
+1409: set of 1 or more reals - Python2                ok
+1410: set of 1 or more reals - Python3                ok
+1411: set max cannot be less than min - C             ok
+1412: set max cannot be less than min - Python2       ok
+1413: set max cannot be negative - C                  ok
+1414: set max cannot be negative - Python2            ok
+1415: set min cannot be negative - C                  ok
+1416: set min cannot be negative - Python2            ok
+1417: set min cannot be greater than one - C          ok
+1418: set min cannot be greater than one - Python2    ok
+
+OVSDB -- map types
+
+1419: map of 1 integer to boolean - C                 ok
+1420: map of 1 integer to boolean - Python2           ok
+1421: map of 1 integer to boolean - Python3           ok
+1422: map of 1 boolean to integer, explicit min and max - C ok
+1423: map of 1 boolean to integer, explicit min and max - Python2 ok
+1424: map of 1 boolean to integer, explicit min and max - Python3 ok
+1425: map of 1 to 5 uuid to real - C                  ok
+1426: map of 1 to 5 uuid to real - Python2            ok
+1427: map of 1 to 5 uuid to real - Python3            ok
+1428: map of 0 to 10 string to uuid - C               ok
+1429: map of 0 to 10 string to uuid - Python2         ok
+1430: map of 0 to 10 string to uuid - Python3         ok
+1431: map of 1 to 20 real to string - C               ok
+1432: map of 1 to 20 real to string - Python2         ok
+1433: map of 1 to 20 real to string - Python3         ok
+1434: map of 0 or more string to real - C             ok
+1435: map of 0 or more string to real - Python2       ok
+1436: map of 0 or more string to real - Python3       ok
+1437: map key type is required - C                    ok
+1438: map key type is required - Python2              ok
+
+OVSDB -- default values
+
+1439: default atoms - C                               ok
+1440: default atoms - Python2                         ok
+1441: default atoms - Python3                         ok
+1442: default data - C                                ok
+1443: default data - Python2                          ok
+1444: default data - Python3                          ok
+
+OVSDB -- atoms without constraints
+
+1445: integer atom from JSON - C                      ok
+1446: integer atom from JSON - Python2                ok
+1447: integer atom from JSON - Python3                ok
+1448: integer atom from string                        ok
+1449: real atom from JSON - C                         ok
+1450: real atom from JSON - Python2                   ok
+1451: real atom from JSON - Python3                   ok
+1452: real atom from string                           ok
+1453: boolean atom from JSON - C                      ok
+1454: boolean atom from JSON - Python2                ok
+1455: boolean atom from JSON - Python3                ok
+1456: boolean atom from string                        ok
+1457: string atom from JSON - C                       ok
+1458: string atom from JSON - Python2                 ok
+1459: string atom from JSON - Python3                 ok
+1460: string atom from string                         ok
+1461: uuid atom from JSON - C                         ok
+1462: uuid atom from JSON - Python2                   ok
+1463: uuid atom from JSON - Python3                   ok
+1464: uuid atom from string                           ok
+1465: integer atom sorting - C                        ok
+1466: integer atom sorting - Python2                  ok
+1467: integer atom sorting - Python3                  ok
+1468: real atom sorting - C                           ok
+1469: real atom sorting - Python2                     ok
+1470: real atom sorting - Python3                     ok
+1471: boolean atom sorting - C                        ok
+1472: boolean atom sorting - Python2                  ok
+1473: boolean atom sorting - Python3                  ok
+1474: string atom sorting - C                         ok
+1475: string atom sorting - Python2                   ok
+1476: string atom sorting - Python3                   ok
+1477: uuid atom sorting - C                           ok
+1478: uuid atom sorting - Python2                     ok
+1479: uuid atom sorting - Python3                     ok
+1480: real not acceptable integer JSON atom - C       ok
+1481: real not acceptable integer JSON atom - Python2 ok
+1482: real not acceptable integer JSON atom - Python3 ok
+1483: no invalid UTF-8 sequences in strings           ok
+1484: no invalid UTF-8 sequences in strings - Python  ok
+1485: real not acceptable integer string atom         ok
+1486: inverted range is not acceptable integer string atom positive and negative ok
+1487: inverted range is not acceptable integer string atom negative ok
+1488: inverted range is not acceptable integer string atom positive ok
+1489: too big range is not acceptable integer string atom positive and negative ok
+1490: too big range is not acceptable integer string atom negative ok
+1491: too big range is not acceptable integer string atom positive ok
+1492: string "true" not acceptable boolean JSON atom - C ok
+1493: string "true" not acceptable boolean JSON atom - Python2 ok
+1494: string "true" not acceptable boolean JSON atom - Python3 ok
+1495: string "true" not acceptable boolean string atom ok
+1496: integer not acceptable string JSON atom - C     ok
+1497: integer not acceptable string JSON atom - Python2 ok
+1498: integer not acceptable string JSON atom - Python3 ok
+1499: uuid atom must be expressed as JSON array - C   ok
+1500: uuid atom must be expressed as JSON array - Python2 ok
+1501: uuid atom must be expressed as JSON array - Python3 ok
+1502: named-uuid requires symbol table - C            ok
+1503: named-uuid requires symbol table - Python2      ok
+1504: named-uuid requires symbol table - Python3      ok
+1505: empty string atom must be quoted                ok
+1506: quotes must be balanced                         ok
+1507: quoted string must not contain unescaped quote  ok
+1508: quoted string must not end with backslash       ok
+1509: uuids must be valid                             ok
+
+OVSDB -- atoms with enum constraints
+
+1510: integer atom enum - C                           ok
+1511: integer atom enum - Python2                     ok
+1512: integer atom enum - Python3                     ok
+1513: integer atom enum from string                   ok
+1514: integer not in enum set from string             ok
+1515: integer range not in enum set from string       ok
+1516: real atom enum - C                              ok
+1517: real atom enum - Python2                        ok
+1518: real atom enum - Python3                        ok
+1519: boolean atom enum - C                           ok
+1520: boolean atom enum - Python2                     ok
+1521: boolean atom enum - Python3                     ok
+1522: string atom enum - C                            ok
+1523: string atom enum - Python2                      ok
+1524: string atom enum - Python3                      ok
+1525: uuid atom enum - C                              ok
+1526: uuid atom enum - Python2                        ok
+1527: uuid atom enum - Python3                        ok
+
+OVSDB -- atoms with other constraints
+
+1528: integers >= 5 - C                               ok
+1529: integers >= 5 - Python2                         ok
+1530: integers >= 5 - Python3                         ok
+1531: integers <= -1 - C                              ok
+1532: integers <= -1 - Python2                        ok
+1533: integers <= -1 - Python3                        ok
+1534: integers in range -10 to 10 - C                 ok
+1535: integers in range -10 to 10 - Python2           ok
+1536: integers in range -10 to 10 - Python3           ok
+1537: reals >= 5 - C                                  ok
+1538: reals >= 5 - Python2                            ok
+1539: reals >= 5 - Python3                            ok
+1540: reals <= -1 - C                                 ok
+1541: reals <= -1 - Python2                           ok
+1542: reals <= -1 - Python3                           ok
+1543: reals in range -10 to 10 - C                    ok
+1544: reals in range -10 to 10 - Python2              ok
+1545: reals in range -10 to 10 - Python3              ok
+1546: strings at least 2 characters long - C          ok
+1547: strings at least 2 characters long - Python2    ok
+1548: strings at least 2 characters long - Python3    ok
+1549: strings no more than 2 characters long - C      ok
+1550: strings no more than 2 characters long - Python2 ok
+1551: strings no more than 2 characters long - Python3 ok
+
+OVSDB -- simple data
+
+1552: integer JSON datum - C                          ok
+1553: integer JSON datum - Python2                    ok
+1554: integer JSON datum - Python3                    ok
+1555: integer string datum                            ok
+1556: real JSON datum - C                             ok
+1557: real JSON datum - Python2                       ok
+1558: real JSON datum - Python3                       ok
+1559: real string datum                               ok
+1560: boolean JSON datum - C                          ok
+1561: boolean JSON datum - Python2                    ok
+1562: boolean JSON datum - Python3                    ok
+1563: boolean string datum                            ok
+1564: string JSON datum - C                           ok
+1565: string JSON datum - Python2                     ok
+1566: string JSON datum - Python3                     ok
+1567: string string datum                             ok
+
+OVSDB -- set data
+
+1568: JSON optional boolean - C                       ok
+1569: JSON optional boolean - Python2                 ok
+1570: JSON optional boolean - Python3                 ok
+1571: string optional boolean                         ok
+1572: JSON set of 0 or more integers - C              ok
+1573: JSON set of 0 or more integers - Python2        ok
+1574: JSON set of 0 or more integers - Python3        ok
+1575: string set of 0 or more integers                ok
+1576: JSON set of 1 to 3 uuids - C                    ok
+1577: JSON set of 1 to 3 uuids - Python2              ok
+1578: JSON set of 1 to 3 uuids - Python3              ok
+1579: string set of 1 to 3 uuids                      ok
+1580: JSON set of 0 to 3 strings - C                  ok
+1581: JSON set of 0 to 3 strings - Python2            ok
+1582: JSON set of 0 to 3 strings - Python3            ok
+1583: string set of 0 to 3 strings                    ok
+1584: duplicate boolean not allowed in JSON set - C   ok
+1585: duplicate boolean not allowed in JSON set - Python2 ok
+1586: duplicate boolean not allowed in string set     ok
+1587: duplicate integer not allowed in JSON set - C   ok
+1588: duplicate integer not allowed in JSON set - Python2 ok
+1589: duplicate integer not allowed in string set     ok
+1590: duplicate real not allowed in JSON set - C      ok
+1591: duplicate real not allowed in JSON set - Python2 ok
+1592: duplicate real not allowed in string set        ok
+1593: duplicate string not allowed in JSON set - C    ok
+1594: duplicate string not allowed in JSON set - Python2 ok
+1595: duplicate string not allowed in string set      ok
+1596: duplicate uuid not allowed in JSON set - C      ok
+1597: duplicate uuid not allowed in JSON set - Python2 ok
+1598: duplicate uuid not allowed in string set        ok
+
+OVSDB -- map data
+
+1599: JSON map of 1 integer to boolean - C            ok
+1600: JSON map of 1 integer to boolean - Python2      ok
+1601: JSON map of 1 integer to boolean - Python3      ok
+1602: string map of 1 integer to boolean              ok
+1603: JSON map of at least 1 integer to boolean - C   ok
+1604: JSON map of at least 1 integer to boolean - Python2 ok
+1605: JSON map of at least 1 integer to boolean - Python3 ok
+1606: string map of at least 1 integer to boolean     ok
+1607: JSON map of 1 boolean to integer - C            ok
+1608: JSON map of 1 boolean to integer - Python2      ok
+1609: JSON map of 1 boolean to integer - Python3      ok
+1610: string map of 1 boolean to integer              ok
+1611: JSON map of 1 uuid to real - C                  ok
+1612: JSON map of 1 uuid to real - Python2            ok
+1613: JSON map of 1 uuid to real - Python3            ok
+1614: string map of 1 uuid to real                    ok
+1615: JSON map of 10 string to string - C             ok
+1616: JSON map of 10 string to string - Python2       ok
+1617: JSON map of 10 string to string - Python3       ok
+1618: string map of 10 string to string               ok
+1619: duplicate integer key not allowed in JSON map - C ok
+1620: duplicate integer key not allowed in JSON map - Python2 ok
+1621: duplicate integer key not allowed in string map ok
+1622: generate and apply diff -- integer              ok
+1623: generate and apply diff -- boolean              ok
+1624: generate and apply diff -- string               ok
+1625: generate and apply diff -- set                  ok
+1626: generate and apply diff -- set -- size error    ok
+1627: generate and apply diff -- map                  ok
+1628: generate and apply diff with map -- size error  ok
+
+OVSDB -- columns
+
+1629: ordinary column - C                             ok
+1630: ordinary column - Python2                       ok
+1631: ordinary column - Python3                       ok
+1632: immutable column - C                            ok
+1633: immutable column - Python2                      ok
+1634: immutable column - Python3                      ok
+1635: ephemeral column - C                            ok
+1636: ephemeral column - Python2                      ok
+1637: ephemeral column - Python3                      ok
+
+OVSDB -- tables
+
+1638: non-root table with one column - C              ok
+1639: non-root table with one column - Python2        ok
+1640: non-root table with one column - Python3        ok
+1641: immutable table with one column - C             ok
+1642: immutable table with one column - Python2       ok
+1643: immutable table with one column - Python3       ok
+1644: root table with one column - C                  ok
+1645: root table with one column - Python2            ok
+1646: root table with one column - Python3            ok
+1647: non-root table with default_is_root=true - C    ok
+1648: non-root table with default_is_root=true - Python2 ok
+1649: non-root table with default_is_root=true - Python3 ok
+1650: root table with default_is_root=true - C        ok
+1651: root table with default_is_root=true - Python2  ok
+1652: root table with default_is_root=true - Python3  ok
+1653: table with maxRows of 2 - C                     ok
+1654: table with maxRows of 2 - Python2               ok
+1655: table with maxRows of 2 - Python3               ok
+1656: table with index - C                            ok
+1657: table with index - Python2                      ok
+1658: table with index - Python3                      ok
+1659: table with syntax error in index - C            ok
+1660: table with syntax error in index - Python2      ok
+1661: table with empty index - C                      ok
+1662: table with empty index - Python2                ok
+1663: table with index of ephemeral column - C        ok
+1664: table with index of ephemeral column - Python2  ok
+1665: column names may not begin with _ - C           ok
+1666: column names may not begin with _ - Python2     ok
+1667: table must have at least one column (1) - C     ok
+1668: table must have at least one column (1) - Python2 ok
+1669: table must have at least one column (2) - C     ok
+1670: table must have at least one column (2) - Python2 ok
+1671: table maxRows must be positive - C              ok
+1672: table maxRows must be positive - Python2        ok
+
+OVSDB -- rows
+
+1673: row with one string column                      ok
+1674: row with one integer column                     ok
+1675: row with one real column                        ok
+1676: row with one boolean column                     ok
+1677: row with one uuid column                        ok
+1678: row with set of 1 to 2 elements                 ok
+1679: row with map of 1 to 2 elements                 ok
+1680: row with several columns                        ok
+1681: row hashing (scalars)                           ok
+1682: row hashing (sets)                              ok
+1683: row hashing (maps)                              ok
+
+OVSDB -- schemas
+
+1684: schema with valid refTables - C                 ok
+1685: schema with valid refTables - Python2           ok
+1686: schema with valid refTables - Python3           ok
+1687: schema with ephemeral strong references - C     ok
+1688: schema with ephemeral strong references - Python2 ok
+1689: schema with ephemeral strong references - Python3 ok
+1690: schema with immutable weak references - C       ok
+1691: schema with immutable weak references - Python2 ok
+1692: schema with immutable weak references - Python3 ok
+1693: schema without version number - C               ok
+1694: schema without version number - Python2         ok
+1695: schema without version number - Python3         ok
+1696: schema with invalid refTables - C               ok
+1697: schema with invalid refTables - Python2         ok
+1698: schema with invalid version number - C          ok
+1699: schema with invalid version number - Python2    ok
+
+OVSDB -- conditions
+
+1700: null condition                                  ok
+1701: conditions on scalars                           ok
+1702: disallowed conditions on scalars                ok
+1703: conditions on optional scalars                  ok
+1704: disallowed conditions on optional scalars       ok
+1705: conditions on sets                              ok
+1706: condition sorting                               ok
+1707: boolean condition                               ok
+1708: boolean condition                               ok
+1709: evaluating null condition                       ok
+1710: evaluating conditions on integers               ok
+1711: evaluating conditions on reals                  ok
+1712: evaluating conditions on booleans               ok
+1713: evaluating conditions on strings                ok
+1714: evaluating conditions on UUIDs                  ok
+1715: evaluating conditions on sets                   ok
+1716: evaluating conditions on maps (1)               ok
+1717: evaluating conditions on maps (2)               ok
+1718: evaluating conditions on optional integers      ok
+1719: evaluating conditions on optional strings       ok
+1720: evaluating conditions on optional reals         ok
+1721: evaluating false boolean condition              ok
+1722: evaluating true boolean condition               ok
+1723: compare condition                               ok
+
+OVSDB -- mutations
+
+1724: null mutation                                   ok
+1725: mutations on scalars                            ok
+1726: disallowed mutations on scalars                 ok
+1727: disallowed mutations on immutable columns       ok
+1728: mutations on sets                               ok
+1729: executing null mutation                         ok
+1730: executing mutations on integers                 ok
+1731: integer overflow detection                      ok
+1732: executing mutations on integers with constraints ok
+1733: executing mutations on reals                    ok
+1734: real overflow detection                         ok
+1735: executing mutations on reals with constraints   ok
+1736: executing mutations on integer sets             ok
+1737: executing mutations on integer sets with constraints ok
+1738: executing mutations on real sets                ok
+1739: executing mutations on boolean sets             ok
+1740: executing mutations on string sets              ok
+1741: executing mutations on uuid sets                ok
+1742: executing mutations on integer maps             ok
+
+OVSDB -- queries
+
+1743: queries on scalars                              ok
+1744: queries on sets                                 ok
+1745: queries on maps (1)                             ok
+1746: queries on maps (2)                             ok
+1747: UUID-distinct queries on scalars                ok
+1748: Boolean-distinct queries on scalars             ok
+1749: parse colunn set containing bad name            ok
+
+OVSDB -- transactions
+
+1750: empty table, empty transaction                  ok
+1751: nonempty table, empty transaction               ok
+1752: insert, commit                                  ok
+1753: insert, abort                                   ok
+1754: modify, commit                                  ok
+1755: modify, abort                                   ok
+1756: delete, commit                                  ok
+1757: delete, abort                                   ok
+1758: modify, delete, commit                          ok
+1759: modify, delete, abort                           ok
+1760: insert, delete, commit                          ok
+1761: insert, delete, abort                           ok
+1762: insert, modify, delete, commit                  ok
+1763: insert, modify, delete, abort                   ok
+1764: deletes are aborted cleanly                     ok
+
+OVSDB -- execution
+
+1765: block insert on read only DB                    ok
+1766: allow select on read only DB                    ok
+1767: uuid-name must be <id>                          ok
+1768: named-uuid must be <id>                         ok
+1769: duplicate uuid-name not allowed                 ok
+1770: insert default row, query table                 ok
+1771: insert row, query table                         ok
+1772: insert rows, query by value                     ok
+1773: insert rows, query by named-uuid                ok
+1774: insert rows, update rows by value               ok
+1775: insert rows, mutate rows                        ok
+1776: insert rows, delete by named-uuid               ok
+1777: insert rows, delete rows by value               ok
+1778: insert rows, delete by (non-matching) value     ok
+1779: insert rows, delete all                         ok
+1780: insert row, query table, commit                 ok
+1781: insert row, query table, commit durably         ok
+1782: equality wait with correct rows                 ok
+1783: equality wait with extra row                    ok
+1784: equality wait with missing row                  ok
+1785: inequality wait with correct rows               ok
+1786: inequality wait with extra row                  ok
+1787: inequality wait with missing row                ok
+1788: insert and update constraints                   ok
+1789: index uniqueness checking                       ok
+1790: referential integrity -- simple                 ok
+1791: referential integrity -- mutual references      ok
+1792: weak references                                 ok
+1793: immutable columns                               ok
+1794: garbage collection                              ok
+
+OVSDB -- triggers
+
+1795: trigger fires immediately                       ok
+1796: trigger times out                               ok
+1797: trigger fires after delay                       ok
+1798: delayed trigger modifies database               ok
+1799: one delayed trigger wakes up another            ok
+
+OVSDB -- ovsdb-tool
+
+1800: insert default row, query table                 ok
+1801: insert row, query table                         ok
+1802: insert rows, query by value                     ok
+1803: insert rows, query by named-uuid                ok
+1804: insert rows, update rows by value               ok
+1805: insert rows, mutate rows                        ok
+1806: insert rows, delete by named-uuid               ok
+1807: insert rows, delete rows by value               ok
+1808: insert rows, delete by (non-matching) value     ok
+1809: insert rows, delete all                         ok
+1810: insert row, query table, commit                 ok
+1811: insert row, query table, commit durably         ok
+1812: equality wait with correct rows                 ok
+1813: equality wait with extra row                    ok
+1814: equality wait with missing row                  ok
+1815: inequality wait with correct rows               ok
+1816: inequality wait with extra row                  ok
+1817: inequality wait with missing row                ok
+1818: insert and update constraints                   ok
+1819: index uniqueness checking                       ok
+1820: referential integrity -- simple                 ok
+1821: referential integrity -- mutual references      ok
+1822: weak references                                 ok
+1823: immutable columns                               ok
+1824: garbage collection                              ok
+1825: transaction comments                            ok
+1826: ovsdb-tool compact                              ok
+1827: ovsdb-tool convert -- removing a column         ok
+1828: ovsdb-tool convert -- adding a column           ok
+1829: ovsdb-tool unsupported cluster operations       ok
+1830: ovsdb-tool schema-version, schema-cksum, schema-name ok
+1831: ovsdb-tool database inspection commands - standalone ok
+1832: ovsdb-tool database inspection commands - clustered ok
+1833: ovsdb-tool database inspection commands - joining a cluster ok
+1834: ovsdb-tool needs-conversion (no conversion needed) ok
+1835: ovsdb-tool needs-conversion (conversion needed) ok
+1836: ovsdb-tool create-cluster with initial data     ok
+
+OVSDB -- ovsdb-server transactions (Unix sockets)
+
+1837: insert default row, query table                 ok
+1838: insert row, query table                         ok
+1839: insert rows, query by value                     ok
+1840: insert rows, query by named-uuid                ok
+1841: insert rows, update rows by value               ok
+1842: insert rows, mutate rows                        ok
+1843: insert rows, delete by named-uuid               ok
+1844: insert rows, delete rows by value               ok
+1845: insert rows, delete by (non-matching) value     ok
+1846: insert rows, delete all                         ok
+1847: insert row, query table, commit                 ok
+1848: insert row, query table, commit durably         ok
+1849: equality wait with correct rows                 ok
+1850: equality wait with extra row                    ok
+1851: equality wait with missing row                  ok
+1852: inequality wait with correct rows               ok
+1853: inequality wait with extra row                  ok
+1854: inequality wait with missing row                ok
+1855: insert and update constraints                   ok
+1856: index uniqueness checking                       ok
+1857: referential integrity -- simple                 ok
+1858: referential integrity -- mutual references      ok
+1859: weak references                                 ok
+1860: immutable columns                               ok
+1861: garbage collection                              ok
+
+ovsdb-server miscellaneous features
+
+1862: truncating corrupted database log               ok
+1863: truncating database log with bad transaction    ok
+1864: database multiplexing implementation            ok
+1865: ovsdb-server/add-db and remove-db               ok
+1866: ovsdb-server/add-db with --monitor              ok
+1867: ovsdb-server/add-db and remove-db with --monitor ok
+1868: --remote=db: implementation                     ok
+1869: ovsdb-server/add-remote and remove-remote       ok
+1870: ovsdb-server/add-remote with --monitor          ok
+1871: ovsdb-server/add-remote and remove-remote with --monitor ok
+1872: SSL db: implementation                          ok
+1873: compacting online - standalone                  ok
+1874: compacting online - cluster                     ok
+1875: schema conversion online - standalone           ok
+1876: schema conversion online - clustered            ok
+1877: ovsdb-server combines updates on backlogged connections ok
+
+OVSDB -- ovsdb-server transactions (SSL IPv4 sockets)
+
+1878: insert default row, query table                 ok
+1879: insert row, query table                         ok
+1880: insert rows, query by value                     ok
+1881: insert rows, query by named-uuid                ok
+1882: insert rows, update rows by value               ok
+1883: insert rows, mutate rows                        ok
+1884: insert rows, delete by named-uuid               ok
+1885: insert rows, delete rows by value               ok
+1886: insert rows, delete by (non-matching) value     ok
+1887: insert rows, delete all                         ok
+1888: insert row, query table, commit                 ok
+1889: insert row, query table, commit durably         ok
+1890: equality wait with correct rows                 ok
+1891: equality wait with extra row                    ok
+1892: equality wait with missing row                  ok
+1893: inequality wait with correct rows               ok
+1894: inequality wait with extra row                  ok
+1895: inequality wait with missing row                ok
+1896: insert and update constraints                   ok
+1897: index uniqueness checking                       ok
+1898: referential integrity -- simple                 ok
+1899: referential integrity -- mutual references      ok
+1900: weak references                                 ok
+1901: immutable columns                               ok
+1902: garbage collection                              ok
+
+OVSDB -- ovsdb-server transactions (SSL IPv6 sockets)
+
+1903: insert default row, query table                 skipped (ovsdb-server.at:1286)
+
+OVSDB -- ovsdb-server transactions (TCP IPv4 sockets)
+
+1904: insert default row, query table                 ok
+1905: insert row, query table                         ok
+1906: insert rows, query by value                     ok
+1907: insert rows, query by named-uuid                ok
+1908: insert rows, update rows by value               ok
+1909: insert rows, mutate rows                        ok
+1910: insert rows, delete by named-uuid               ok
+1911: insert rows, delete rows by value               ok
+1912: insert rows, delete by (non-matching) value     ok
+1913: insert rows, delete all                         ok
+1914: insert row, query table, commit                 ok
+1915: insert row, query table, commit durably         ok
+1916: equality wait with correct rows                 ok
+1917: equality wait with extra row                    ok
+1918: equality wait with missing row                  ok
+1919: inequality wait with correct rows               ok
+1920: inequality wait with extra row                  ok
+1921: inequality wait with missing row                ok
+1922: insert and update constraints                   ok
+1923: index uniqueness checking                       ok
+1924: referential integrity -- simple                 ok
+1925: referential integrity -- mutual references      ok
+1926: weak references                                 ok
+1927: immutable columns                               ok
+1928: garbage collection                              ok
+
+OVSDB -- ovsdb-server transactions (TCP IPv6 sockets)
+
+1929: insert default row, query table                 skipped (ovsdb-server.at:1359)
+
+OVSDB -- transactions on transient ovsdb-server
+
+1930: insert default row, query table                 ok
+1931: insert row, query table                         ok
+1932: insert rows, query by value                     ok
+1933: insert rows, query by named-uuid                ok
+1934: insert rows, update rows by value               ok
+1935: insert rows, mutate rows                        ok
+1936: insert rows, delete by named-uuid               ok
+1937: insert rows, delete rows by value               ok
+1938: insert rows, delete by (non-matching) value     ok
+1939: insert rows, delete all                         ok
+1940: insert row, query table, commit                 ok
+1941: insert row, query table, commit durably         ok
+1942: equality wait with correct rows                 ok
+1943: equality wait with extra row                    ok
+1944: equality wait with missing row                  ok
+1945: inequality wait with correct rows               ok
+1946: inequality wait with extra row                  ok
+1947: inequality wait with missing row                ok
+1948: insert and update constraints                   ok
+1949: index uniqueness checking                       ok
+1950: referential integrity -- simple                 ok
+1951: referential integrity -- mutual references      ok
+1952: weak references                                 ok
+1953: immutable columns                               ok
+1954: garbage collection                              ok
+
+OVSDB -- ovsdb-server replication
+
+1955: insert default row, query table                 ok
+1956: insert row, query table                         ok
+1957: insert rows, query by value                     ok
+1958: insert rows, query by named-uuid                ok
+1959: insert rows, update rows by value               ok
+1960: insert rows, mutate rows                        ok
+1961: insert rows, delete by named-uuid               ok
+1962: insert rows, delete rows by value               ok
+1963: insert rows, delete by (non-matching) value     ok
+1964: insert rows, delete all                         ok
+1965: insert row, query table, commit                 ok
+1966: insert row, query table, commit durably         ok
+1967: equality wait with correct rows                 ok
+1968: equality wait with extra row                    ok
+1969: equality wait with missing row                  ok
+1970: inequality wait with correct rows               ok
+1971: inequality wait with extra row                  ok
+1972: inequality wait with missing row                ok
+1973: insert and update constraints                   ok
+1974: index uniqueness checking                       ok
+1975: referential integrity -- simple                 ok
+1976: referential integrity -- mutual references      ok
+1977: weak references                                 ok
+1978: immutable columns                               ok
+1979: garbage collection                              ok
+
+OVSDB -- ovsdb-server replication table-exclusion
+
+1980: insert monitored table, insert excluded table   ok
+1981: insert monitored table, update excluded table   ok
+1982: update monitored table, insert excluded table   ok
+1983: update monitored table, update excluded table   ok
+1984: delete monitored table, insert excluded table   ok
+1985: delete monitored table, update excluded table   ok
+
+OVSDB -- ovsdb-server replication runtime management commands
+
+1986: ovsdb-server/get-active-ovsdb-server            ok
+1987: ovsdb-server/set-active-ovsdb-server            ok
+1988: ovsdb-server/get-sync-exclude-tables            ok
+1989: ovsdb-server/set-sync-exclude-tables            ok
+1990: ovsdb-server/connect-active-server              ok
+1991: ovsdb-server/disconnect-active-server           ok
+1992: ovsdb-server/active-backup-role-switching       ok
+1993: ovsdb-server prevent self replicating           ok
+1994: ovsdb-server/read-only db:ptcp connection       ok
+
+OVSDB -- ovsdb-client commands
+
+1995: ovsdb-client get-schema-version and get-schema-cksum ok
+1996: ovsdb-client backup and restore                 ok
+1997: ovsdb-client query                              ok
+
+OVSDB -- ovsdb-server monitors
+
+1998: monitor insert into empty table                 ok
+1999: monitor insert into populated table             ok
+2000: monitor delete                                  ok
+2001: monitor row update                              ok
+2002: monitor no-op row updates                       ok
+2003: monitor insert-and-update transaction           ok
+2004: monitor insert-update-and-delete transaction    ok
+2005: monitor weak reference change                   ok
+2006: monitor insert-update-and-delete transaction    ok
+
+ovsdb -- ovsdb-monitor monitor only some operations
+
+2007: monitor all operations                          ok
+2008: monitor initial only                            ok
+2009: monitor insert only                             ok
+2010: monitor delete only                             ok
+2011: monitor modify only                             ok
+
+ovsdb -- ovsdb-monitor-cond conditional monitor only some operations
+
+2012: monitor-cond empty condition                    ok
+2013: monitor-cond multiple conditions                ok
+2014: monitor-cond delete from populated table        ok
+2015: monitor-cond insert due to modify               ok
+2016: monitor-cond delete due to modify               ok
+2017: monitor-cond condition non-monitored columns    ok
+2018: monitor-cond-change                             ok
+2019: monitor-cond-change with many sessions pending  ok
+
+OVSDB -- interface description language (IDL)
+
+2020: simple passive idl, initially empty, select empty - Python2 ptcp ok
+2021: simple passive idl, initially empty, select empty - Python3 ptcp ok
+2022: simple idl, initially empty, no ops - C         ok
+2023: simple idl, initially empty, no ops - Python2   ok
+2024: simple idl, initially empty, no ops - Python3   ok
+2025: simple idl, initially empty, no ops - Python2 - register_columns ok
+2026: simple idl, initially empty, no ops - Python3 - register_columns ok
+2027: simple idl, initially empty, no ops - Python2 - tcp ok
+2028: simple idl, initially empty, no ops - Python3 - tcp ok
+2029: simple idl, initially empty, no ops - Python2 (multiple remotes) - tcp ok
+2030: simple idl, initially empty, no ops - Python3 (multiple remotes) - tcp ok
+2031: simple idl, initially empty, no ops - Python2 - tcp6 skipped (ovsdb-idl.at:273)
+2032: simple idl, initially empty, no ops - Python3 - tcp6 skipped (ovsdb-idl.at:273)
+2033: simple idl, initially empty, no ops - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:273)
+2034: simple idl, initially empty, no ops - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:273)
+2035: simple idl, initially empty, no ops - Python2 - SSL ok
+2036: simple idl, initially empty, no ops - Python3 - SSL skipped (ovsdb-idl.at:273)
+2037: simple idl, initially empty, various ops - C    ok
+2038: simple idl, initially empty, various ops - Python2 ok
+2039: simple idl, initially empty, various ops - Python3 ok
+2040: simple idl, initially empty, various ops - Python2 - register_columns ok
+2041: simple idl, initially empty, various ops - Python3 - register_columns ok
+2042: simple idl, initially empty, various ops - Python2 - tcp ok
+2043: simple idl, initially empty, various ops - Python3 - tcp ok
+2044: simple idl, initially empty, various ops - Python2 (multiple remotes) - tcp ok
+2045: simple idl, initially empty, various ops - Python3 (multiple remotes) - tcp ok
+2046: simple idl, initially empty, various ops - Python2 - tcp6 skipped (ovsdb-idl.at:280)
+2047: simple idl, initially empty, various ops - Python3 - tcp6 skipped (ovsdb-idl.at:280)
+2048: simple idl, initially empty, various ops - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:280)
+2049: simple idl, initially empty, various ops - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:280)
+2050: simple idl, initially empty, various ops - Python2 - SSL ok
+2051: simple idl, initially empty, various ops - Python3 - SSL skipped (ovsdb-idl.at:280)
+2052: simple idl, initially populated - C             ok
+2053: simple idl, initially populated - Python2       ok
+2054: simple idl, initially populated - Python3       ok
+2055: simple idl, initially populated - Python2 - register_columns ok
+2056: simple idl, initially populated - Python3 - register_columns ok
+2057: simple idl, initially populated - Python2 - tcp ok
+2058: simple idl, initially populated - Python3 - tcp ok
+2059: simple idl, initially populated - Python2 (multiple remotes) - tcp ok
+2060: simple idl, initially populated - Python3 (multiple remotes) - tcp ok
+2061: simple idl, initially populated - Python2 - tcp6 skipped (ovsdb-idl.at:358)
+2062: simple idl, initially populated - Python3 - tcp6 skipped (ovsdb-idl.at:358)
+2063: simple idl, initially populated - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:358)
+2064: simple idl, initially populated - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:358)
+2065: simple idl, initially populated - Python2 - SSL ok
+2066: simple idl, initially populated - Python3 - SSL skipped (ovsdb-idl.at:358)
+2067: simple idl, writing via IDL - C                 ok
+2068: simple idl, writing via IDL - Python2           ok
+2069: simple idl, writing via IDL - Python3           ok
+2070: simple idl, writing via IDL - Python2 - register_columns ok
+2071: simple idl, writing via IDL - Python3 - register_columns ok
+2072: simple idl, writing via IDL - Python2 - tcp     ok
+2073: simple idl, writing via IDL - Python3 - tcp     ok
+2074: simple idl, writing via IDL - Python2 (multiple remotes) - tcp ok
+2075: simple idl, writing via IDL - Python3 (multiple remotes) - tcp ok
+2076: simple idl, writing via IDL - Python2 - tcp6    skipped (ovsdb-idl.at:389)
+2077: simple idl, writing via IDL - Python3 - tcp6    skipped (ovsdb-idl.at:389)
+2078: simple idl, writing via IDL - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:389)
+2079: simple idl, writing via IDL - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:389)
+2080: simple idl, writing via IDL - Python2 - SSL     ok
+2081: simple idl, writing via IDL - Python3 - SSL     skipped (ovsdb-idl.at:389)
+2082: simple idl, writing via IDL with unicode - C    ok
+2083: simple idl, writing via IDL with unicode - Python2 ok
+2084: simple idl, writing via IDL with unicode - Python3 ok
+2085: simple idl, writing via IDL with unicode - Python2 - register_columns ok
+2086: simple idl, writing via IDL with unicode - Python3 - register_columns ok
+2087: simple idl, writing via IDL with unicode - Python2 - tcp ok
+2088: simple idl, writing via IDL with unicode - Python3 - tcp ok
+2089: simple idl, writing via IDL with unicode - Python2 (multiple remotes) - tcp ok
+2090: simple idl, writing via IDL with unicode - Python3 (multiple remotes) - tcp ok
+2091: simple idl, writing via IDL with unicode - Python2 - tcp6 skipped (ovsdb-idl.at:420)
+2092: simple idl, writing via IDL with unicode - Python3 - tcp6 skipped (ovsdb-idl.at:420)
+2093: simple idl, writing via IDL with unicode - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:420)
+2094: simple idl, writing via IDL with unicode - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:420)
+2095: simple idl, writing via IDL with unicode - Python2 - SSL ok
+2096: simple idl, writing via IDL with unicode - Python3 - SSL skipped (ovsdb-idl.at:420)
+2097: simple idl, writing large data via IDL with unicode - Python2 ok
+2098: simple idl, writing large data via IDL with unicode - Python3 ok
+2099: simple idl, handling verification failure - C   ok
+2100: simple idl, handling verification failure - Python2 ok
+2101: simple idl, handling verification failure - Python3 ok
+2102: simple idl, handling verification failure - Python2 - register_columns ok
+2103: simple idl, handling verification failure - Python3 - register_columns ok
+2104: simple idl, handling verification failure - Python2 - tcp ok
+2105: simple idl, handling verification failure - Python3 - tcp ok
+2106: simple idl, handling verification failure - Python2 (multiple remotes) - tcp ok
+2107: simple idl, handling verification failure - Python3 (multiple remotes) - tcp ok
+2108: simple idl, handling verification failure - Python2 - tcp6 skipped (ovsdb-idl.at:466)
+2109: simple idl, handling verification failure - Python3 - tcp6 skipped (ovsdb-idl.at:466)
+2110: simple idl, handling verification failure - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:466)
+2111: simple idl, handling verification failure - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:466)
+2112: simple idl, handling verification failure - Python2 - SSL ok
+2113: simple idl, handling verification failure - Python3 - SSL skipped (ovsdb-idl.at:466)
+2114: simple idl, increment operation - C             ok
+2115: simple idl, increment operation - Python2       ok
+2116: simple idl, increment operation - Python3       ok
+2117: simple idl, increment operation - Python2 - register_columns ok
+2118: simple idl, increment operation - Python3 - register_columns ok
+2119: simple idl, increment operation - Python2 - tcp ok
+2120: simple idl, increment operation - Python3 - tcp ok
+2121: simple idl, increment operation - Python2 (multiple remotes) - tcp ok
+2122: simple idl, increment operation - Python3 (multiple remotes) - tcp ok
+2123: simple idl, increment operation - Python2 - tcp6 skipped (ovsdb-idl.at:497)
+2124: simple idl, increment operation - Python3 - tcp6 skipped (ovsdb-idl.at:497)
+2125: simple idl, increment operation - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:497)
+2126: simple idl, increment operation - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:497)
+2127: simple idl, increment operation - Python2 - SSL ok
+2128: simple idl, increment operation - Python3 - SSL skipped (ovsdb-idl.at:497)
+2129: simple idl, aborting - C                        ok
+2130: simple idl, aborting - Python2                  ok
+2131: simple idl, aborting - Python3                  ok
+2132: simple idl, aborting - Python2 - register_columns ok
+2133: simple idl, aborting - Python3 - register_columns ok
+2134: simple idl, aborting - Python2 - tcp            ok
+2135: simple idl, aborting - Python3 - tcp            ok
+2136: simple idl, aborting - Python2 (multiple remotes) - tcp ok
+2137: simple idl, aborting - Python3 (multiple remotes) - tcp ok
+2138: simple idl, aborting - Python2 - tcp6           skipped (ovsdb-idl.at:509)
+2139: simple idl, aborting - Python3 - tcp6           skipped (ovsdb-idl.at:509)
+2140: simple idl, aborting - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:509)
+2141: simple idl, aborting - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:509)
+2142: simple idl, aborting - Python2 - SSL            ok
+2143: simple idl, aborting - Python3 - SSL            skipped (ovsdb-idl.at:509)
+2144: simple idl, destroy without commit or abort - C ok
+2145: simple idl, destroy without commit or abort - Python2 ok
+2146: simple idl, destroy without commit or abort - Python3 ok
+2147: simple idl, destroy without commit or abort - Python2 - register_columns ok
+2148: simple idl, destroy without commit or abort - Python3 - register_columns ok
+2149: simple idl, destroy without commit or abort - Python2 - tcp ok
+2150: simple idl, destroy without commit or abort - Python3 - tcp ok
+2151: simple idl, destroy without commit or abort - Python2 (multiple remotes) - tcp ok
+2152: simple idl, destroy without commit or abort - Python3 (multiple remotes) - tcp ok
+2153: simple idl, destroy without commit or abort - Python2 - tcp6 skipped (ovsdb-idl.at:523)
+2154: simple idl, destroy without commit or abort - Python3 - tcp6 skipped (ovsdb-idl.at:523)
+2155: simple idl, destroy without commit or abort - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:523)
+2156: simple idl, destroy without commit or abort - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:523)
+2157: simple idl, destroy without commit or abort - Python2 - SSL ok
+2158: simple idl, destroy without commit or abort - Python3 - SSL skipped (ovsdb-idl.at:523)
+2159: simple idl, conditional, false condition - C    ok
+2160: simple idl, conditional, false condition - Python2 ok
+2161: simple idl, conditional, false condition - Python3 ok
+2162: simple idl, conditional, false condition - Python2 - register_columns ok
+2163: simple idl, conditional, false condition - Python3 - register_columns ok
+2164: simple idl, conditional, false condition - Python2 - tcp ok
+2165: simple idl, conditional, false condition - Python3 - tcp ok
+2166: simple idl, conditional, false condition - Python2 (multiple remotes) - tcp ok
+2167: simple idl, conditional, false condition - Python3 (multiple remotes) - tcp ok
+2168: simple idl, conditional, false condition - Python2 - tcp6 skipped (ovsdb-idl.at:537)
+2169: simple idl, conditional, false condition - Python3 - tcp6 skipped (ovsdb-idl.at:537)
+2170: simple idl, conditional, false condition - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:537)
+2171: simple idl, conditional, false condition - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:537)
+2172: simple idl, conditional, false condition - Python2 - SSL ok
+2173: simple idl, conditional, false condition - Python3 - SSL skipped (ovsdb-idl.at:537)
+2174: simple idl, conditional, true condition - C     ok
+2175: simple idl, conditional, true condition - Python2 ok
+2176: simple idl, conditional, true condition - Python3 ok
+2177: simple idl, conditional, true condition - Python2 - register_columns ok
+2178: simple idl, conditional, true condition - Python3 - register_columns ok
+2179: simple idl, conditional, true condition - Python2 - tcp ok
+2180: simple idl, conditional, true condition - Python3 - tcp ok
+2181: simple idl, conditional, true condition - Python2 (multiple remotes) - tcp ok
+2182: simple idl, conditional, true condition - Python3 (multiple remotes) - tcp ok
+2183: simple idl, conditional, true condition - Python2 - tcp6 skipped (ovsdb-idl.at:553)
+2184: simple idl, conditional, true condition - Python3 - tcp6 skipped (ovsdb-idl.at:553)
+2185: simple idl, conditional, true condition - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:553)
+2186: simple idl, conditional, true condition - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:553)
+2187: simple idl, conditional, true condition - Python2 - SSL ok
+2188: simple idl, conditional, true condition - Python3 - SSL skipped (ovsdb-idl.at:553)
+2189: simple idl, conditional, multiple clauses in condition - C ok
+2190: simple idl, conditional, multiple clauses in condition - Python2 ok
+2191: simple idl, conditional, multiple clauses in condition - Python3 ok
+2192: simple idl, conditional, multiple clauses in condition - Python2 - register_columns ok
+2193: simple idl, conditional, multiple clauses in condition - Python3 - register_columns ok
+2194: simple idl, conditional, multiple clauses in condition - Python2 - tcp ok
+2195: simple idl, conditional, multiple clauses in condition - Python3 - tcp ok
+2196: simple idl, conditional, multiple clauses in condition - Python2 (multiple remotes) - tcp ok
+2197: simple idl, conditional, multiple clauses in condition - Python3 (multiple remotes) - tcp ok
+2198: simple idl, conditional, multiple clauses in condition - Python2 - tcp6 skipped (ovsdb-idl.at:569)
+2199: simple idl, conditional, multiple clauses in condition - Python3 - tcp6 skipped (ovsdb-idl.at:569)
+2200: simple idl, conditional, multiple clauses in condition - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:569)
+2201: simple idl, conditional, multiple clauses in condition - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:569)
+2202: simple idl, conditional, multiple clauses in condition - Python2 - SSL ok
+2203: simple idl, conditional, multiple clauses in condition - Python3 - SSL skipped (ovsdb-idl.at:569)
+2204: simple idl, conditional, modify as insert due to condition - C ok
+2205: simple idl, conditional, modify as insert due to condition - Python2 ok
+2206: simple idl, conditional, modify as insert due to condition - Python3 ok
+2207: simple idl, conditional, modify as insert due to condition - Python2 - register_columns ok
+2208: simple idl, conditional, modify as insert due to condition - Python3 - register_columns ok
+2209: simple idl, conditional, modify as insert due to condition - Python2 - tcp ok
+2210: simple idl, conditional, modify as insert due to condition - Python3 - tcp ok
+2211: simple idl, conditional, modify as insert due to condition - Python2 (multiple remotes) - tcp ok
+2212: simple idl, conditional, modify as insert due to condition - Python3 (multiple remotes) - tcp ok
+2213: simple idl, conditional, modify as insert due to condition - Python2 - tcp6 skipped (ovsdb-idl.at:591)
+2214: simple idl, conditional, modify as insert due to condition - Python3 - tcp6 skipped (ovsdb-idl.at:591)
+2215: simple idl, conditional, modify as insert due to condition - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:591)
+2216: simple idl, conditional, modify as insert due to condition - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:591)
+2217: simple idl, conditional, modify as insert due to condition - Python2 - SSL ok
+2218: simple idl, conditional, modify as insert due to condition - Python3 - SSL skipped (ovsdb-idl.at:591)
+2219: simple idl, conditional, modify as delete due to condition - C ok
+2220: simple idl, conditional, modify as delete due to condition - Python2 ok
+2221: simple idl, conditional, modify as delete due to condition - Python3 ok
+2222: simple idl, conditional, modify as delete due to condition - Python2 - register_columns ok
+2223: simple idl, conditional, modify as delete due to condition - Python3 - register_columns ok
+2224: simple idl, conditional, modify as delete due to condition - Python2 - tcp ok
+2225: simple idl, conditional, modify as delete due to condition - Python3 - tcp ok
+2226: simple idl, conditional, modify as delete due to condition - Python2 (multiple remotes) - tcp ok
+2227: simple idl, conditional, modify as delete due to condition - Python3 (multiple remotes) - tcp ok
+2228: simple idl, conditional, modify as delete due to condition - Python2 - tcp6 skipped (ovsdb-idl.at:607)
+2229: simple idl, conditional, modify as delete due to condition - Python3 - tcp6 skipped (ovsdb-idl.at:607)
+2230: simple idl, conditional, modify as delete due to condition - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:607)
+2231: simple idl, conditional, modify as delete due to condition - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:607)
+2232: simple idl, conditional, modify as delete due to condition - Python2 - SSL ok
+2233: simple idl, conditional, modify as delete due to condition - Python3 - SSL skipped (ovsdb-idl.at:607)
+2234: simple idl, conditional, multiple tables - C    ok
+2235: simple idl, conditional, multiple tables - Python2 ok
+2236: simple idl, conditional, multiple tables - Python3 ok
+2237: simple idl, conditional, multiple tables - Python2 - register_columns ok
+2238: simple idl, conditional, multiple tables - Python3 - register_columns ok
+2239: simple idl, conditional, multiple tables - Python2 - tcp ok
+2240: simple idl, conditional, multiple tables - Python3 - tcp ok
+2241: simple idl, conditional, multiple tables - Python2 (multiple remotes) - tcp ok
+2242: simple idl, conditional, multiple tables - Python3 (multiple remotes) - tcp ok
+2243: simple idl, conditional, multiple tables - Python2 - tcp6 skipped (ovsdb-idl.at:634)
+2244: simple idl, conditional, multiple tables - Python3 - tcp6 skipped (ovsdb-idl.at:634)
+2245: simple idl, conditional, multiple tables - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:634)
+2246: simple idl, conditional, multiple tables - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:634)
+2247: simple idl, conditional, multiple tables - Python2 - SSL ok
+2248: simple idl, conditional, multiple tables - Python3 - SSL skipped (ovsdb-idl.at:634)
+2249: self-linking idl, consistent ops - C            ok
+2250: self-linking idl, consistent ops - Python2      ok
+2251: self-linking idl, consistent ops - Python3      ok
+2252: self-linking idl, consistent ops - Python2 - register_columns ok
+2253: self-linking idl, consistent ops - Python3 - register_columns ok
+2254: self-linking idl, consistent ops - Python2 - tcp ok
+2255: self-linking idl, consistent ops - Python3 - tcp ok
+2256: self-linking idl, consistent ops - Python2 (multiple remotes) - tcp ok
+2257: self-linking idl, consistent ops - Python3 (multiple remotes) - tcp ok
+2258: self-linking idl, consistent ops - Python2 - tcp6 skipped (ovsdb-idl.at:673)
+2259: self-linking idl, consistent ops - Python3 - tcp6 skipped (ovsdb-idl.at:673)
+2260: self-linking idl, consistent ops - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:673)
+2261: self-linking idl, consistent ops - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:673)
+2262: self-linking idl, consistent ops - Python2 - SSL ok
+2263: self-linking idl, consistent ops - Python3 - SSL skipped (ovsdb-idl.at:673)
+2264: self-linking idl, inconsistent ops - C          ok
+2265: self-linking idl, inconsistent ops - Python2    ok
+2266: self-linking idl, inconsistent ops - Python3    ok
+2267: self-linking idl, inconsistent ops - Python2 - register_columns ok
+2268: self-linking idl, inconsistent ops - Python3 - register_columns ok
+2269: self-linking idl, inconsistent ops - Python2 - tcp ok
+2270: self-linking idl, inconsistent ops - Python3 - tcp ok
+2271: self-linking idl, inconsistent ops - Python2 (multiple remotes) - tcp ok
+2272: self-linking idl, inconsistent ops - Python3 (multiple remotes) - tcp ok
+2273: self-linking idl, inconsistent ops - Python2 - tcp6 skipped (ovsdb-idl.at:717)
+2274: self-linking idl, inconsistent ops - Python3 - tcp6 skipped (ovsdb-idl.at:717)
+2275: self-linking idl, inconsistent ops - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:717)
+2276: self-linking idl, inconsistent ops - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:717)
+2277: self-linking idl, inconsistent ops - Python2 - SSL ok
+2278: self-linking idl, inconsistent ops - Python3 - SSL skipped (ovsdb-idl.at:717)
+2279: self-linking idl, sets - C                      ok
+2280: self-linking idl, sets - Python2                ok
+2281: self-linking idl, sets - Python3                ok
+2282: self-linking idl, sets - Python2 - register_columns ok
+2283: self-linking idl, sets - Python3 - register_columns ok
+2284: self-linking idl, sets - Python2 - tcp          ok
+2285: self-linking idl, sets - Python3 - tcp          ok
+2286: self-linking idl, sets - Python2 (multiple remotes) - tcp ok
+2287: self-linking idl, sets - Python3 (multiple remotes) - tcp ok
+2288: self-linking idl, sets - Python2 - tcp6         skipped (ovsdb-idl.at:765)
+2289: self-linking idl, sets - Python3 - tcp6         skipped (ovsdb-idl.at:765)
+2290: self-linking idl, sets - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:765)
+2291: self-linking idl, sets - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:765)
+2292: self-linking idl, sets - Python2 - SSL          ok
+2293: self-linking idl, sets - Python3 - SSL          skipped (ovsdb-idl.at:765)
+2294: external-linking idl, consistent ops - C        ok
+2295: external-linking idl, consistent ops - Python2  ok
+2296: external-linking idl, consistent ops - Python3  ok
+2297: external-linking idl, consistent ops - Python2 - register_columns ok
+2298: external-linking idl, consistent ops - Python3 - register_columns ok
+2299: external-linking idl, consistent ops - Python2 - tcp ok
+2300: external-linking idl, consistent ops - Python3 - tcp ok
+2301: external-linking idl, consistent ops - Python2 (multiple remotes) - tcp ok
+2302: external-linking idl, consistent ops - Python3 (multiple remotes) - tcp ok
+2303: external-linking idl, consistent ops - Python2 - tcp6 skipped (ovsdb-idl.at:815)
+2304: external-linking idl, consistent ops - Python3 - tcp6 skipped (ovsdb-idl.at:815)
+2305: external-linking idl, consistent ops - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:815)
+2306: external-linking idl, consistent ops - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:815)
+2307: external-linking idl, consistent ops - Python2 - SSL ok
+2308: external-linking idl, consistent ops - Python3 - SSL skipped (ovsdb-idl.at:815)
+2309: singleton idl, constraints - C                  ok
+2310: singleton idl, constraints - Python2            ok
+2311: singleton idl, constraints - Python3            ok
+2312: singleton idl, constraints - Python2 - register_columns ok
+2313: singleton idl, constraints - Python3 - register_columns ok
+2314: singleton idl, constraints - Python2 - tcp      ok
+2315: singleton idl, constraints - Python3 - tcp      ok
+2316: singleton idl, constraints - Python2 (multiple remotes) - tcp ok
+2317: singleton idl, constraints - Python3 (multiple remotes) - tcp ok
+2318: singleton idl, constraints - Python2 - tcp6     skipped (ovsdb-idl.at:833)
+2319: singleton idl, constraints - Python3 - tcp6     skipped (ovsdb-idl.at:833)
+2320: singleton idl, constraints - Python2 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:833)
+2321: singleton idl, constraints - Python3 (multiple remotes) - tcp6 skipped (ovsdb-idl.at:833)
+2322: singleton idl, constraints - Python2 - SSL      ok
+2323: singleton idl, constraints - Python3 - SSL      skipped (ovsdb-idl.at:833)
+2324: external-linking idl, insert ops - Python2      ok
+2325: external-linking idl, insert ops - Python3      ok
+2326: getattr idl, insert ops - Python2               ok
+2327: getattr idl, insert ops - Python3               ok
+2328: row-from-json idl, whats this - Python2         ok
+2329: row-from-json idl, whats this - Python3         ok
+2330: idl handling of missing tables and columns - C  ok
+2331: simple idl, initially populated - Python2 fetch ok
+2332: simple idl, initially populated - Python3 fetch ok
+2333: simple idl disable monitor-cond - Python2       ok
+2334: simple idl disable monitor-cond - Python3       ok
+2335: track, simple idl, initially populated - C      ok
+2336: track, simple idl, initially empty, various ops - C ok
+2337: map, simple2 idl-partial-update-map-column, initially populated - C ok
+2338: partial-map idl - Python2                       ok
+2339: partial-map idl - Python3                       ok
+2340: set, simple3 idl-partial-update-set-column, initially populated - C ok
+2341: partial-set idl - Python2                       ok
+2342: partial-set idl - Python3                       ok
+2343: simple idl verify notify - Python2              ok
+2344: simple idl verify notify - Python3              ok
+2345: simple idl verify notify - Python2 - SSL        ok
+2346: simple idl verify notify - Python3 - SSL        skipped (ovsdb-idl.at:1381)
+2347: Compound_index, single column test  - C         ok
+2348: Compound_index, double column test  - C         ok
+2349: set, simple3 idl-compound-index-with-ref, initially populated - C ok
+2350: Check Stream open block - C - tcp               ok
+2351: Check Stream open block - C - tcp6              skipped (ovsdb-idl.at:1803)
+2352: Check PY2 Stream open block                     ok
+2353: Check PY3 Stream open block                     ok
+
+OVSDB -- lock
+
+2354: ovsdb lock -- lock                              ok
+2355: ovsdb lock -- unlock                            ok
+2356: ovsdb lock -- steal                             ok
+
+OVSDB -- ovsdb-server rbac
+
+2357: ovsdb-server/rbac 2                             ok
+
+OVSDB - clustered transactions (1 server)
+
+2358: insert default row, query table - cluster of 1  ok
+2359: insert row, query table - cluster of 1          ok
+2360: insert rows, query by value - cluster of 1      ok
+2361: insert rows, query by named-uuid - cluster of 1 ok
+2362: insert rows, update rows by value - cluster of 1 ok
+2363: insert rows, mutate rows - cluster of 1         ok
+2364: insert rows, delete by named-uuid - cluster of 1 ok
+2365: insert rows, delete rows by value - cluster of 1 ok
+2366: insert rows, delete by (non-matching) value - cluster of 1 ok
+2367: insert rows, delete all - cluster of 1          ok
+2368: insert row, query table, commit - cluster of 1  ok
+2369: insert row, query table, commit durably - cluster of 1 ok
+2370: equality wait with correct rows - cluster of 1  ok
+2371: equality wait with extra row - cluster of 1     ok
+2372: equality wait with missing row - cluster of 1   ok
+2373: inequality wait with correct rows - cluster of 1 ok
+2374: inequality wait with extra row - cluster of 1   ok
+2375: inequality wait with missing row - cluster of 1 ok
+2376: insert and update constraints - cluster of 1    ok
+2377: index uniqueness checking - cluster of 1        ok
+2378: referential integrity -- simple - cluster of 1  ok
+2379: referential integrity -- mutual references - cluster of 1 ok
+2380: weak references - cluster of 1                  ok
+2381: immutable columns - cluster of 1                ok
+2382: garbage collection - cluster of 1               ok
+
+OVSDB - clustered transactions (3 servers)
+
+2383: insert default row, query table - cluster of 3  ok
+2384: insert row, query table - cluster of 3          ok
+2385: insert rows, query by value - cluster of 3      ok
+2386: insert rows, query by named-uuid - cluster of 3 ok
+2387: insert rows, update rows by value - cluster of 3 ok
+2388: insert rows, mutate rows - cluster of 3         ok
+2389: insert rows, delete by named-uuid - cluster of 3 ok
+2390: insert rows, delete rows by value - cluster of 3 ok
+2391: insert rows, delete by (non-matching) value - cluster of 3 ok
+2392: insert rows, delete all - cluster of 3          ok
+2393: insert row, query table, commit - cluster of 3  ok
+2394: insert row, query table, commit durably - cluster of 3 ok
+2395: equality wait with correct rows - cluster of 3  ok
+2396: equality wait with extra row - cluster of 3     ok
+2397: equality wait with missing row - cluster of 3   ok
+2398: inequality wait with correct rows - cluster of 3 ok
+2399: inequality wait with extra row - cluster of 3   ok
+2400: inequality wait with missing row - cluster of 3 ok
+2401: insert and update constraints - cluster of 3    ok
+2402: index uniqueness checking - cluster of 3        ok
+2403: referential integrity -- simple - cluster of 3  ok
+2404: referential integrity -- mutual references - cluster of 3 ok
+2405: weak references - cluster of 3                  ok
+2406: immutable columns - cluster of 3                ok
+2407: garbage collection - cluster of 3               ok
+
+OVSDB - clustered transactions (5 servers)
+
+2408: insert default row, query table - cluster of 5  ok
+2409: insert row, query table - cluster of 5          ok
+2410: insert rows, query by value - cluster of 5      ok
+2411: insert rows, query by named-uuid - cluster of 5 ok
+2412: insert rows, update rows by value - cluster of 5 ok
+2413: insert rows, mutate rows - cluster of 5         ok
+2414: insert rows, delete by named-uuid - cluster of 5 ok
+2415: insert rows, delete rows by value - cluster of 5 ok
+2416: insert rows, delete by (non-matching) value - cluster of 5 ok
+2417: insert rows, delete all - cluster of 5          ok
+2418: insert row, query table, commit - cluster of 5  ok
+2419: insert row, query table, commit durably - cluster of 5 ok
+2420: equality wait with correct rows - cluster of 5  ok
+2421: equality wait with extra row - cluster of 5     ok
+2422: equality wait with missing row - cluster of 5   ok
+2423: inequality wait with correct rows - cluster of 5 ok
+2424: inequality wait with extra row - cluster of 5   ok
+2425: inequality wait with missing row - cluster of 5 ok
+2426: insert and update constraints - cluster of 5    ok
+2427: index uniqueness checking - cluster of 5        ok
+2428: referential integrity -- simple - cluster of 5  ok
+2429: referential integrity -- mutual references - cluster of 5 ok
+2430: weak references - cluster of 5                  ok
+2431: immutable columns - cluster of 5                ok
+2432: garbage collection - cluster of 5               ok
+
+OVSDB - cluster tests
+
+2433: OVSDB 3-server torture test - kill/restart leader ok
+2434: OVSDB 3-server torture test - kill/restart follower 1 ok
+2435: OVSDB 3-server torture test - kill/restart follower 2 ok
+2436: OVSDB 5-server torture test - kill/restart leader ok
+2437: OVSDB 5-server torture test - kill/restart follower 1 ok
+2438: OVSDB 5-server torture test - kill/restart follower 2 ok
+2439: OVSDB 5-server torture test - kill/restart follower 3 ok
+2440: OVSDB 5-server torture test - kill/restart follower 4 ok
+2441: OVSDB 3-server torture test - remove/re-add leader ok
+2442: OVSDB 3-server torture test - remove/re-add follower 1 ok
+2443: OVSDB 3-server torture test - remove/re-add follower 2 ok
+2444: OVSDB 5-server torture test - remove/re-add leader ok
+2445: OVSDB 5-server torture test - remove/re-add follower 1 ok
+2446: OVSDB 5-server torture test - remove/re-add follower 2 ok
+2447: OVSDB 5-server torture test - remove/re-add follower 3 ok
+2448: OVSDB 5-server torture test - remove/re-add follower 4 ok
+
+ovs-vsctl unit tests
+
+2449: ovs-vsctl connection retry                      ok
+
+ovs-vsctl unit tests -- real bridges
+
+2450: add-br a                                        ok
+2451: add-br a, add-br a                              ok
+2452: add-br a, add-br b                              ok
+2453: add-br a, add-br b, del-br a                    ok
+2454: add-br a, del-br a, add-br a                    ok
+2455: add-br a, add-port a a1, add-port a a2          ok
+2456: add-br a, add-port a a1, add-port a a1          ok
+2457: add-br a b, add-port a a1, add-port b b1, del-br a ok
+2458: add-br a, add-bond a bond0 a1 a2 a3             ok
+2459: add-bond-iface and del-bond-iface               ok
+2460: add-br a b, add-port a a1, add-port b b1, del-port a a1 ok
+2461: add-br a, add-bond a bond0 a1 a2 a3, del-port bond0 ok
+2462: external IDs                                    ok
+2463: controllers                                     ok
+
+ovs-vsctl unit tests -- fake bridges (VLAN 9)
+
+2464: simple fake bridge (VLAN 9)                     ok
+2465: list bridges -- real and fake (VLAN 9)          ok
+2466: simple fake bridge + del-br fake bridge (VLAN 9) ok
+2467: simple fake bridge + del-br real bridge (VLAN 9) ok
+2468: simple fake bridge + external IDs (VLAN 9)      ok
+2469: simple fake bridge + del-port from parent (VLAN 9) ok
+
+ovs-vsctl unit tests -- fake bridges (VLAN 0)
+
+2470: simple fake bridge (VLAN 0)                     ok
+2471: list bridges -- real and fake (VLAN 0)          ok
+2472: simple fake bridge + del-br fake bridge (VLAN 0) ok
+2473: simple fake bridge + del-br real bridge (VLAN 0) ok
+2474: simple fake bridge + external IDs (VLAN 0)      ok
+2475: simple fake bridge + del-port from parent (VLAN 0) ok
+2476: fake bridge on bond                             ok
+2477: fake bridge on bond + del-br fake bridge        ok
+2478: fake bridge on bond + del-br real bridge        ok
+
+ovs-vsctl unit tests -- manager commands
+
+2479: managers                                        ok
+
+ovs-vsctl unit tests -- database commands
+
+2480: database commands -- positive checks            ok
+2481: database commands -- negative checks            ok
+2482: database commands -- conditions                 ok
+2483: database commands -- wait-until immediately true ok
+2484: database commands -- wait-until must wait       ok
+2485: --id option on create, get commands             ok
+2486: unreferenced record warnings                    ok
+2487: created row UUID is wrong in same execution     ok
+2488: --all option on destroy command                 ok
+
+ovs-vsctl add-port -- reserved port names
+
+2489: add-port -- reserved names 1                    ok
+2490: add-port -- reserved names 2                    ok
+2491: naming in db commands                           ok
+2492: bootstrap ca cert                               ok
+2493: peer ca cert                                    ok
+
+ovs-xapi-sync
+
+2494: ovs-xapi-sync                                   ok
+
+interface-reconfigure
+
+2495: non-VLAN, non-bond                              ok
+2496: VLAN, non-bond                                  ok
+2497: Bond, non-VLAN                                  ok
+2498: VLAN on bond                                    ok
+2499: Re-create port with different types             ok
+
+Spanning Tree Protocol unit tests
+
+2500: STP example from IEEE 802.1D-1998               ok
+2501: STP example from IEEE 802.1D-2004 figures 17.4 and 17.5 ok
+2502: STP example from IEEE 802.1D-2004 figure 17.6   ok
+2503: STP example from IEEE 802.1D-2004 figure 17.7   ok
+2504: STP.io.1.1: Link Failure                        ok
+2505: STP.io.1.2: Repeated Network                    ok
+2506: STP.io.1.4: Network Initialization              ok
+2507: STP.io.1.5: Topology Change                     ok
+2508: STP.op.1.1 and STP.op.1.2                       ok
+2509: STP.op.1.4: All Ports Initialized to Designated Ports ok
+2510: STP.op.3.1: Root Bridge Selection: Root ID Values ok
+2511: STP.op.3.3: Root Bridge Selection: Bridge ID Values ok
+2512: STP.op.3.3: Root Bridge Selection: Bridge ID Values ok
+2513: STP - dummy interface                           ok
+2514: STP - flush the fdb and mdb when topology changed ok
+2515: STP - check link-state when stp is running      ok
+
+Rapid Spanning Tree Protocol unit tests
+
+2516: RSTP Single bridge                              ok
+2517: RSTP Link failure                               ok
+2518: RSTP Double link Failure                        ok
+2519: RSTP example from IEEE 802.1D-2004 figures 17.4 and 17.5 ok
+2520: RSTP example from IEEE 802.1D-2004 figure 17.6  ok
+2521: RSTP example from IEEE 802.1D-2004 figure 17.7  ok
+2522: RSTP - dummy interface                          ok
+
+vlog
+
+2523: vlog - Python2                                  ok
+2524: vlog - Python3                                  ok
+2525: vlog - vlog/reopen - C                          ok
+2526: vlog - vlog/reopen - Python2                    ok
+2527: vlog - vlog/reopen - Python3                    ok
+2528: vlog - vlog/reopen without log file - C         ok
+2529: vlog - vlog/reopen without log file - Python2   ok
+2530: vlog - vlog/reopen without log file - Python3   ok
+2531: vlog - vlog/reopen can't reopen log file - C    ok
+2532: vlog - vlog/reopen can't reopen log file - Python2 ok
+2533: vlog - vlog/reopen can't reopen log file - Python3 ok
+2534: vlog - vlog/close - C                           ok
+2535: vlog - vlog/close - Python2                     ok
+2536: vlog - vlog/close - Python3                     ok
+2537: vlog - vlog/set and vlog/list - C               ok
+2538: vlog - vlog/set and vlog/list - Python2         ok
+2539: vlog - vlog/set and vlog/list - Python3         ok
+2540: vlog - RFC5424 facility                         ok
+2541: vlog - RFC5424 facility - Python2               ok
+2542: vlog - RFC5424 facility - Python3               ok
+
+vtep-ctl unit tests -- physical switch tests
+
+2543: add-ps a                                        ok
+2544: add-ps a, add-ps a                              ok
+2545: add-ps a, add-ps b                              ok
+2546: add-ps a, add-ps b, del-ps a                    ok
+2547: add-ps a, del-ps a, add-ps a                    ok
+2548: add-ps a, add-port a a1, add-port a a2          ok
+2549: add-ps a, add-port a a1, add-port a a1          ok
+2550: add-ps a b, add-port a a1, add-port b b1, del-ps a ok
+2551: add-ps a b, add-port a a1, add-port b b1, del-port a a1 ok
+2552: add-ps a b, add-port a p1, add-port b p1, del-port a p1 ok
+
+vtep-ctl unit tests -- logical switch tests
+
+2553: add-ls a                                        ok
+2554: add-ls a, add-ls a                              ok
+2555: add-ls a, add-ls b                              ok
+2556: add-ls a, add-ls b, del-ls a                    ok
+2557: add-ls a, del-ls a, add-ls a                    ok
+2558: add-ls a, get-replication-mode a                ok
+2559: add-ls a, set-replication-mode a source_node    ok
+2560: add-ls a, set-replication-mode a service_node   ok
+
+vtep-ctl unit tests -- logical binding tests
+
+2561: bind-ls ps1 pp1 300 ls1                         ok
+2562: bind-ls ps1 pp1 300 ls1, bind-ls ps1 pp1 400 ls2 ok
+2563: bind-ls ps1 pp1 300, bind-ls ps2 pp2 300 ls2    ok
+
+vtep-ctl unit tests -- MAC binding tests
+
+2564: add-ucast-local ls1                             ok
+2565: add-ucast-local ls1, overwrite                  ok
+2566: add-ucast-local ls1, del-ucast-local ls1        ok
+2567: add-ucast-remote ls1                            ok
+2568: add-ucast-remote ls1, overwrite                 ok
+2569: add-ucast-remote ls1, del-ucast-remote ls1      ok
+2570: add-ucast-local ls1, add-ucast-remote ls1       ok
+2571: add-mcast-local ls1                             ok
+2572: add-mcast-local ls1, del-mcast-local ls1        ok
+2573: add-mcast-remote ls1                            ok
+2574: add-mcast-remote ls1, del-mcast-remote ls1      ok
+2575: add-mcast-local ls1, add-mcast-remote ls1       ok
+2576: add local and remote macs, clear-local-macs     ok
+2577: add local and remote macs, clear-remote-macs    ok
+
+vtep-ctl unit tests -- manager commands
+
+2578: managers                                        ok
+2579: show command                                    ok
+
+auto-attach unit tests
+
+2580: auto-attach - packets                           ok
+
+OVN components
+
+2581: ovn -- lexer                                    ok
+2582: ovn -- registers                                ok
+2583: ovn -- conntrack fields                         ok
+2584: ovn -- composition                              ok
+2585: ovn -- expression parser                        ok
+2586: ovn -- expression annotation                    ok
+2587: ovn -- 1-term expression conversion             ok
+2588: ovn -- 2-term expression conversion             ok
+2589: ovn -- 3-term expression conversion             ok
+2590: ovn -- 3-term numeric expression simplification ok
+2591: ovn -- 4-term string expression simplification  ok
+2592: ovn -- 3-term mixed expression simplification   ok
+2593: ovn -- simplification special cases             ok
+2594: ovn -- is_chassis_resident simplification       ok
+2595: ovn -- 4-term numeric expression normalization  ok
+2596: ovn -- 4-term string expression normalization   ok
+2597: ovn -- 4-term mixed expression normalization    ok
+2598: ovn -- 5-term numeric expression normalization  ok
+2599: ovn -- 5-term string expression normalization   ok
+2600: ovn -- 5-term mixed expression normalization    ok
+2601: ovn -- 4-term numeric expressions to flows      ok
+2602: ovn -- 4-term string expressions to flows       ok
+2603: ovn -- 4-term mixed expressions to flows        ok
+2604: ovn -- 3-term numeric expressions to flows      ok
+2605: ovn -- converting expressions to flows -- string fields ok
+2606: ovn -- converting expressions to flows -- address sets ok
+2607: ovn -- converting expressions to flows -- port groups ok
+2608: ovn -- converting expressions to flows -- conjunction ok
+2609: ovn -- action parsing                           ok
+
+OVN end-to-end tests
+
+2610: ovn -- 3 HVs, 1 LS, 3 lports/HV                 ok
+2611: ovn -- trace 1 LS, 3 LSPs                       ok
+2612: ovn -- 2 HVs, 4 lports/HV, localnet ports       ok
+2613: ovn -- vtep: 3 HVs, 1 VIFs/HV, 1 GW, 1 LS       ok
+2614: ovn -- 3 HVs, 1 VIFs/HV, 1 software GW, 1 LS    ok
+2615: ovn -- 3 HVs, 3 LS, 3 lports/LS, 1 LR           ok
+2616: ovn -- IP relocation using GARP request         ok
+2617: ovn -- portsecurity : 3 HVs, 1 LS, 3 lports/HV  ok
+2618: ovn -- 2 HVs, 2 LS, 1 lport/LS, 2 peer LRs      ok
+2619: ovn -- 1 HV, 1 LS, 2 lport/LS, 1 LR             ok
+2620: ovn -- 1 HV, 2 LSs, 1 lport/LS, 1 LR            ok
+2621: ovn -- 2 HVs, 3 LS, 1 lport/LS, 2 peer LRs, static routes ok
+2622: ovn -- send gratuitous arp on localnet          ok
+2623: ovn -- 2 HVs, 3 LRs connected via LS, static routes ok
+2624: ovn -- dhcpv4 : 1 HV, 2 LS, 2 LSPs/LS           ok
+2625: ovn -- dhcpv6 : 1 HV, 2 LS, 5 LSPs              ok
+2626: ovn -- 2 HVs, 2 LRs connected via LS, gateway router ok
+2627: ovn -- icmp_reply: 1 HVs, 2 LSs, 1 lport/LS, 1 LR ok
+2628: ovn -- port state up and down                   ok
+2629: ovn -- datapath rules added/removed             ok
+2630: ovn -- nd_na                                    ok
+2631: ovn -- address sets modification/removal smoke test ok
+2632: ovn -- ipam                                     ok
+2633: ovn -- ipam connectivity                        ok
+2634: ovn -- ovs-vswitchd restart                     ok
+2635: ovn -- send arp for nexthop                     ok
+2636: ovn -- send gratuitous arp for nat ips in localnet ok
+2637: ovn -- send gratuitous arp with nat-addresses router in localnet ok
+2638: ovn -- delete mac bindings                      ok
+2639: ovn -- conntrack zone allocation                ok
+2640: ovn -- tag allocation                           ok
+2641: ovn -- lsp deletion and broadcast-flow deletion on localnet ok
+2642: ovn -- ACL logging                              ok
+2643: ovn -- ACL rate-limited logging                 ok
+2644: ovn -- DSCP marking and meter check             ok
+2645: ovn -- read-only sb db:ptcp access              ok
+2646: ovn -- read-only sb db:pssl access              ok
+2647: ovn -- nb connection/ssl commands               ok
+2648: ovn -- sb connection/ssl commands               ok
+2649: ovn -- nested containers                        ok
+2650: ovn -- 3 HVs, 3 LRs connected via LS, source IP based routes ok
+2651: ovn -- dns lookup : 1 HV, 2 LS, 2 LSPs/LS       ok
+2652: ovn -- 4 HV, 1 LS, 1 LR, packet test with HA distributed router gateway port ok
+2653: ovn -- 4 HV, 3 LS, 2 LR, packet test with HA distributed router gateway port ok
+2654: ovn -- 1 LR with distributed router gateway port ok
+2655: ovn -- send gratuitous arp for NAT rules on distributed router ok
+2656: ovn -- IPv6 ND Router Solicitation responder    ok
+2657: ovn -- /32 router IP address                    ok
+2658: ovn -- 2 HVs, 1 lport/HV, localport ports       ok
+2659: ovn -- 1 LR with HA distributed router gateway port ok
+2660: ovn -- send gratuitous ARP for NAT rules on HA distributed router ok
+2661: ovn -- ensure one gw controller restart in HA doesn't bounce the master ok
+2662: ovn -- IPv6 Neighbor Solicitation for unknown MAC ok
+2663: ovn -- options:requested-chassis for logical port ok
+2664: ovn -- options:requested-chassis with hostname  ok
+2665: ovn -- IPv6 periodic RA                         ok
+2666: ovn -- ACL reject rule test                     ok
+2667: ovn -- Port Groups                              ok
+2668: ovn -- ACLs on Port Groups                      ok
+2669: ovn -- Address Set generation from Port Groups (static addressing) ok
+2670: ovn -- Address Set generation from Port Groups (dynamic addressing) ok
+2671: ovn -- ACL conjunction                          ok
+2672: ovn -- TTL exceeded                             ok
+2673: ovn -- router port unreachable                  ok
+2674: ovn -- ovn-controller exit                      ok
+2675: ovn -- ovn-controller restart                   ok
+2676: ovn -- ipam to non-ipam                         ok
+2677: ovn -- ipam router ports                        ok
+
+OVN northd
+
+2678: ovn -- check Gateway_Chassis propagation from NBDB to SBDB ok
+2679: ovn -- check Gateway_Chassis propagation from NBDB to SBDB backwards compatibility ok
+2680: ovn -- check up state of VIF LSP                ok
+2681: ovn -- check up state of router LSP linked to a distributed LR ok
+2682: ovn -- check up state of router LSP linked to a gateway LR ok
+2683: ovn -- check up state of router LSP linked to an LRP with set Gateway Chassis ok
+2684: ovn -- check IPv6 RA config propagation to SBDB ok
+2685: ovn -- test unixctl                             ok
+
+ovn-nbctl
+
+2686: ovn-nbctl - basic switch commands - direct      ok
+2687: ovn-nbctl - basic switch commands - daemon      ok
+2688: ovn-nbctl - basic logical switch port commands - direct ok
+2689: ovn-nbctl - basic logical switch port commands - daemon ok
+2690: ovn-nbctl - lport addresses - direct            ok
+2691: ovn-nbctl - lport addresses - daemon            ok
+2692: ovn-nbctl - port security - direct              ok
+2693: ovn-nbctl - port security - daemon              ok
+2694: ovn-nbctl - ACLs - direct                       ok
+2695: ovn-nbctl - ACLs - daemon                       ok
+2696: ovn-nbctl - QoS - direct                        ok
+2697: ovn-nbctl - QoS - daemon                        ok
+2698: ovn-nbctl - meters - direct                     ok
+2699: ovn-nbctl - meters - daemon                     ok
+2700: ovn-nbctl - NATs - direct                       ok
+2701: ovn-nbctl - NATs - daemon                       ok
+2702: ovn-nbctl - LBs - direct                        ok
+2703: ovn-nbctl - LBs - daemon                        ok
+2704: ovn-nbctl - LBs IPv6 - direct                   ok
+2705: ovn-nbctl - LBs IPv6 - daemon                   ok
+2706: ovn-nbctl - basic logical router commands - direct ok
+2707: ovn-nbctl - basic logical router commands - daemon ok
+2708: ovn-nbctl - basic logical router port commands - direct ok
+2709: ovn-nbctl - basic logical router port commands - daemon ok
+2710: ovn-nbctl - logical router port gateway chassis - direct ok
+2711: ovn-nbctl - logical router port gateway chassis - daemon ok
+2712: ovn-nbctl - logical router port enable and disable - direct ok
+2713: ovn-nbctl - logical router port enable and disable - daemon ok
+2714: ovn-nbctl - routes - direct                     ok
+2715: ovn-nbctl - routes - daemon                     ok
+2716: ovn-nbctl - lsp types - direct                  ok
+2717: ovn-nbctl - lsp types - daemon                  ok
+2718: ovn-nbctl - connection - direct                 ok
+2719: ovn-nbctl - connection - daemon                 ok
+2720: ovn-nbctl - dry run mode - direct               ok
+2721: ovn-nbctl - dry run mode - daemon               ok
+2722: ovn-nbctl - oneline output - direct             ok
+2723: ovn-nbctl - oneline output - daemon             ok
+2724: ovn-nbctl - commands parser error paths - direct ok
+2725: ovn-nbctl - commands parser error paths - daemon ok
+2726: ovn-nbctl - port groups - direct                ok
+2727: ovn-nbctl - port groups - daemon                ok
+2728: ovn-nbctl - extra newlines - direct             ok
+2729: ovn-nbctl - extra newlines - daemon             ok
+2730: ovn-nbctl - table formatting - direct           ok
+2731: ovn-nbctl - table formatting - daemon           ok
+
+ovn-sbctl
+
+2732: ovn-sbctl - chassis commands                    ok
+2733: ovn-sbctl                                       ok
+2734: ovn-sbctl - connection                          ok
+
+ovn-controller
+
+2735: ovn-controller - ovn-bridge-mappings            ok
+2736: ovn-controller - Chassis external_ids           ok
+2737: ovn-controller - change Encap properties        ok
+2738: ovn-controller - check sbdb connection          ok
+
+ovn_controller_vtep
+
+2739: ovn-controller-vtep - chassis                   ok
+2740: ovn-controller-vtep - binding 1                 ok
+2741: ovn-controller-vtep - binding 2                 ok
+2742: ovn-controller-vtep - vtep-lswitch              ok
+2743: ovn-controller-vtep - vtep-macs 1               ok
+2744: ovn-controller-vtep - vtep-macs 2               ok
+
+mcast snooping
+
+2745: mcast - check multicasts to trunk ports are not duplicated ok
+2746: mcast - delete the port mdb when vlan configuration changed ok
+2747: mcast - delete the port mdb when port destroyed ok
+
+packet-type-aware pipeline
+
+2748: ptap - legal flow entries in ptap bridge        ok
+2749: ptap - triangle bridge setup with L2 and L3 GRE tunnels ok
+2750: ptap - check decap() prerequisits               ok
+2751: ptap - check encap/decap VLAN tagged Ethernet frame ok
+2752: ptap - L3 over patch port                       ok
+2753: ptap - recirculate after packet_type change     ok
+
+network service header (NSH)
+
+2754: nsh - matching                                  ok
+2755: nsh - md1 encap over a veth link                ok
+2756: nsh - md2 encap over a veth link                ok
+2757: nsh - double encap over veth link using groups  ok
+2758: nsh - triangle PTAP bridge setup with NSH over vxlan-gpe ok
+
+## ------------- ##
+## Test results. ##
+## ------------- ##
+
+2649 tests were successful.
+109 tests were skipped.
+make[3]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
+make[2]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
+make[1]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
