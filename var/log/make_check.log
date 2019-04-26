@@ -1,0 +1,472 @@
+make  check-recursive
+make[1]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
+Making check in datapath
+make[2]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
+make[3]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
+make[3]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
+make[2]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
+make[2]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
+make[3]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
+make[3]: 'distfiles' is up to date.
+make[3]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs/datapath'
+make  utilities/ovs-appctl-bashcomp.bash utilities/ovs-vsctl-bashcomp.bash tests/atlocal tests/testpki-cacert.pem tests/testpki-cert.pem tests/testpki-privkey.pem tests/testpki-req.pem tests/testpki-cert2.pem tests/testpki-privkey2.pem tests/testpki-req2.pem
+make[3]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
+make[3]: Nothing to be done for 'utilities/ovs-appctl-bashcomp.bash'.
+make[3]: Nothing to be done for 'utilities/ovs-vsctl-bashcomp.bash'.
+make[3]: 'tests/atlocal' is up to date.
+make[3]: 'tests/testpki-cacert.pem' is up to date.
+make[3]: 'tests/testpki-cert.pem' is up to date.
+make[3]: 'tests/testpki-privkey.pem' is up to date.
+make[3]: 'tests/testpki-req.pem' is up to date.
+make[3]: 'tests/testpki-cert2.pem' is up to date.
+make[3]: 'tests/testpki-privkey2.pem' is up to date.
+make[3]: 'tests/testpki-req2.pem' is up to date.
+make[3]: Leaving directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
+make  check-local
+make[3]: Entering directory '/home/cigarier/Desktop/openvswitch2.10/ovs'
+set /bin/bash './tests/testsuite' -C tests AUTOTEST_PATH=utilities:vswitchd:ovsdb:vtep:tests:::ovn/controller-vtep:ovn/northd:ovn/utilities:ovn/controller ; \
+"$@" || (test X'' = Xyes && "$@" -j1 --recheck)
+## ------------------------------ ##
+## openvswitch 2.10.3 test suite. ##
+## ------------------------------ ##
+
+appctl bashcomp unit tests
+
+  1: appctl-bashcomp - basic verification            ok
+  2: appctl-bashcomp - complex completion check 1    ok
+  3: appctl-bashcomp - complex completion check 2    ok
+  4: appctl-bashcomp - complex completion check 3    ok
+  5: appctl-bashcomp - complex completion check 4    ok
+  6: appctl-bashcomp - negative test                 ok
+
+vsctl bashcomp unit tests
+
+  7: vsctl-bashcomp - basic verification             ok
+  8: vsctl-bashcomp - argument completion            ok
+  9: vsctl-bashcomp - negative test                  ok
+
+bfd
+
+ 10: bfd - basic config on different bridges         ok
+ 11: bfd - Verify tunnel down detection              ok
+ 12: bfd - concatenated path down                    ok
+ 13: bfd - Edit the Min Tx/Rx values                 ok
+ 14: bfd - check_tnl_key                             ok
+ 15: bfd - bfd decay                                 ok
+ 16: bfd - bfd forwarding_if_rx - bfd on one side    ok
+ 17: bfd - bfd forwarding_if_rx - bfd on both sides  ok
+ 18: bfd - bfd forwarding_if_rx - with bfd decay     ok
+ 19: bfd - bfd forwarding_if_rx - demand_rx_bfd      ok
+ 20: bfd - flap_count                                ok
+ 21: bfd - check that BFD works together with RSTP   ok
+ 22: bfd - liveness propagation - OF1.3              ok
+ 23: bfd - liveness propagation - OF1.4              ok
+ 24: bfd - liveness propagation - OF1.5              ok
+ 25: bfd - Edit the Detect Mult values               ok
+
+cfm
+
+ 26: cfm - check update ovsdb 1                      ok
+ 27: cfm - check update ovsdb 2                      ok
+ 28: cfm - demand mode                               ok
+ 29: cfm - demand_rx_ccm                             ok
+ 30: cfm - flap_count                                ok
+ 31: cfm - fault_override                            ok
+ 32: cfm - check that CFM works together with RSTP   ok
+ 33: cfm - liveness propagation - OF1.3              ok
+ 34: cfm - liveness propagation - OF1.4              ok
+ 35: cfm - liveness propagation - OF1.5              ok
+
+lacp
+
+ 36: lacp - config                                   ok
+ 37: lacp - multi port config                        ok
+ 38: lacp - negotiation                              ok
+ 39: lacp - liveness propagation - OF1.3             ok
+ 40: lacp - liveness propagation - OF1.4             ok
+ 41: lacp - liveness propagation - OF1.5             ok
+
+library unit tests
+
+ 42: flow extractor                                  ok
+ 43: TCP/IP checksumming                             ok
+ 44: hash functions                                  ok
+ 45: hash map                                        ok
+ 46: hash index                                      ok
+ 47: cuckoo hash                                     ok
+ 48: counting cuckoo hash                            ok
+ 49: atomic operations                               ok
+ 50: test linked lists                               ok
+ 51: packet library                                  ok
+ 52: SHA-1                                           ok
+ 53: test skiplist                                   ok
+ 54: type properties                                 ok
+ 55: strtok_r bug fix                                ok
+ 56: byte order conversion                           ok
+ 57: random number generator                         ok
+ 58: ctz() function                                  ok
+ 59: clz() function                                  ok
+ 60: round_up_pow2() function                        ok
+ 61: round_down_pow2() function                      ok
+ 62: count_1bits() function                          ok
+ 63: log_2_floor() function                          ok
+ 64: bitwise_copy() function                         ok
+ 65: bitwise_zero() function                         ok
+ 66: bitwise_one() function                          ok
+ 67: bitwise_is_all_zeros() function                 ok
+ 68: bitwise_rscan() function                        ok
+ 69: ovs_scan() function                             ok
+ 70: unix socket, short pathname - C                 ok
+ 71: unix socket, long pathname - C                  ok
+ 72: unix socket, short pathname - Python2           ok
+ 73: unix socket, short pathname - Python3           ok
+ 74: unix socket, long pathname - Python2            ok
+ 75: unix socket, long pathname - Python3            ok
+ 76: ovs_assert                                      ok
+ 77: snprintf                                        ok
+ 78: bitmap functions                                ok
+ 79: use of public headers                           ok
+ 80: ofpbuf module                                   ok
+ 81: rcu                                             ok
+ 82: stopwatch module                                ok
+
+heap library
+
+ 83: heap library -- insert delete same order        ok
+ 84: heap library -- insert delete reverse order     ok
+ 85: heap library -- insert delete every order       ok
+ 86: heap library -- insert delete same order with dups ok
+ 87: heap library -- raw insert                      ok
+ 88: heap library -- raw delete                      ok
+
+bundle link selection
+
+ 89: hrw bundle link selection                       ok
+ 90: active_backup bundle link selection             ok
+ 91: hrw bundle single link selection                ok
+ 92: hrw bundle no link selection                    ok
+ 93: bundle action missing argument                  ok
+ 94: bundle action bad fields                        ok
+ 95: bundle action bad algorithm                     ok
+ 96: bundle action bad slave type                    ok
+ 97: bundle action bad slave delimiter               ok
+ 98: bundle action with many ports                   ok
+ 99: bundle action with ports up and down            ok
+100: bundle_load action with ports down              ok
+
+flow classifier unit tests
+
+101: flow classifier - empty                         ok
+102: flow classifier - destroy null                  ok
+103: flow classifier - single rule                   ok
+104: flow classifier - rule replacement              ok
+105: flow classifier - many rules in one list        ok
+106: flow classifier - versioned many rules in one list ok
+107: flow classifier - many rules in one table       ok
+108: flow classifier - versioned many rules in one table ok
+109: flow classifier - many rules in two tables      ok
+110: flow classifier - versioned many rules in two tables ok
+111: flow classifier - many rules in five tables     ok
+112: flow classifier - versioned many rules in five tables ok
+
+miniflow unit tests
+
+113: miniflow - miniflow                             ok
+114: miniflow - minimask_has_extra                   ok
+115: miniflow - minimask_combine                     ok
+
+flow classifier lookup segmentation
+
+116: flow classifier - lookup segmentation           ok
+
+flow classifier prefix lookup
+
+117: flow classifier - prefix lookup                 ok
+
+conjunctive match
+
+118: single conjunctive match                        ok
+119: multiple conjunctive match                      ok
+120: conjunctive match priority fallback             ok
+121: conjunctive match and other actions             ok
+
+struct alignment checker unit tests
+
+122: check struct tail padding                       ok
+123: check struct internal alignment                 ok
+124: check struct declared size                      ok
+125: check wrong struct's declared size              ok
+
+daemon unit tests - C
+
+126: daemon                                          ok
+127: daemon --monitor                                ok
+128: daemon --detach                                 ok
+129: daemon --detach --monitor                       ok
+130: daemon --detach startup errors                  ok
+131: daemon --detach --monitor startup errors        ok
+132: daemon --service                                skipped (daemon.at:169)
+
+daemon unit tests - Python
+
+133: daemon - Python2                                ok
+134: daemon - Python3                                ok
+135: daemon --monitor - Python2                      ok
+136: daemon --monitor - Python3                      ok
+137: daemon --monitor restart exit code - Python2    ok
+138: daemon --monitor restart exit code - Python3    ok
+139: daemon --detach - Python2                       ok
+140: daemon --detach - Python3                       ok
+141: daemon --detach --monitor - Python2             ok
+142: daemon --detach --monitor - Python3             ok
+143: daemon --detach startup errors - Python2        ok
+144: daemon --detach startup errors - Python3        ok
+145: daemon --detach --monitor startup errors - Python2 ok
+146: daemon --detach --monitor startup errors - Python3 ok
+147: daemon --detach closes standard fds - Python2   ok
+148: daemon --detach closes standard fds - Python3   ok
+149: daemon --detach --monitor closes standard fds - Python2 ok
+150: daemon --detach --monitor closes standard fds - Python3 ok
+
+OpenFlow actions
+
+151: OpenFlow 1.0 action translation                 ok
+152: OpenFlow 1.0 "instruction" translations         ok
+153: OpenFlow 1.1 action translation                 ok
+154: OpenFlow 1.1 instruction translation            ok
+155: OpenFlow 1.2 action translation                 ok
+156: OpenFlow 1.3 action translation                 ok
+157: OpenFlow 1.5 action translation                 ok
+158: ofp-actions - inconsistent MPLS actions         ok
+159: reg_load <-> set_field translation corner case  ok
+160: enqueue action for OF1.1+                       ok
+161: mod_nw_ttl action for OF1.0                     ok
+162: mod_nw_ecn action translation                   ok
+
+ofp-print
+
+163: empty                                           ok
+164: too short                                       ok
+165: wrong OpenFlow version                          ok
+166: truncated message                               ok
+167: message only uses part of buffer                ok
+168: OFPT_HELLO - ordinary                           ok
+169: OFPT_HELLO with extra data                      ok
+170: OFPT_HELLO with version bitmap                  ok
+171: OFPT_HELLO with version bitmap and extra data   ok
+172: OFPT_HELLO with higher than supported version   ok
+173: OFPT_HELLO with contradictory version bitmaps   ok
+174: OFPT_ECHO_REQUEST, empty payload                ok
+175: OFPT_ECHO_REQUEST, 5-byte payload               ok
+176: OFPT_ECHO_REPLY, empty payload                  ok
+177: OFPT_ECHO_REPLY, 5-byte payload                 ok
+178: OFPT_FEATURES_REQUEST                           ok
+179: OFPT_FEATURES_REPLY - OF1.0                     ok
+180: OFPT_FEATURES_REPLY cut off mid-port - OF1.0    ok
+181: OFPT_FEATURES_REPLY - OF1.1                     ok
+182: OFPT_FEATURES_REPLY cut off mid-port - OF1.1    ok
+183: OFPT_FEATURES_REPLY - OF1.2                     ok
+184: OFPT_FEATURES_REPLY cut off mid-port - OF1.2    ok
+185: OFPT_FEATURES_REPLY - OF1.3                     ok
+186: OFPT_FEATURES_REPLY - OF1.4                     ok
+187: OFPT_FEATURES_REPLY - OF1.5                     ok
+188: OFPT_FEATURES_REPLY - with auxiliary_id - OF1.3 ok
+189: OFPT_GET_CONFIG_REQUEST                         ok
+190: OFPT_GET_CONFIG_REPLY, most common form         ok
+191: OFPT_GET_CONFIG_REPLY, frags and miss_send_len  ok
+192: OFPT_PACKET_IN - OF1.0                          ok
+193: OFPT_PACKET_IN - OF1.0, with hex output of packet data ok
+194: OFPT_PACKET_IN - OF1.1                          ok
+195: OFPT_PACKET_IN - OF1.2                          ok
+196: OFPT_PACKET_IN - OF1.2, with hex output of packet data ok
+197: OFPT_PACKET_IN - OF1.3                          ok
+198: OFPT_PACKET_IN - OF1.4                          ok
+199: OFPT_PACKET_IN - OF1.5                          ok
+200: OFPT_PACKET_IN - OF1.3, with hex output of packet data ok
+201: OFPT_FLOW_REMOVED - OF1.0                       ok
+202: OFPT_FLOW_REMOVED - OF1.2                       ok
+203: OFPT_FLOW_REMOVED - OF1.3                       ok
+204: OFPT_FLOW_REMOVED - OF1.5                       ok
+205: OFPT_PORT_STATUS - OF1.0                        ok
+206: OFPT_PORT_STATUS - OF1.1                        ok
+207: OFPT_PORT_STATUS - OF1.4                        ok
+208: OFPT_PORT_STATUS - OF1.6                        ok
+209: OFPT_PACKET_OUT - OF1.0                         ok
+210: OFPT_PACKET_OUT - OF1.0, with packet            ok
+211: OFPT_PACKET_OUT - OF1.0, with hex output of packet data ok
+212: OFPT_PACKET_OUT - OF1.1                         ok
+213: OFPT_PACKET_OUT - OF1.1, with packet            ok
+214: OFPT_PACKET_OUT - OF1.5                         ok
+215: OFPT_PACKET_OUT - OF1.5, with packet            ok
+216: OFPT_FLOW_MOD - OF1.0 - low verbosity           ok
+217: OFPT_FLOW_MOD - OF1.1 - low verbosity           ok
+218: OFPT_FLOW_MOD - OF1.2 - low verbosity           ok
+219: OFPT_FLOW_MOD - OF1.0 - high verbosity          ok
+220: OFPT_FLOW_MOD - OF1.2 - low verbosity           ok
+221: OFPT_FLOW_MOD - OF1.3 - flags - low verbosity   ok
+222: OFPT_FLOW_MOD - OF1.2 - set-field ip_src        ok
+223: OFPT_FLOW_MOD - OF1.2 - set-field ip_dst        ok
+224: OFPT_FLOW_MOD - OF1.2 - set-field sctp_src      ok
+225: OFPT_FLOW_MOD - OF1.2 - set-field sctp_dst      ok
+226: OFPT_FLOW_MOD - OF1.2 - experimenter OXM        ok
+227: OFPT_FLOW_MOD - OF1.2 - set-field nd_target, nd_sll ok
+228: OFPT_FLOW_MOD - OF1.3 - meter                   ok
+229: OFPT_FLOW reply - OF1.2 - set-field ip_src      ok
+230: OFPT_FLOW reply - OF1.2 - set-field ip_dst      ok
+231: OFPT_FLOW reply - OF1.2 - set-field sctp_src    ok
+232: OFPT_FLOW reply - OF1.2 - set-field sctp_dst    ok
+233: OFPT_PORT_MOD - OF1.0                           ok
+234: OFPT_PORT_MOD - OF1.1                           ok
+235: OFPT_PORT_MOD - OF1.2                           ok
+236: OFPT_PORT_MOD - OF1.3                           ok
+237: OFPT_PORT_MOD - OF1.4                           ok
+238: OFPT_PORT_MOD - OF1.6                           ok
+239: OFPT_TABLE_MOD - OF1.1                          ok
+240: OFPT_TABLE_MOD - OF1.2                          ok
+241: OFPT_TABLE_MOD - OF1.3                          ok
+242: OFPT_TABLE_MOD - OF1.4                          ok
+243: OFPST_DESC request                              ok
+244: OFPST_DESC reply                                ok
+245: OFPST_FLOW request - OF1.0                      ok
+246: OFPST_FLOW request - OF1.2                      ok
+247: OFPST_FLOW request - OF1.3                      ok
+248: OFPST_FLOW request - OF1.5                      ok
+249: OFPST_FLOW reply - OF1.0                        ok
+250: OFPST_FLOW reply - OF1.2                        ok
+251: OFPST_FLOW reply - OF1.5                        ok
+252: OFPST_AGGREGATE request - OF1.0                 ok
+253: OFPST_AGGREGATE request - OF1.2                 ok
+254: OFPST_AGGREGATE request - OF1.3                 ok
+255: OFPST_AGGREGATE request - OF1.5                 ok
+256: OFPST_AGGREGATE reply - OF1.0                   ok
+257: OFPST_AGGREGATE reply - OF1.2                   ok
+258: OFPST_AGGREGATE reply - OF1.3                   ok
+259: OFPST_AGGREGATE reply - OF1.5                   ok
+260: OFPST_TABLE request - OF1.0                     ok
+261: OFPST_TABLE request - OF1.1                     ok
+262: OFPST_TABLE request - OF1.2                     ok
+263: OFPST_TABLE request - OF1.3                     ok
+264: OFPST_TABLE reply - OF1.0                       ok
+265: OFPST_TABLE reply - OF1.2                       ok
+266: OFPST_TABLE reply - OF1.3                       ok
+267: OFPST_PORT request - 1.0                        ok
+268: OFPST_PORT request - 1.1                        ok
+269: OFPST_PORT request - 1.2                        ok
+270: OFPST_PORT request - 1.3                        ok
+271: OFPST_PORT reply - OF1.0                        ok
+272: OFPST_PORT reply - OF1.2                        ok
+273: OFPST_PORT reply - OF1.3                        ok
+274: OFPST_PORT reply - OF1.4                        ok
+275: OFPST_QUEUE request - OF1.0                     ok
+276: OFPST_QUEUE request - OF1.1                     ok
+277: OFPST_QUEUE request - OF1.2                     ok
+278: OFPST_QUEUE request - OF1.3                     ok
+279: OFPST_QUEUE reply - OF1.0                       ok
+280: OFPST_QUEUE reply - OF1.1                       ok
+281: OFPST_QUEUE reply - OF1.2                       ok
+282: OFPST_QUEUE reply - OF1.3                       ok
+283: OFPST_QUEUE reply - OF1.4                       ok
+284: NXST_GROUP request - OF1.0                      ok
+285: OFPST_GROUP request - OF1.1                     ok
+286: NXST_GROUP reply - OF1.0                        ok
+287: OFPST_GROUP reply - OF1.1                       ok
+288: OFPST_GROUP reply - OF1.3                       ok
+289: NXST_GROUP_DESC request - OF1.0                 ok
+290: OFPST_GROUP_DESC request - OF1.1                ok
+291: OFPST_GROUP_DESC request - OF1.5                ok
+292: NXST_GROUP_DESC reply - OF1.0                   ok
+293: OFPST_GROUP_DESC reply - OF1.1                  ok
+294: OFPST_GROUP_DESC reply - OF1.5                  ok
+295: NXST_GROUP_FEATURES request                     ok
+296: OFPST_GROUP_FEATURES request                    ok
+297: NXST_GROUP_FEATURES reply                       ok
+298: OFPST_GROUP_FEATURES reply                      ok
+299: OFPST_PORT_DESC request - OF1.0                 ok
+300: OFPST_PORT_DESC request - OF1.5                 ok
+301: OFPST_PORT_DESC reply - OF1.0                   ok
+302: OFPST_PORT_DESC reply - OF1.4                   ok
+303: OFPT_METER_MOD request - OF1.3                  ok
+304: OFPT_METER_MOD request - bad band - OF1.3       ok
+305: OFPT_METER_MOD request - bad command - OF1.3    ok
+306: OFPT_METER_MOD request - bad flags - OF1.3      ok
+307: OFPST_METER request - OF1.3                     ok
+308: OFPST_METER_CONFIG request - OF1.3              ok
+309: OFPST_METER_FEATURES request - OF1.3            ok
+310: OFPST_METER_FEATURES reply - OF1.3              ok
+311: OFPST_METER_CONFIG reply - OF1.3                ok
+312: OFPST_METER reply - OF1.3                       ok
+313: OFPST_TABLE_FEATURES request - OF1.3            ok
+314: OFPT_BARRIER_REQUEST - OF1.0                    ok
+315: OFPT_BARRIER_REQUEST - OF1.1                    ok
+316: OFPT_BARRIER_REQUEST - OF1.2                    ok
+317: OFPT_BARRIER_REQUEST - OF1.3                    ok
+318: OFPT_BARRIER_REPLY - OF1.0                      ok
+319: OFPT_BARRIER_REPLY - OF1.1                      ok
+320: OFPT_BARRIER_REPLY - OF1.2                      ok
+321: OFPT_BARRIER_REPLY - OF1.3                      ok
+322: OFPT_QUEUE_GET_CONFIG_REQUEST - OF1.0           ok
+323: OFPT_QUEUE_GET_CONFIG_REQUEST - OF1.2           ok
+324: OFPST_QUEUE_DESC request - OF1.4                ok
+325: OFPT_QUEUE_GET_CONFIG_REPLY - OF1.0             ok
+326: OFPT_QUEUE_GET_CONFIG_REPLY - OF1.1             ok
+327: OFPT_QUEUE_GET_CONFIG_REPLY - OF1.2             ok
+328: OFPT_QUEUE_GET_CONFIG_REPLY - OF1.3             ok
+329: OFPST_QUEUE_DESC reply - OF1.4                  ok
+330: OFPT_SET_ASYNC - OF1.3                          ok
+331: OFPT_ROLE_REQUEST - OF1.2                       ok
+332: OFPT_ROLE_REQUEST - nochange - OF1.2            ok
+333: NXT_ROLE_REQUEST                                ok
+334: OFPT_ROLE_REPLY - OF1.2                         ok
+335: NXT_ROLE_REPLY                                  ok
+336: OFP_ROLE_STATUS - master, experimenter - OF1.3  ok
+337: OFP_ROLE_STATUS - master, config - OF1.3        ok
+338: OFP_ROLE_STATUS - master, config,generation - OF1.3 ok
+339: OFP_ROLE_STATUS - master, experimenter - OF1.4  ok
+340: OFP_ROLE_STATUS - master, config - OF1.4        ok
+341: OFP_ROLE_STATUS - master, config,generation - OF1.4 ok
+342: OFP_REQUESTFORWARD - OF1.4                      ok
+343: OFP_REQUESTFORWARD - OF1.4                      ok
+344: OFP_REQUESTFORWARD - OF1.4                      ok
+345: OFP_REQUESTFORWARD - OF1.4                      ok
+346: NXT_SET_PACKET_IN                               ok
+347: NXT_PACKET_IN                                   ok
+348: NXT_PACKET_IN, with hex output of packet data   ok
+349: NX_PACKET_IN2                                   ok
+350: NXT_SET_ASYNC_CONFIG                            ok
+351: OFPT_SET_ASYNC_CONFIG                           ok
+352: OFPT_SET_ASYNC_CONFIG - invalid mask - OF1.4    ok
+353: OFPT_SET_ASYNC_CONFIG - unsupported configuration - OF1.4 ok
+354: NXT_SET_CONTROLLER_ID                           ok
+355: NXT_FLOW_MONITOR_CANCEL                         ok
+356: NXT_FLOW_MONITOR_PAUSED                         ok
+357: NXT_FLOW_MONITOR_RESUMED                        ok
+358: NXT_SET_FLOW_FORMAT                             ok
+359: NXT_FLOW_MOD, low verbosity                     ok
+360: NXT_FLOW_MOD, high verbosity                    ok
+361: NXT_GROUP_MOD add - OF1.0                       ok
+362: OFPT_GROUP_MOD - OF1.1                          ok
+363: OFPT_GROUP_MOD add - OF1.5                      ok
+364: OFPT_GROUP_MOD insert bucket - OF1.5            ok
+365: NXT_FLOW_REMOVED                                ok
+366: NXT_FLOW_MOD_TABLE_ID                           ok
+367: NXT_RESUME                                      ok
+368: NXST_FLOW request                               ok
+369: NXST_FLOW reply                                 ok
+370: NXST_AGGREGATE request                          ok
+371: NXST_AGGREGATE reply                            ok
+372: NXST_FLOW_MONITOR request                       ok
+373: NXST_FLOW_MONITOR reply                         ok
+374: OFPT_BUNDLE_CONTROL - atomic OPEN_REQUEST       ok
+375: OFPT_BUNDLE_CONTROL - ordered OPEN_REQUEST      ok
+376: OFPT_BUNDLE_CONTROL - atomic ordered OPEN_REQUEST ok
+377: OFPT_BUNDLE_CONTROL - OPEN_REPLY                ok
+378: OFPT_BUNDLE_CONTROL - CLOSE_REQUEST             ok
+379: OFPT_BUNDLE_CONTROL - CLOSE_REPLY               ok
+380: OFPT_BUNDLE_CONTROL - COMMIT_REQUEST            ok
+381: OFPT_BUNDLE_CONTROL - COMMIT_REPLY              ok
+382: OFPT_BUNDLE_CONTROL - DISCARD_REQUEST           ok
+383: OFPT_BUNDLE_CONTROL - DISCARD_REPLY             ok
+384: OFPT_BUNDLE_ADD_MESSAGE - verify xid            ok
+385: OFPT_BUNDLE_ADD_MESSAGE - reject OFPT_HELLO     ok
+386: OFPT_BUNDLE_ADD_MESSAGE - FLOW_MOD              ok
+387: OFPT_BUNDLE_ADD_MESSAGE - PORT_MOD             
