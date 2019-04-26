@@ -1,5 +1,14 @@
 #!/bin/bash
-#############
+################################################
+#
+# Mihai IDU (c) - 2019
+#	
+# This script is the automated way to install 
+#and power the ovs-2.10.90 as a service on the
+#host machine (Virtual Machine or Physical
+#Machine)
+#
+################################################
 
 # colorful echos
 ###################################
@@ -42,11 +51,14 @@ function install_ovs {
   git checkout origin/branch-2.10
   ./boot.sh
   ./configure
-  make
-  echo_info "Checking all the previous work done"
-  make check
+  echo_info "Start the making process. Please have patience!"
+  echo_info "The output information of the process it can be found on the make.log file!"
+  sudo make > make.log 2>&1
+  echo_info "Checking all the previous work is done corect. Please have patience!"
+  echo_info "The output information of the process it can be found on the make_check.log file!"
+  sudo make check > make_check.log 2>&1
   echo_info "Start the installation!"
-  make install
+  sudo make install
   cd -
 }
 
@@ -62,6 +74,5 @@ sudo apt-get install iperf -y
 
 echo_info "Start installing the ovs-2.10.90 on the host"
 install_ovs
-echo_success "The installation is done! The ovs-ctl will start"
-sudo ovs-ctl start
+echo_success "The installation is done! The ovs-2.10.90 will start"
 
